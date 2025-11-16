@@ -1,0 +1,210 @@
+<<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KJS STORE – Produk</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0d0d0d;
+        color: white;
+        text-align: center;
+    }
+
+    .header {
+        padding: 25px;
+        background: linear-gradient(135deg, #1a1a1a, #000000);
+        border-bottom: 2px solid gold;
+    }
+
+    h1 {
+        font-size: 28px;
+        margin: 0;
+        color: gold;
+        letter-spacing: 1px;
+    }
+
+    .product-buttons {
+        margin: 20px auto;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn {
+        padding: 15px;
+        background: #1e1e1e;
+        border: 2px solid gold;
+        border-radius: 12px;
+        color: gold;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background: gold;
+        color: black;
+        transform: scale(1.03);
+    }
+
+    .card {
+        display: none;
+        margin: 25px auto;
+        width: 90%;
+        max-width: 480px;
+        background: rgba(255, 215, 0, 0.06);
+        border: 1px solid gold;
+        padding: 20px;
+        border-radius: 15px;
+        animation: fade 0.3s ease-in-out;
+    }
+
+    @keyframes fade {
+        from {opacity: 0; transform: translateY(10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .logo-produk {
+        width: 110px;
+        height: 110px;
+        object-fit: contain;
+        margin-bottom: 15px;
+    }
+
+    .whatsapp-btn {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 12px 20px;
+        background: green;
+        color: white;
+        border-radius: 10px;
+        font-size: 17px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+        background: #00ff00;
+        color: black;
+    }
+</style>
+
+<script>
+function showProduct(id) {
+    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
+    document.getElementById(id).style.display = "block";
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="header">
+    <h1>📦 PRODUK KJS STORE</h1>
+</div>
+
+<div class="product-buttons">
+    <button class="btn" onclick="showProduct('axis')">Paket Axis</button>
+    <button class="btn" onclick="showProduct('xl')">Paket XL</button>
+    <button class="btn" onclick="showProduct('telkomsel')">Paket Telkomsel</button>
+    <button class="btn" onclick="showProduct('tri')">Paket TRI</button>
+    <button class="btn" onclick="showProduct('indosat')">Paket Indosat</button>
+    <button class="btn" onclick="showProduct('hotspot')">Paket Hotspot</button>
+    <button class="btn" onclick="showProduct('vpn')">VPN & Premium Tools</button>
+</div>
+
+<!-- PRODUK 1 -->
+<div class="card" id="axis">
+    <img class="logo-produk" src="LINK_LOGO_AXIS" alt="Axis Logo">
+    <h2>Paket Axis</h2>
+    <p>
+        • 15GB 7 Hari  
+        • 30GB 30 Hari  
+        • Unlimited App  
+        • Aman & Fast Respon  
+    </p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20Axis">Beli via WhatsApp</a>
+</div>
+
+<!-- PRODUK 2 -->
+<div class="card" id="xl">
+    <img class="logo-produk" src="LINK_LOGO_XL" alt="XL Logo">
+    <h2>Paket XL</h2>
+    <p>
+        • Promo 20rb 15GB  
+        • Full Kuota Utama  
+        • Support Semua TKP  
+    </p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20XL">Beli via WhatsApp</a>
+</div>
+
+<!-- PRODUK 3 -->
+<div class="card" id="telkomsel">
+    <img class="logo-produk" src="LINK_LOGO_TSEL" alt="Telkomsel Logo">
+    <h2>Paket Telkomsel</h2>
+    <p>
+        • Kuota Belajar  
+        • Kuota Internet Reguler  
+        • Harga Termurah  
+    </p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20Telkomsel">Beli via WhatsApp</a>
+</div>
+
+<!-- PRODUK 4 -->
+<div class="card" id="tri">
+    <img class="logo-produk" src="LINK_LOGO_TRI" alt="Tri Logo">
+    <h2>Paket TRI</h2>
+    <p>
+        • 25GB 25rb  
+        • 40GB 30rb  
+        • Masa Aktif Panjang  
+    </p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20Tri">Beli via WhatsApp</a>
+</div>
+
+<!-- PRODUK 5 -->
+<div class="card" id="indosat">
+    <img class="logo-produk" src="LINK_LOGO_INDOSAT" alt="Indosat Logo">
+    <h2>Paket Indosat</h2>
+    <p>
+        • Internet Yellow  
+        • Freedom Internet  
+        • Harga Pelajar  
+    </p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20Indosat">Beli via WhatsApp</a>
+</div>
+
+<!-- PRODUK 6 -->
+<div class="card" id="hotspot">
+    <img class="logo-produk" src="LINK_LOGO_WIFI" alt="Hotspot Logo">
+    <h2>Paket Hotspot</h2>
+    <p>
+        • Unlimited Hotspot  
+        • 30 Hari  
+        • No FUP  
+    </p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20Hotspot">Beli via WhatsApp</a>
+</div>
+
+<!-- PRODUK 7 -->
+<div class="card" id="vpn">
+    <img class="logo-produk" src="LINK_LOGO_VPN" alt="VPN Logo">
+    <h2>VPN & Premium Tools</h2>
+    <p>
+        • VPN All Operator  
+        • DarkTunnel  
+        • HA Tunnel  
+        • Premium Script  
+    </p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20VPN%20Premium">Beli via WhatsApp</a>
+</div>
+
+</body>
+</html>
