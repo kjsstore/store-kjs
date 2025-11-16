@@ -12,14 +12,130 @@
         font-family: 'Poppins', sans-serif;
         color: white;
         overflow-x: hidden;
-        transition: .3s; /* transisi untuk mode terang/gelap */
+        transition: .3s;
     }
+
+    /* ============================
+       🔥 NAVBAR STYLING
+    ============================ */
+    .nav-container {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        background: #111;
+        padding: 14px 18px;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    body.light .nav-container {
+        background: #ffffff;
+        color: #111;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+
+    .nav-logo {
+        font-size: 20px;
+        font-weight: 700;
+        color: #c084fc;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    body.light .nav-logo {
+        color: #8f00ff;
+    }
+
+    .hamburger {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #222;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .hamburger i {
+        font-size: 22px;
+        color: white;
+    }
+
+    body.light .hamburger {
+        background: #f1f1f1;
+    }
+
+    body.light .hamburger i {
+        color: #000;
+    }
+
+    /* SIDE MENU */
+    .side-menu {
+        position: fixed;
+        top: 0;
+        right: -260px;
+        width: 260px;
+        height: 100%;
+        background: #111;
+        box-shadow: -3px 0 8px rgba(0,0,0,0.3);
+        padding: 80px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        transition: 0.3s ease;
+        z-index: 998;
+    }
+
+    body.light .side-menu {
+        background: #ffffff;
+        box-shadow: -3px 0 8px rgba(0,0,0,0.15);
+    }
+
+    .side-menu a {
+        font-size: 17px;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    body.light .side-menu a {
+        color: #000;
+    }
+
+    .side-menu.open {
+        right: 0;
+    }
+
+    .menu-contact {
+        margin-top: 20px;
+        padding: 14px 12px;
+        background: #8f00ff;
+        color: white;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    body.light .menu-contact {
+        background: #c084fc;
+        color: #fff;
+    }
+
+    /* ============================ */
+
 
     /* BUTTON MODE TERANG/GELAP */
     .theme-btn {
         position: fixed;
         top: 15px;
-        right: 15px;
+        right: 65px;
         background: #1a1a1a;
         padding: 10px 14px;
         border-radius: 10px;
@@ -31,42 +147,13 @@
         transition: .3s;
     }
 
-    .theme-btn:hover {
-        transform: scale(1.1);
-    }
-
-    /* MODE TERANG */
-    body.light {
-        background: #f2f2f7;
-        color: #000;
-    }
-
-    body.light .category-card {
-        background: #fff;
-        border: 1px solid rgba(0,0,0,0.15);
-    }
-
-    body.light .card {
-        background: #fff;
-        border: 1px solid #8f00ff;
-        color: #000;
-    }
-
-    body.light .hero::after {
-        background: rgba(255,255,255,0.45);
-    }
-
-    body.light .category-title {
-        color: #8f00ff;
-    }
-
     body.light .theme-btn {
         background: #fff;
         color: #000;
         box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
-    /* OPENING SCREEN */
+    /* OPENING */
     #opening {
         position: fixed;
         inset: 0;
@@ -75,9 +162,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        z-index: 9999;
-        animation: fadeIn 1s ease;
-        overflow: hidden;
+        z-index: 9998;
     }
 
     .opening-bg-logo {
@@ -101,7 +186,6 @@
         object-fit: cover;
         filter: drop-shadow(0 0 20px #8f00ff);
         animation: pulse 2s infinite alternate;
-        z-index: 5;
     }
 
     @keyframes pulse {
@@ -120,22 +204,11 @@
         font-weight: bold;
         cursor: pointer;
         animation: glow 1.5s infinite alternate;
-        z-index: 5;
     }
 
     @keyframes glow {
         from { box-shadow: 0 0 10px #8f00ff; }
         to { box-shadow: 0 0 20px #d400ff; }
-    }
-
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; visibility: hidden; }
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
     }
 
     /* HERO */
@@ -148,6 +221,7 @@
         text-align: center;
         position: relative;
         overflow: hidden;
+        margin-top: 70px;
     }
 
     .hero::after {
@@ -165,22 +239,12 @@
     .hero h1 {
         font-size: 32px;
         font-weight: 700;
-        color: #fff;
+        color: white;
         text-shadow: 0 0 12px #8f00ff;
     }
 
-    .hero p {
-        margin-top: 8px;
-        font-size: 16px;
-        overflow: hidden;
-        white-space: nowrap;
-    }
-
     .running-text {
-        display: inline-block;
-        white-space: nowrap;
         animation: moveText 12s linear infinite;
-        opacity: .9;
     }
 
     @keyframes moveText {
@@ -188,7 +252,6 @@
         to { transform: translateX(-100%); }
     }
 
-    /* GRID */
     .category-title {
         text-align: center;
         font-size: 22px;
@@ -196,82 +259,46 @@
         font-weight: 600;
         color: #c084fc;
     }
-
-    .category-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 15px;
-        padding: 20px;
-    }
-
-    .category-card {
-        background: #141420;
-        border-radius: 14px;
-        padding: 15px;
-        text-align: center;
-        cursor: pointer;
-        transition: 0.3s;
-        border: 1px solid rgba(255,255,255,0.07);
-    }
-
-    .category-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 15px #8f00ff;
-    }
-
-    .category-card img {
-        width: 90px;
-        height: 90px;
-        object-fit: contain;
-        filter: drop-shadow(0 0 8px #8f00ff);
-    }
-
-    .category-card h3 {
-        font-size: 15px;
-        margin-top: 10px;
-        color: #d4bfff;
-    }
-
-    /* PRODUK CARD */
-    .card {
-        display: none;
-        background: #13131f;
-        margin: 20px auto;
-        width: 90%;
-        max-width: 480px;
-        padding: 20px;
-        border-radius: 14px;
-        border: 1px solid #8f00ff;
-        animation: fadeIn .4s;
-        text-align: center;
-        color: white;
-    }
-
-    .card img {
-        width: 120px;
-        height: 120px;
-        filter: drop-shadow(0 0 10px #b86bff);
-    }
-
-    .whatsapp-btn {
-        display: inline-block;
-        margin-top: 12px;
-        padding: 12px 24px;
-        background: #25D366;
-        color: white;
-        text-decoration: none;
-        border-radius: 10px;
-        font-size: 17px;
-        font-weight: bold;
-        transition: .3s;
-    }
-
 </style>
 </head>
 <body>
 
-<!-- 🔥 TOMBOL MODE GELAP / TERANG -->
+<!-- 🌙 THEME MODE BTN -->
 <div id="themeToggle" class="theme-btn">🌙</div>
+
+<!-- ============================
+     🔥 NAVBAR BARU
+============================ -->
+<div class="nav-container">
+    <div class="nav-logo">KJS STORE</div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+</div>
+
+<div id="sideMenu" class="side-menu">
+    <a href="#">Jasa BPJS</a>
+    <a href="#">Perdokumenan</a>
+    <a href="#">APK Premium</a>
+    <a href="#">Bypass HP</a>
+    <a href="#">List Paket VPN</a>
+    <a href="#">Sewa Script</a>
+    <a href="#">VPN Premium</a>
+
+    <div class="menu-contact">
+        Hubungi Admin
+    </div>
+</div>
+
+<script>
+function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("open");
+}
+</script>
+
+<!-- ============================ -->
+
 
 <script>
     const savedTheme = localStorage.getItem("theme");
@@ -294,7 +321,6 @@
         }
     };
 </script>
-
 
 <!-- OPENING -->
 <div id="opening">
@@ -324,14 +350,11 @@ document.getElementById("enterBtn").onclick = () => {
         <h1>HAI SELAMAT DATANG</h1>
         <p>
             <span class="running-text">
-                Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar Langsung Hubungi Admin •
-                Fast, Trusted, Aman •
+                Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar Langsung Hubungi Admin • Fast, Trusted, Aman •
             </span>
         </p>
     </div>
 </div>
-
-<h2 class="category-title">BY KJS-STORE</h2>
 
 <!-- GRID KATEGORI -->
 <div class="category-grid">
