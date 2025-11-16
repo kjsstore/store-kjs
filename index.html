@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -8,60 +8,105 @@
 <style>
     body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background: #0d0d0d;
+        background: #0a0a0f;
+        font-family: 'Poppins', sans-serif;
         color: white;
-        text-align: center;
     }
 
-    .header {
-        padding: 25px;
-        background: linear-gradient(135deg, #1a1a1a, #000000);
-        border-bottom: 2px solid gold;
-    }
-
-    h1 {
-        font-size: 28px;
-        margin: 0;
-        color: gold;
-        letter-spacing: 1px;
-    }
-
-    .product-buttons {
-        margin: 20px auto;
-        max-width: 400px;
+    /* HERO SECTION */
+    .hero {
+        background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+        height: 330px;
         display: flex;
-        flex-direction: column;
-        gap: 12px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
     }
 
-    .btn {
+    .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.55);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 10;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #fff;
+        text-shadow: 0 0 12px #8f00ff;
+    }
+
+    .hero p {
+        margin-top: 8px;
+        font-size: 16px;
+        opacity: .9;
+    }
+
+    /* KATEGORI GRID */
+    .category-title {
+        text-align: center;
+        font-size: 22px;
+        margin-top: 30px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #c084fc;
+    }
+
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .category-card {
+        background: #141420;
+        border-radius: 14px;
         padding: 15px;
-        background: #1e1e1e;
-        border: 2px solid gold;
-        border-radius: 12px;
-        color: gold;
-        font-size: 18px;
+        text-align: center;
         cursor: pointer;
         transition: 0.3s;
+        border: 1px solid rgba(255,255,255,0.07);
     }
 
-    .btn:hover {
-        background: gold;
-        color: black;
-        transform: scale(1.03);
+    .category-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 15px #8f00ff;
     }
 
+    .category-card img {
+        width: 90px;
+        height: 90px;
+        object-fit: contain;
+        filter: drop-shadow(0 0 8px #8f00ff);
+    }
+
+    .category-card h3 {
+        font-size: 15px;
+        margin-top: 10px;
+        color: #d4bfff;
+        font-weight: 500;
+    }
+
+    /* DETAIL PRODUK */
     .card {
         display: none;
-        margin: 25px auto;
+        background: #13131f;
+        margin: 20px auto;
         width: 90%;
         max-width: 480px;
-        background: rgba(255, 215, 0, 0.06);
-        border: 1px solid gold;
         padding: 20px;
-        border-radius: 15px;
+        border-radius: 14px;
+        border: 1px solid #8f00ff;
         animation: fade 0.3s ease-in-out;
+        text-align: center;
     }
 
     @keyframes fade {
@@ -69,29 +114,30 @@
         to {opacity: 1; transform: translateY(0);}
     }
 
-    .logo-produk {
-        width: 110px;
-        height: 110px;
+    .card img {
+        width: 120px;
+        height: 120px;
         object-fit: contain;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+        filter: drop-shadow(0 0 10px #b86bff);
     }
 
     .whatsapp-btn {
         display: inline-block;
         margin-top: 12px;
-        padding: 12px 20px;
-        background: green;
+        padding: 12px 24px;
+        background: #25D366;
         color: white;
+        text-decoration: none;
         border-radius: 10px;
         font-size: 17px;
-        text-decoration: none;
         font-weight: bold;
-        transition: 0.3s;
+        transition: .3s;
     }
 
     .whatsapp-btn:hover {
-        background: #00ff00;
-        color: black;
+        background: #00ff88;
+        color: #000;
     }
 </style>
 
@@ -99,111 +145,125 @@
 function showProduct(id) {
     document.querySelectorAll(".card").forEach(c => c.style.display = "none");
     document.getElementById(id).style.display = "block";
+    window.scrollTo({ top: 500, behavior: "smooth" });
 }
 </script>
-
 </head>
 
 <body>
 
-<div class="header">
-    <h1>📦 PRODUK KJS STORE</h1>
+<!-- HERO DISPLAY -->
+<div class="hero">
+    <div class="hero-content">
+        <h1>Redefine Your Experience With KJS Store</h1>
+        <p>Pilih Produk Sesuai Kebutuhan Anda – Fast, Trusted, Aman</p>
+    </div>
 </div>
 
-<div class="product-buttons">
-    <button class="btn" onclick="showProduct('axis')">Paket Axis</button>
-    <button class="btn" onclick="showProduct('xl')">Paket XL</button>
-    <button class="btn" onclick="showProduct('telkomsel')">Paket Telkomsel</button>
-    <button class="btn" onclick="showProduct('tri')">Paket TRI</button>
-    <button class="btn" onclick="showProduct('indosat')">Paket Indosat</button>
-    <button class="btn" onclick="showProduct('hotspot')">Paket Hotspot</button>
-    <button class="btn" onclick="showProduct('vpn')">VPN & Premium Tools</button>
+<h2 class="category-title">Shop by Categories</h2>
+
+<!-- GRID CATEGORY -->
+<div class="category-grid">
+
+    <div class="category-card" onclick="showProduct('axis')">
+        <img src="LINK_LOGO_AXIS">
+        <h3>Paket Axis</h3>
+    </div>
+
+    <div class="category-card" onclick="showProduct('xl')">
+        <img src="LINK_LOGO_XL">
+        <h3>Paket XL</h3>
+    </div>
+
+    <div class="category-card" onclick="showProduct('telkomsel')">
+        <img src="LINK_LOGO_TSEL">
+        <h3>Telkomsel</h3>
+    </div>
+
+    <div class="category-card" onclick="showProduct('tri')">
+        <img src="LINK_LOGO_TRI">
+        <h3>Paket TRI</h3>
+    </div>
+
+    <div class="category-card" onclick="showProduct('indosat')">
+        <img src="LINK_LOGO_INDOSAT">
+        <h3>Indosat</h3>
+    </div>
+
+    <div class="category-card" onclick="showProduct('hotspot')">
+        <img src="LINK_LOGO_WIFI">
+        <h3>Paket Hotspot</h3>
+    </div>
+
+    <div class="category-card" onclick="showProduct('vpn')">
+        <img src="LINK_LOGO_VPN">
+        <h3>VPN Premium</h3>
+    </div>
+
 </div>
 
-<!-- PRODUK 1 -->
+<!-- DETAIL PRODUK -->
 <div class="card" id="axis">
-    <img class="logo-produk" src="LINK_LOGO_AXIS" alt="Axis Logo">
+    <img src="LINK_LOGO_AXIS">
     <h2>Paket Axis</h2>
-    <p>
-        • 15GB 7 Hari  
-        • 30GB 30 Hari  
-        • Unlimited App  
-        • Aman & Fast Respon  
-    </p>
-    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20Axis">Beli via WhatsApp</a>
+    <p>• 15GB 7 Hari<br>• 30GB 30 Hari<br>• Unlimited App<br>• Aman & Fast Respon</p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20ingin%20beli%20Paket%20Axis">
+        Beli via WhatsApp
+    </a>
 </div>
 
-<!-- PRODUK 2 -->
 <div class="card" id="xl">
-    <img class="logo-produk" src="LINK_LOGO_XL" alt="XL Logo">
+    <img src="LINK_LOGO_XL">
     <h2>Paket XL</h2>
-    <p>
-        • Promo 20rb 15GB  
-        • Full Kuota Utama  
-        • Support Semua TKP  
-    </p>
-    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20XL">Beli via WhatsApp</a>
+    <p>• Promo 15GB 20RB<br>• Full Kuota Utama<br>• Support Semua TKP</p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Saya%20ingin%20beli%20Paket%20XL">
+        Beli via WhatsApp
+    </a>
 </div>
 
-<!-- PRODUK 3 -->
 <div class="card" id="telkomsel">
-    <img class="logo-produk" src="LINK_LOGO_TSEL" alt="Telkomsel Logo">
+    <img src="LINK_LOGO_TSEL">
     <h2>Paket Telkomsel</h2>
-    <p>
-        • Kuota Belajar  
-        • Kuota Internet Reguler  
-        • Harga Termurah  
-    </p>
-    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20Telkomsel">Beli via WhatsApp</a>
+    <p>• Kuota Belajar<br>• Kuota Internet Reguler<br>• Harga Termurah</p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Beli%20Paket%20Telkomsel">
+        Beli via WhatsApp
+    </a>
 </div>
 
-<!-- PRODUK 4 -->
 <div class="card" id="tri">
-    <img class="logo-produk" src="LINK_LOGO_TRI" alt="Tri Logo">
+    <img src="LINK_LOGO_TRI">
     <h2>Paket TRI</h2>
-    <p>
-        • 25GB 25rb  
-        • 40GB 30rb  
-        • Masa Aktif Panjang  
-    </p>
-    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20Tri">Beli via WhatsApp</a>
+    <p>• 25GB 25rb<br>• 40GB 30rb<br>• Masa Aktif Panjang</p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Beli%20Paket%20Tri">
+        Beli via WhatsApp
+    </a>
 </div>
 
-<!-- PRODUK 5 -->
 <div class="card" id="indosat">
-    <img class="logo-produk" src="LINK_LOGO_INDOSAT" alt="Indosat Logo">
+    <img src="LINK_LOGO_INDOSAT">
     <h2>Paket Indosat</h2>
-    <p>
-        • Internet Yellow  
-        • Freedom Internet  
-        • Harga Pelajar  
-    </p>
-    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20Indosat">Beli via WhatsApp</a>
+    <p>• Internet Yellow<br>• Freedom Internet<br>• Harga Pelajar</p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Beli%20Paket%20Indosat">
+        Beli via WhatsApp
+    </a>
 </div>
 
-<!-- PRODUK 6 -->
 <div class="card" id="hotspot">
-    <img class="logo-produk" src="LINK_LOGO_WIFI" alt="Hotspot Logo">
+    <img src="LINK_LOGO_WIFI">
     <h2>Paket Hotspot</h2>
-    <p>
-        • Unlimited Hotspot  
-        • 30 Hari  
-        • No FUP  
-    </p>
-    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20Paket%20Hotspot">Beli via WhatsApp</a>
+    <p>• Unlimited Hotspot<br>• 30 Hari<br>• No FUP</p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Beli%20Paket%20Hotspot">
+        Beli via WhatsApp
+    </a>
 </div>
 
-<!-- PRODUK 7 -->
 <div class="card" id="vpn">
-    <img class="logo-produk" src="LINK_LOGO_VPN" alt="VPN Logo">
+    <img src="LINK_LOGO_VPN">
     <h2>VPN & Premium Tools</h2>
-    <p>
-        • VPN All Operator  
-        • DarkTunnel  
-        • HA Tunnel  
-        • Premium Script  
-    </p>
-    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Halo%20Admin,%20saya%20ingin%20beli%20VPN%20Premium">Beli via WhatsApp</a>
+    <p>• VPN All Operator<br>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
+    <a class="whatsapp-btn" href="https://wa.me/62XXXXXXXXXX?text=Beli%20VPN%20Premium">
+        Beli via WhatsApp
+    </a>
 </div>
 
 </body>
