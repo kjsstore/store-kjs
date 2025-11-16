@@ -14,222 +14,9 @@
         overflow-x: hidden;
     }
 
-    /* ============================
-       OPENING SCREEN
-    ============================ */
-    #opening {
-        position: fixed;
-        inset: 0;
-        background: #000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        z-index: 9999;
-        animation: fadeIn 1s ease;
-        overflow: hidden;
-    }
-
-    /* LOGO BESAR TRANSPARAN BELAKANG */
-    .opening-bg-logo {
-        position: absolute;
-        width: 85%;
-        height: auto;
-        opacity: 0.12;
-        filter: blur(2px) drop-shadow(0 0 25px #8f00ffaa);
-        animation: zoomIn 6s ease forwards;
-    }
-
-    @keyframes zoomIn {
-        from { transform: scale(1); opacity: 0.08; }
-        to { transform: scale(1.25); opacity: 0.15; }
-    }
-
-    /* LOGO BULAT UTAMA */
-    .opening-logo {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        object-fit: cover;
-        filter: drop-shadow(0 0 20px #8f00ff);
-        animation: pulse 2s infinite alternate;
-        z-index: 5;
-    }
-
-    @keyframes pulse {
-        from { transform: scale(1); }
-        to { transform: scale(1.08); }
-    }
-
-    #enterBtn {
-        margin-top: 30px;
-        padding: 12px 26px;
-        font-size: 18px;
-        background: linear-gradient(45deg,#8f00ff,#d400ff);
-        border: none;
-        border-radius: 12px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        animation: glow 1.5s infinite alternate;
-        z-index: 5;
-    }
-
-    @keyframes glow {
-        from { box-shadow: 0 0 10px #8f00ff; }
-        to { box-shadow: 0 0 20px #d400ff; }
-    }
-
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; visibility: hidden; }
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-    /* ============================
-       HERO SECTION
-    ============================ */
-    .hero {
-        background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
-        height: 330px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(0,0,0,0.55);
-    }
-
-    .hero-content {
-        position: relative;
-        z-index: 10;
-    }
-
-    .hero h1 {
-        font-size: 32px;
-        font-weight: 700;
-        color: #fff;
-        text-shadow: 0 0 12px #8f00ff;
-    }
-
-    /* TEXT RUNNING */
-    .hero p {
-        margin-top: 8px;
-        font-size: 16px;
-        overflow: hidden;
-        white-space: nowrap;
-    }
-
-    .running-text {
-        display: inline-block;
-        white-space: nowrap;
-        animation: moveText 12s linear infinite;
-        opacity: .9;
-    }
-
-    @keyframes moveText {
-        from { transform: translateX(100%); }
-        to { transform: translateX(-100%); }
-    }
-
-    /* ============================
-       PRODUCT GRID
-    ============================ */
-    .category-title {
-        text-align: center;
-        font-size: 22px;
-        margin-top: 30px;
-        font-weight: 600;
-        color: #c084fc;
-    }
-
-    .category-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 15px;
-        padding: 20px;
-    }
-
-    .category-card {
-        background: #141420;
-        border-radius: 14px;
-        padding: 15px;
-        text-align: center;
-        cursor: pointer;
-        transition: 0.3s;
-        border: 1px solid rgba(255,255,255,0.07);
-    }
-
-    .category-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 15px #8f00ff;
-    }
-
-    .category-card img {
-        width: 90px;
-        height: 90px;
-        object-fit: contain;
-        filter: drop-shadow(0 0 8px #8f00ff);
-    }
-
-    .category-card h3 {
-        font-size: 15px;
-        margin-top: 10px;
-        color: #d4bfff;
-    }
-
-    /* PRODUCT DETAIL */
-    .card {
-        display: none;
-        background: #13131f;
-        margin: 20px auto;
-        width: 90%;
-        max-width: 480px;
-        padding: 20px;
-        border-radius: 14px;
-        border: 1px solid #8f00ff;
-        animation: fadeIn .4s;
-        text-align: center;
-    }
-
-    .card img {
-        width: 120px;
-        height: 120px;
-        filter: drop-shadow(0 0 10px #b86bff);
-    }
-
-    .whatsapp-btn {
-        display: inline-block;
-        margin-top: 12px;
-        padding: 12px 24px;
-        background: #25D366;
-        color: white;
-        text-decoration: none;
-        border-radius: 10px;
-        font-size: 17px;
-        font-weight: bold;
-        transition: .3s;
-    }
-</style>
-
-</head>
-<body>
-
-<!-- ============================
-     NAVBAR ALA APLIKASI
-============================ -->
-<style>
+    /* ====================================
+       NAVBAR ALA APLIKASI
+    ==================================== */
     .app-navbar {
         width: 100%;
         padding: 12px 18px;
@@ -244,87 +31,163 @@
         box-shadow: 0 0 10px #8f00ff55;
     }
 
-    .nav-left {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
+    .nav-left { display: flex; align-items: center; gap: 10px; }
     .nav-logo {
-        width: 36px;
-        height: 36px;
+        width: 36px; height: 36px;
         border-radius: 50%;
         object-fit: cover;
         box-shadow: 0 0 10px #8f00ff;
     }
+    .nav-title { font-size: 19px; font-weight: 700; letter-spacing: .5px; }
 
-    .nav-title {
-        font-size: 19px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-    }
-
-    .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-    }
-
+    .nav-right { display: flex; align-items: center; gap: 14px; }
     .nav-icon {
-        font-size: 20px;
-        cursor: pointer;
-        transition: .3s;
-        padding: 6px;
-        border-radius: 8px;
+        font-size: 20px; cursor: pointer;
+        padding: 6px; border-radius: 8px; transition: .2s;
     }
-    .nav-icon:active {
-        background: #ffffff1a;
-    }
+    .nav-icon:active { background: #ffffff1a; }
 
-    /* MENU DROPDOWN */
     #menuBox {
         position: fixed;
-        top: 58px;
-        right: 12px;
+        top: 58px; right: 12px;
         background: #151525;
         padding: 15px;
         border-radius: 12px;
         width: 180px;
         display: none;
         box-shadow: 0 0 10px #8f00ff66;
-        animation: fadeIn .3s;
     }
+
     #menuBox a {
         display: block;
-        padding: 10px 0;
         color: white;
+        padding: 10px 0;
         text-decoration: none;
         border-bottom: 1px solid #ffffff15;
         font-size: 15px;
     }
-    #menuBox a:last-child {
-        border-bottom: none;
+    #menuBox a:last-child { border-bottom: none; }
+
+    /* Light mode */
+    .light { background: white !important; color: #111 !important; }
+    .light .app-navbar { background: white; color: #000; }
+    .light #menuBox { background: #f1f1f1; color: #000; }
+    .light .nav-icon { color: #000; }
+
+    /* ====================================
+       OPENING SCREEN
+    ==================================== */
+    #opening {
+        position: fixed;
+        inset: 0;
+        background: #0a0a0f;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 1000;
+        animation: fadeOut 1.3s ease forwards;
+        animation-delay: 1.2s;
     }
 
-    /* LIGHT MODE */
-    .light {
-        background: white !important;
-        color: #0b0b12 !important;
+    @keyframes fadeOut {
+        to { opacity: 0; visibility: hidden; }
     }
 
-    .light .app-navbar {
-        background: #ffffff;
-        color: #0b0b12;
-        box-shadow: 0 0 10px #00000022;
+    .opening-logo {
+        width: 140px; height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 25px #8f00ff;
     }
 
-    .light #menuBox {
-        background: #f2f2f7;
-        color: black;
+    .opening-bg-logo {
+        position: absolute;
+        width: 80%;
+        opacity: 0.05;
+    }
+
+    /* ====================================
+       HERO SECTION
+    ==================================== */
+    .hero {
+        height: 260px;
+        background: linear-gradient(#8f00ff33, #000000aa),
+                    url('https://files.catbox.moe/js5luv.webp');
+        background-size: cover;
+        background-position: center;
+        border-radius: 0 0 30px 30px;
+        padding: 25px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .hero h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    /* ====================================
+       GRID PRODUK
+    ==================================== */
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .category-card {
+        background: #12121a;
+        padding: 15px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 0 15px #8f00ff22;
+        transition: .3s;
+    }
+
+    .category-card:hover {
+        transform: scale(.96);
+    }
+
+    .category-card img {
+        width: 80px; height: 80px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+    }
+
+    .category-card h3 {
+        margin: 5px 0 0;
+        font-size: 16px;
+    }
+
+    /* ====================================
+       FIX RESPONSIVE HP
+    ==================================== */
+    @media(max-width:480px){
+        .hero { height: 240px; }
+        .hero h1 { font-size: 22px; }
+
+        .category-grid {
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .category-card img {
+            width: 70px; height: 70px;
+        }
+
+        .opening-logo { width: 120px; height: 120px; }
+        .nav-title { font-size: 16px; }
     }
 </style>
+</head>
+<body>
 
-<!-- NAVBAR -->
+<!-- =====================
+     NAVBAR APLIKASI
+===================== -->
 <div class="app-navbar" id="navbar">
     <div class="nav-left">
         <img src="https://files.catbox.moe/js5luv.webp" class="nav-logo">
@@ -332,19 +195,50 @@
     </div>
 
     <div class="nav-right">
-        <!-- Mode Gelap/Terang -->
         <div class="nav-icon" id="themeBtn">🌙</div>
-
-        <!-- Menu Burger -->
         <div class="nav-icon" id="menuBtn">☰</div>
     </div>
 </div>
 
-<!-- MENU BOX -->
 <div id="menuBox">
     <a href="#">📦 Produk</a>
     <a href="#">💳 Pembayaran</a>
     <a href="#">☎ Kontak Admin</a>
+</div>
+
+<!-- =====================
+     OPENING SCREEN
+===================== -->
+<div id="opening">
+    <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo">
+    <img src="https://files.catbox.moe/js5luv.webp" class="opening-bg-logo">
+</div>
+
+<!-- =====================
+     HERO
+===================== -->
+<div class="hero">
+    <h1>Selamat Datang di KJS STORE</h1>
+</div>
+
+<!-- =====================
+     GRID PRODUK
+===================== -->
+<div class="category-grid">
+    <div class="category-card">
+        <img src="https://via.placeholder.com/100">
+        <h3>Paket Data</h3>
+    </div>
+
+    <div class="category-card">
+        <img src="https://via.placeholder.com/100">
+        <h3>Top Up Game</h3>
+    </div>
+
+    <div class="category-card">
+        <img src="https://via.placeholder.com/100">
+        <h3>Jasa Lainnya</h3>
+    </div>
 </div>
 
 <script>
@@ -354,205 +248,13 @@
         box.style.display = box.style.display === "block" ? "none" : "block";
     };
 
-    // Toggle Tema Gelap/Terang
+    // Toggle Tema
     const themeBtn = document.getElementById("themeBtn");
     themeBtn.onclick = () => {
         document.body.classList.toggle("light");
-
-        if (document.body.classList.contains("light")) {
-            themeBtn.textContent = "☀️";
-        } else {
-            themeBtn.textContent = "🌙";
-        }
+        themeBtn.textContent = document.body.classList.contains("light") ? "☀️" : "🌙";
     };
 </script>
-<!-- ============================
-     OPENING SCREEN
-============================ -->
-<div id="opening">
-
-    <!-- LOGO BESAR TRANSPARAN -->
-    <img src="https://files.catbox.moe/js5luv.webp" class="opening-bg-logo">
-
-    <!-- LOGO BULAT DEPAN -->
-    <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo">
-
-    <button id="enterBtn">Masuk & Lanjut Belanja</button>
-</div>
-
-<audio id="bgm" loop>
-    <source src="https://files.catbox.moe/m6v2y3.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-document.getElementById("enterBtn").onclick = () => {
-    let open = document.getElementById("opening");
-    open.style.animation = "fadeOut 1s forwards";
-
-    let audio = document.getElementById("bgm");
-    audio.volume = 0.6;
-    audio.play();
-};
-</script>
-
-<!-- ============================
-     HERO SECTION
-============================ -->
-<div class="hero">
-    <div class="hero-content">
-        <h1>HAI SELAMAT DATANG</h1>
-        <p>
-            <span class="running-text">
-                Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar Langsung Hubungi Admin •
-                Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar Langsung Hubungi Admin– Fast, Trusted, Aman •
-            </span>
-        </p>
-    </div>
-</div>
-
-<h2 class="category-title">BY KJS-STORE</h2>
-
-<!-- ============================
-     GRID KATEGORI
-============================ -->
-<div class="category-grid">
-
-    <div class="category-card" onclick="showProduct('paket1')">
-        <img src="https://files.catbox.moe/fwu0ky.jpg">
-        <h3>JASA BPJS KETENAGKERJAAN</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket2')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>JASA PERDOKUMENAN</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket3')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>APK PREMIUM</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket4')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>JASA BAYPAS HP</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket5')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>LIST PAKET VPN</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket6')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>SEWA SCRIPT TUNNELING</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket7')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>VPN PREMIUM</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket8')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>SEWA SCRIPT TUNNELING</h3>
-    </div>
-
-</div>
-
-<!-- ============================
-     DETAIL PRODUK
-============================ -->
-<script>
-function showProduct(id) {
-    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
-    document.getElementById(id).style.display = "block";
-    window.scrollTo({ top: 500, behavior: "smooth" });
-}
-</script>
-
-<div class="card" id="paket1">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>JASA BPJSK</h2>
-
-    <p style="line-height: 1.6; font-size: 15px;">
-
-        •━━━━━━━━━━━━━━━━• <br>
-        💰 <b>JASA PENCAIRAN BPJS KETENAGAKERJAAN</b> 💰 <br>
-        •━━━━━━━━━━━━━━━━• <br><br>
-
-        🔑 <b>Keuntungan Jasa Kami :</b><br>
-        ✅ Proses Cepat & Aman<br>
-        ✅ Data Terjamin Privasi<br>
-        ✅ Tanpa Ribet<br>
-        ✅ Bisa Semua Bank<br><br>
-
-        📍 <b>Ketentuan :</b><br>
-        • Cukup siapkan data & berkas lengkap<br>
-        • Proses sesuai ketentuan resmi BPJS<br>
-        • Full Garansi 100% Amanah<br><br>
-
-        🔧 <b>Layanan Tambahan:</b><br>
-        • Cek Valid<br>
-        • Riset Akun<br>
-        • Cek Data<br>
-        • Rubah Data<br>
-        • Pengajuan LASIK<br><br>
-
-        •━━━━━━━━━━━━━━━━•
-    </p>
-
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
-</div>
-
-<div class="card" id="paket2">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket XL</h2>
-    <p>• Promo 15GB 20RB<br>• Full Kuota Utama<br>• Support Semua TKP</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="paket3">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Telkomsel</h2>
-    <p>• Kuota Belajar<br>• Kuota Internet Reguler<br>• Harga Termurah</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="paket4">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket TRI</h2>
-    <p>• 25GB 25rb<br>• 40GB 30rb<br>• Masa Aktif Panjang</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="paket5">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Indosat</h2>
-    <p>• Internet Yellow<br>• Freedom Internet<br>• Harga Pelajar</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="paket6">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Hotspot</h2>
-    <p>• Unlimited Hotspot<br>• 30 Hari<br>• No FUP</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="paket7">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>VPN & Premium Tools</h2>
-    <p>• VPN All Operator<br>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="paket8">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>VPN & Premium Tools</h2>
-    <p>• VPN All Operator<br>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
 
 </body>
 </html>
