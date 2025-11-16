@@ -6,65 +6,12 @@
 <title>KJS STORE – Produk</title>
 
 <style>
-    /* =======================================
-       ROOT WARNA UNTUK MODE GELAP & TERANG
-    ======================================= */
-    :root {
-        --bg-main: #0a0a0f;
-        --card-bg: #141420;
-        --text-color: #ffffff;
-        --accent: #8f00ff;
-    }
-
-    .light-theme {
-        --bg-main: #f5f4fa;
-        --card-bg: #ffffff;
-        --text-color: #111;
-        --accent: #7d00ff;
-    }
-
     body {
         margin: 0;
-        background: var(--bg-main);
+        background: #0a0a0f;
         font-family: 'Poppins', sans-serif;
-        color: var(--text-color);
+        color: white;
         overflow-x: hidden;
-        transition: .3s ease;
-    }
-
-    /* ============================
-       TOP APP BAR
-    ============================ */
-    .app-bar {
-        width: 100%;
-        padding: 14px 20px;
-        background: var(--card-bg);
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        z-index: 99999;
-        backdrop-filter: blur(10px);
-    }
-
-    .app-title {
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--accent);
-        text-shadow: 0 0 8px var(--accent);
-    }
-
-    .theme-toggle {
-        padding: 8px 16px;
-        border-radius: 20px;
-        background: var(--accent);
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        font-size: 15px;
-        box-shadow: 0 0 10px var(--accent);
     }
 
     /* ============================
@@ -83,13 +30,22 @@
         overflow: hidden;
     }
 
+    /* LOGO BESAR TRANSPARAN BELAKANG */
     .opening-bg-logo {
         position: absolute;
         width: 85%;
-        opacity: 0.15;
+        height: auto;
+        opacity: 0.12;
         filter: blur(2px) drop-shadow(0 0 25px #8f00ffaa);
+        animation: zoomIn 6s ease forwards;
     }
 
+    @keyframes zoomIn {
+        from { transform: scale(1); opacity: 0.08; }
+        to { transform: scale(1.25); opacity: 0.15; }
+    }
+
+    /* LOGO BULAT UTAMA */
     .opening-logo {
         width: 180px;
         height: 180px;
@@ -98,6 +54,11 @@
         filter: drop-shadow(0 0 20px #8f00ff);
         animation: pulse 2s infinite alternate;
         z-index: 5;
+    }
+
+    @keyframes pulse {
+        from { transform: scale(1); }
+        to { transform: scale(1.08); }
     }
 
     #enterBtn {
@@ -114,15 +75,23 @@
         z-index: 5;
     }
 
-    @keyframes glow { 
+    @keyframes glow {
         from { box-shadow: 0 0 10px #8f00ff; }
         to { box-shadow: 0 0 20px #d400ff; }
     }
 
-    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
 
     /* ============================
-       HERO
+       HERO SECTION
     ============================ */
     .hero {
         background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
@@ -149,18 +118,40 @@
 
     .hero h1 {
         font-size: 32px;
+        font-weight: 700;
         color: #fff;
         text-shadow: 0 0 12px #8f00ff;
     }
 
+    /* TEXT RUNNING */
+    .hero p {
+        margin-top: 8px;
+        font-size: 16px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .running-text {
+        display: inline-block;
+        white-space: nowrap;
+        animation: moveText 12s linear infinite;
+        opacity: .9;
+    }
+
+    @keyframes moveText {
+        from { transform: translateX(100%); }
+        to { transform: translateX(-100%); }
+    }
+
     /* ============================
-       CATEGORY GRID
+       PRODUCT GRID
     ============================ */
     .category-title {
         text-align: center;
         font-size: 22px;
         margin-top: 30px;
-        color: var(--accent);
+        font-weight: 600;
+        color: #c084fc;
     }
 
     .category-grid {
@@ -171,44 +162,43 @@
     }
 
     .category-card {
-        background: var(--card-bg);
+        background: #141420;
         border-radius: 14px;
         padding: 15px;
         text-align: center;
         cursor: pointer;
-        transition: .3s;
+        transition: 0.3s;
         border: 1px solid rgba(255,255,255,0.07);
     }
 
     .category-card:hover {
         transform: translateY(-6px);
-        box-shadow: 0 0 15px var(--accent);
+        box-shadow: 0 0 15px #8f00ff;
     }
 
     .category-card img {
         width: 90px;
         height: 90px;
-        filter: drop-shadow(0 0 8px var(--accent));
+        object-fit: contain;
+        filter: drop-shadow(0 0 8px #8f00ff);
     }
 
     .category-card h3 {
         font-size: 15px;
         margin-top: 10px;
-        color: var(--accent);
+        color: #d4bfff;
     }
 
-    /* ============================
-       PRODUCT DETAIL CARD
-    ============================ */
+    /* PRODUCT DETAIL */
     .card {
         display: none;
-        background: var(--card-bg);
+        background: #13131f;
         margin: 20px auto;
         width: 90%;
         max-width: 480px;
         padding: 20px;
         border-radius: 14px;
-        border: 1px solid var(--accent);
+        border: 1px solid #8f00ff;
         animation: fadeIn .4s;
         text-align: center;
     }
@@ -216,7 +206,7 @@
     .card img {
         width: 120px;
         height: 120px;
-        filter: drop-shadow(0 0 10px var(--accent));
+        filter: drop-shadow(0 0 10px #b86bff);
     }
 
     .whatsapp-btn {
@@ -225,36 +215,168 @@
         padding: 12px 24px;
         background: #25D366;
         color: white;
+        text-decoration: none;
         border-radius: 10px;
         font-size: 17px;
         font-weight: bold;
-        text-decoration: none;
+        transition: .3s;
     }
 </style>
-</head>
 
+</head>
 <body>
 
 <!-- ============================
-     APP BAR (FITUR BARU)
+     NAVBAR ALA APLIKASI
 ============================ -->
-<div class="app-bar">
-    <div class="app-title">KJS STORE</div>
-    <button class="theme-toggle" onclick="toggleTheme()">Tema</button>
+<style>
+    .app-navbar {
+        width: 100%;
+        padding: 12px 18px;
+        background: #0b0b12;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        box-shadow: 0 0 10px #8f00ff55;
+    }
+
+    .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 10px #8f00ff;
+    }
+
+    .nav-title {
+        font-size: 19px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .nav-icon {
+        font-size: 20px;
+        cursor: pointer;
+        transition: .3s;
+        padding: 6px;
+        border-radius: 8px;
+    }
+    .nav-icon:active {
+        background: #ffffff1a;
+    }
+
+    /* MENU DROPDOWN */
+    #menuBox {
+        position: fixed;
+        top: 58px;
+        right: 12px;
+        background: #151525;
+        padding: 15px;
+        border-radius: 12px;
+        width: 180px;
+        display: none;
+        box-shadow: 0 0 10px #8f00ff66;
+        animation: fadeIn .3s;
+    }
+    #menuBox a {
+        display: block;
+        padding: 10px 0;
+        color: white;
+        text-decoration: none;
+        border-bottom: 1px solid #ffffff15;
+        font-size: 15px;
+    }
+    #menuBox a:last-child {
+        border-bottom: none;
+    }
+
+    /* LIGHT MODE */
+    .light {
+        background: white !important;
+        color: #0b0b12 !important;
+    }
+
+    .light .app-navbar {
+        background: #ffffff;
+        color: #0b0b12;
+        box-shadow: 0 0 10px #00000022;
+    }
+
+    .light #menuBox {
+        background: #f2f2f7;
+        color: black;
+    }
+</style>
+
+<!-- NAVBAR -->
+<div class="app-navbar" id="navbar">
+    <div class="nav-left">
+        <img src="https://files.catbox.moe/js5luv.webp" class="nav-logo">
+        <div class="nav-title">KJS STORE</div>
+    </div>
+
+    <div class="nav-right">
+        <!-- Mode Gelap/Terang -->
+        <div class="nav-icon" id="themeBtn">🌙</div>
+
+        <!-- Menu Burger -->
+        <div class="nav-icon" id="menuBtn">☰</div>
+    </div>
+</div>
+
+<!-- MENU BOX -->
+<div id="menuBox">
+    <a href="#">📦 Produk</a>
+    <a href="#">💳 Pembayaran</a>
+    <a href="#">☎ Kontak Admin</a>
 </div>
 
 <script>
-function toggleTheme() { 
-    document.body.classList.toggle("light-theme"); 
-}
-</script>
+    // Toggle Menu
+    document.getElementById("menuBtn").onclick = () => {
+        let box = document.getElementById("menuBox");
+        box.style.display = box.style.display === "block" ? "none" : "block";
+    };
 
+    // Toggle Tema Gelap/Terang
+    const themeBtn = document.getElementById("themeBtn");
+    themeBtn.onclick = () => {
+        document.body.classList.toggle("light");
+
+        if (document.body.classList.contains("light")) {
+            themeBtn.textContent = "☀️";
+        } else {
+            themeBtn.textContent = "🌙";
+        }
+    };
+</script>
 <!-- ============================
      OPENING SCREEN
 ============================ -->
 <div id="opening">
+
+    <!-- LOGO BESAR TRANSPARAN -->
     <img src="https://files.catbox.moe/js5luv.webp" class="opening-bg-logo">
+
+    <!-- LOGO BULAT DEPAN -->
     <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo">
+
     <button id="enterBtn">Masuk & Lanjut Belanja</button>
 </div>
 
@@ -266,6 +388,7 @@ function toggleTheme() {
 document.getElementById("enterBtn").onclick = () => {
     let open = document.getElementById("opening");
     open.style.animation = "fadeOut 1s forwards";
+
     let audio = document.getElementById("bgm");
     audio.volume = 0.6;
     audio.play();
@@ -273,14 +396,15 @@ document.getElementById("enterBtn").onclick = () => {
 </script>
 
 <!-- ============================
-     HERO
+     HERO SECTION
 ============================ -->
 <div class="hero">
     <div class="hero-content">
         <h1>HAI SELAMAT DATANG</h1>
         <p>
             <span class="running-text">
-                Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar • Fast, Trusted, Aman •
+                Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar Langsung Hubungi Admin •
+                Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar Langsung Hubungi Admin– Fast, Trusted, Aman •
             </span>
         </p>
     </div>
@@ -292,6 +416,7 @@ document.getElementById("enterBtn").onclick = () => {
      GRID KATEGORI
 ============================ -->
 <div class="category-grid">
+
     <div class="category-card" onclick="showProduct('paket1')">
         <img src="https://files.catbox.moe/fwu0ky.jpg">
         <h3>JASA BPJS KETENAGKERJAAN</h3>
@@ -331,8 +456,12 @@ document.getElementById("enterBtn").onclick = () => {
         <img src="https://files.catbox.moe/js5luv.webp">
         <h3>SEWA SCRIPT TUNNELING</h3>
     </div>
+
 </div>
 
+<!-- ============================
+     DETAIL PRODUK
+============================ -->
 <script>
 function showProduct(id) {
     document.querySelectorAll(".card").forEach(c => c.style.display = "none");
@@ -341,36 +470,89 @@ function showProduct(id) {
 }
 </script>
 
-<!-- ============================
-     DETAIL PRODUK
-============================ -->
 <div class="card" id="paket1">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>JASA BPJSK</h2>
-    <p>• Info lengkap jasa BPJSK…</p>
+
+    <p style="line-height: 1.6; font-size: 15px;">
+
+        •━━━━━━━━━━━━━━━━• <br>
+        💰 <b>JASA PENCAIRAN BPJS KETENAGAKERJAAN</b> 💰 <br>
+        •━━━━━━━━━━━━━━━━• <br><br>
+
+        🔑 <b>Keuntungan Jasa Kami :</b><br>
+        ✅ Proses Cepat & Aman<br>
+        ✅ Data Terjamin Privasi<br>
+        ✅ Tanpa Ribet<br>
+        ✅ Bisa Semua Bank<br><br>
+
+        📍 <b>Ketentuan :</b><br>
+        • Cukup siapkan data & berkas lengkap<br>
+        • Proses sesuai ketentuan resmi BPJS<br>
+        • Full Garansi 100% Amanah<br><br>
+
+        🔧 <b>Layanan Tambahan:</b><br>
+        • Cek Valid<br>
+        • Riset Akun<br>
+        • Cek Data<br>
+        • Rubah Data<br>
+        • Pengajuan LASIK<br><br>
+
+        •━━━━━━━━━━━━━━━━•
+    </p>
+
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
 
 <div class="card" id="paket2">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>Paket XL</h2>
-    <p>• Promo 15GB 20RB…</p>
-    <a class="whatsapp-btn" href="#">Beli via WhatsApp</a>
+    <p>• Promo 15GB 20RB<br>• Full Kuota Utama<br>• Support Semua TKP</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
 <div class="card" id="paket3">
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>APK Premium</h2>
-    <p>• Kumpulan APK Premium…</p>
-    <a class="whatsapp-btn" href="#">Beli via WhatsApp</a>
+    <h2>Paket Telkomsel</h2>
+    <p>• Kuota Belajar<br>• Kuota Internet Reguler<br>• Harga Termurah</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
 <div class="card" id="paket4">
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>BYPASS HP</h2>
-    <p>• Jasa bypass HP…</p>
-    <a class="whatsapp-btn" href="#">Beli via WhatsApp</a>
+    <h2>Paket TRI</h2>
+    <p>• 25GB 25rb<br>• 40GB 30rb<br>• Masa Aktif Panjang</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
+
+<div class="card" id="paket5">
+    <img src="https://files.catbox.moe/js5luv.webp">
+    <h2>Paket Indosat</h2>
+    <p>• Internet Yellow<br>• Freedom Internet<br>• Harga Pelajar</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
+
+<div class="card" id="paket6">
+    <img src="https://files.catbox.moe/js5luv.webp">
+    <h2>Paket Hotspot</h2>
+    <p>• Unlimited Hotspot<br>• 30 Hari<br>• No FUP</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
+
+<div class="card" id="paket7">
+    <img src="https://files.catbox.moe/js5luv.webp">
+    <h2>VPN & Premium Tools</h2>
+    <p>• VPN All Operator<br>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
+
+<div class="card" id="paket8">
+    <img src="https://files.catbox.moe/js5luv.webp">
+    <h2>VPN & Premium Tools</h2>
+    <p>• VPN All Operator<br>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
+
 
 </body>
 </html>
