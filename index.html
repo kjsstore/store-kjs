@@ -11,9 +11,69 @@
         background: #0a0a0f;
         font-family: 'Poppins', sans-serif;
         color: white;
+        overflow-x: hidden;
     }
 
-    /* HERO SECTION */
+    /* ============================
+       OPENING SCREEN
+    ============================ */
+    #opening {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 9999;
+        animation: fadeIn 1s ease;
+    }
+
+    .opening-logo {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        filter: drop-shadow(0 0 20px #8f00ff);
+        animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+        from { transform: scale(1); }
+        to { transform: scale(1.08); }
+    }
+
+    #enterBtn {
+        margin-top: 30px;
+        padding: 12px 26px;
+        font-size: 18px;
+        background: linear-gradient(45deg,#8f00ff,#d400ff);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { box-shadow: 0 0 10px #8f00ff; }
+        to { box-shadow: 0 0 20px #d400ff; }
+    }
+
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* ============================
+       HERO SECTION
+    ============================ */
     .hero {
         background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
         height: 330px;
@@ -49,9 +109,7 @@
         margin-top: 8px;
         font-size: 16px;
         overflow: hidden;
-        width: 100%;
         white-space: nowrap;
-        position: relative;
     }
 
     .running-text {
@@ -66,13 +124,14 @@
         to { transform: translateX(-100%); }
     }
 
-    /* KATEGORI GRID */
+    /* ============================
+       PRODUCT GRID
+    ============================ */
     .category-title {
         text-align: center;
         font-size: 22px;
         margin-top: 30px;
         font-weight: 600;
-        letter-spacing: 1px;
         color: #c084fc;
     }
 
@@ -109,10 +168,9 @@
         font-size: 15px;
         margin-top: 10px;
         color: #d4bfff;
-        font-weight: 500;
     }
 
-    /* DETAIL PRODUK */
+    /* PRODUCT DETAIL */
     .card {
         display: none;
         background: #13131f;
@@ -122,20 +180,13 @@
         padding: 20px;
         border-radius: 14px;
         border: 1px solid #8f00ff;
-        animation: fade 0.3s ease-in-out;
+        animation: fadeIn .4s;
         text-align: center;
-    }
-
-    @keyframes fade {
-        from {opacity: 0; transform: translateY(10px);}
-        to {opacity: 1; transform: translateY(0);}
     }
 
     .card img {
         width: 120px;
         height: 120px;
-        object-fit: contain;
-        margin-bottom: 10px;
         filter: drop-shadow(0 0 10px #b86bff);
     }
 
@@ -151,43 +202,54 @@
         font-weight: bold;
         transition: .3s;
     }
-
-    .whatsapp-btn:hover {
-        background: #00ff88;
-        color: #000;
-    }
 </style>
 
-<script>
-function showProduct(id) {
-    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
-    document.getElementById(id).style.display = "block";
-    window.scrollTo({ top: 500, behavior: "smooth" });
-}
-</script>
 </head>
-
 <body>
 
-<!-- HERO DISPLAY -->
+<!-- ============================
+     OPENING SCREEN
+============================ -->
+<div id="opening">
+    <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo">
+    <button id="enterBtn">Masuk & Lanjut Belanja</button>
+</div>
+
+<audio id="bgm" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.getElementById("enterBtn").onclick = () => {
+    let open = document.getElementById("opening");
+    open.style.animation = "fadeOut 1s forwards";
+
+    let audio = document.getElementById("bgm");
+    audio.volume = 0.6;
+    audio.play();
+};
+</script>
+
+<!-- ============================
+     HERO SECTION
+============================ -->
 <div class="hero">
     <div class="hero-content">
         <h1>Redefine Your Experience With KJS Store</h1>
-
         <p>
             <span class="running-text">
                 Pilih Produk Sesuai Kebutuhan Anda – Fast, Trusted, Aman •
                 Pilih Produk Sesuai Kebutuhan Anda – Fast, Trusted, Aman •
-                Pilih Produk Sesuai Kebutuhan Anda – Fast, Trusted, Aman •
             </span>
         </p>
-
     </div>
 </div>
 
 <h2 class="category-title">STORE BY KJS-STORE</h2>
 
-<!-- GRID CATEGORY -->
+<!-- ============================
+     GRID KATEGORI
+============================ -->
 <div class="category-grid">
 
     <div class="category-card" onclick="showProduct('axis')">
@@ -227,68 +289,64 @@ function showProduct(id) {
 
 </div>
 
-<!-- DETAIL PRODUK -->
+<!-- ============================
+     DETAIL PRODUK
+============================ -->
+<script>
+function showProduct(id) {
+    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
+    document.getElementById(id).style.display = "block";
+    window.scrollTo({ top: 500, behavior: "smooth" });
+}
+</script>
+
 <div class="card" id="axis">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>Paket Axis</h2>
     <p>• 15GB 7 Hari<br>• 30GB 30 Hari<br>• Unlimited App<br>• Aman & Fast Respon</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681?text=Halo%20Admin,%20ingin%20beli%20Paket%20Axis">
-        Beli via WhatsApp
-    </a>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
 <div class="card" id="xl">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>Paket XL</h2>
     <p>• Promo 15GB 20RB<br>• Full Kuota Utama<br>• Support Semua TKP</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681?text=Saya%20ingin%20beli%20Paket%20XL">
-        Beli via WhatsApp
-    </a>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
 <div class="card" id="telkomsel">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>Paket Telkomsel</h2>
     <p>• Kuota Belajar<br>• Kuota Internet Reguler<br>• Harga Termurah</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681?text=Beli%20Paket%20Telkomsel">
-        Beli via WhatsApp
-    </a>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
 <div class="card" id="tri">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>Paket TRI</h2>
     <p>• 25GB 25rb<br>• 40GB 30rb<br>• Masa Aktif Panjang</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681?text=Beli%20Paket%20Tri">
-        Beli via WhatsApp
-    </a>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
 <div class="card" id="indosat">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>Paket Indosat</h2>
     <p>• Internet Yellow<br>• Freedom Internet<br>• Harga Pelajar</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681?text=Beli%20Paket%20Indosat">
-        Beli via WhatsApp
-    </a>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
 <div class="card" id="hotspot">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>Paket Hotspot</h2>
     <p>• Unlimited Hotspot<br>• 30 Hari<br>• No FUP</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681?text=Beli%20Paket%20Hotspot">
-        Beli via WhatsApp
-    </a>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
 <div class="card" id="vpn">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>VPN & Premium Tools</h2>
     <p>• VPN All Operator<br>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681?text=Beli%20VPN%20Premium">
-        Beli via WhatsApp
-    </a>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
 </body>
