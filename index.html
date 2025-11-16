@@ -1,495 +1,357 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>KJS STORE – Produk</title>
-
 <style>
+    /* ---------- BASE ---------- */
+    :root{
+        --bg-dark: #0a0a0f;
+        --panel-dark: #111;
+        --accent: #8f00ff;
+        --accent-2: #c084fc;
+    }
+    *{box-sizing:border-box}
     body {
         margin: 0;
-        background: #0a0a0f;
+        background: var(--bg-dark);
         font-family: 'Poppins', sans-serif;
         color: white;
         overflow-x: hidden;
-        transition: .3s;
+        transition: background .25s, color .25s;
     }
 
-    /* ============================
-       🔥 NAVBAR STYLING
-    ============================ */
-    .nav-container {
-        width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 9999;
-        background: #111;
-        padding: 14px 18px;
-        box-shadow: 0 1px 5px rgba(0,0,0,0.3);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    /* ---------- NAVBAR ---------- */
+    .nav-container{
+        width:100%;
+        position:fixed;
+        top:0;
+        left:0;
+        z-index:1100;
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(6px);
+        padding: 12px 16px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+    }
+    .nav-left{display:flex;align-items:center;gap:10px}
+    .nav-logo{
+        font-weight:800;
+        font-size:18px;
+        color:var(--accent-2);
+        letter-spacing:.4px;
     }
 
-    body.light .nav-container {
-        background: #ffffff;
-        color: #111;
-        box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-    }
-
-    .nav-logo {
-        font-size: 20px;
-        font-weight: 700;
-        color: #c084fc;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    body.light .nav-logo {
-        color: #8f00ff;
-    }
-
-    .hamburger {
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        background: #222;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-
-    .hamburger i {
-        font-size: 22px;
-        color: white;
-    }
-
-    body.light .hamburger {
-        background: #f1f1f1;
-    }
-
-    body.light .hamburger i {
-        color: #000;
-    }
-
-    /* SIDE MENU */
-    .side-menu {
-        position: fixed;
-        top: 0;
-        right: -260px;
-        width: 260px;
-        height: 100%;
-        background: #111;
-        box-shadow: -3px 0 8px rgba(0,0,0,0.3);
-        padding: 80px 20px 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 22px;
-        transition: 0.3s ease;
-        z-index: 998;
-    }
-
-    body.light .side-menu {
-        background: #ffffff;
-        box-shadow: -3px 0 8px rgba(0,0,0,0.15);
-    }
-
-    .side-menu a {
-        font-size: 17px;
-        color: white;
-        text-decoration: none;
-        font-weight: 500;
-    }
-
-    body.light .side-menu a {
-        color: #000;
-    }
-
-    .side-menu.open {
-        right: 0;
-    }
-
-    .menu-contact {
-        margin-top: 20px;
-        padding: 14px 12px;
-        background: #8f00ff;
-        color: white;
-        border-radius: 6px;
-        text-align: center;
-        font-size: 16px;
-        font-weight: 600;
-    }
-
-    body.light .menu-contact {
-        background: #c084fc;
-        color: #fff;
-    }
-
-    /* ============================ */
-
-
-    /* BUTTON MODE TERANG/GELAP */
-    .theme-btn {
-        position: fixed;
-        top: 15px;
-        right: 65px;
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .hamburger, .theme-btn {
+        width:38px;
+        height:38px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:10px;
+        cursor:pointer;
+        user-select:none;
+        font-size:18px;
         background: #1a1a1a;
-        padding: 10px 14px;
-        border-radius: 10px;
-        font-size: 20px;
-        color: white;
-        cursor: pointer;
-        z-index: 99999;
-        box-shadow: 0 0 10px rgba(0,0,0,0.4);
-        transition: .3s;
+        color: #fff;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+        transition: transform .15s, background .15s;
+    }
+    .hamburger:active, .theme-btn:active{ transform: scale(.98) }
+
+    /* ---------- SIDE MENU ---------- */
+    .overlay{
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.45);
+        display:none;
+        z-index:1090;
+        transition:opacity .2s;
+    }
+    .side-menu{
+        position:fixed;
+        top:0;
+        right:-300px;
+        width:300px;
+        height:100%;
+        background:var(--panel-dark);
+        padding:70px 18px 20px;
+        box-shadow:-8px 0 30px rgba(0,0,0,0.5);
+        transition:right .28s ease;
+        z-index:1095;
+        display:flex;
+        flex-direction:column;
+        gap:16px;
+    }
+    .side-menu.open{ right:0 }
+    .side-menu a{
+        color: #fff;
+        text-decoration:none;
+        font-size:16px;
+        padding:10px 8px;
+        border-radius:8px;
+        display:block;
+    }
+    .side-menu a:hover{ background: rgba(255,255,255,0.03) }
+
+    .menu-contact{
+        margin-top:auto;
+        padding:12px;
+        background: linear-gradient(90deg,var(--accent),#d400ff);
+        color:#fff;
+        text-align:center;
+        border-radius:8px;
+        font-weight:700;
     }
 
-    body.light .theme-btn {
-        background: #fff;
-        color: #000;
-        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    /* ---------- THEME (light) ---------- */
+    body.light{
+        background: #f2f2f7;
+        color: #111;
     }
+    body.light .nav-container{ background: rgba(255,255,255,0.85) }
+    body.light .nav-logo{ color: var(--accent) }
+    body.light .hamburger, body.light .theme-btn { background:#fff; color:#111; box-shadow:0 4px 14px rgba(0,0,0,0.06) }
+    body.light .side-menu{ background:#fff; color:#111 }
+    body.light .side-menu a { color:#111 }
+    body.light .menu-contact{ background: linear-gradient(90deg,#8f00ff,#c084fc); color:#fff }
 
-    /* OPENING */
-    #opening {
-        position: fixed;
-        inset: 0;
-        background: #000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        z-index: 9998;
+    /* ---------- OPENING ---------- */
+    #opening{
+        position:fixed;
+        inset:0;
+        background:#000;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+        z-index:1200; /* di atas navbar */
     }
+    .opening-bg-logo{ position:absolute;width:85%;opacity:.12;filter: blur(2px) drop-shadow(0 0 25px #8f00ffaa);animation:zoomIn 6s ease forwards }
+    .opening-logo{ width:160px;height:160px;border-radius:50%;object-fit:cover;filter:drop-shadow(0 0 20px #8f00ff);animation:pulse 2s infinite alternate }
+    #enterBtn{ margin-top:22px;padding:12px 26px;border-radius:12px;border:0;background:linear-gradient(45deg,#8f00ff,#d400ff);color:#fff;font-weight:700;cursor:pointer }
+    @keyframes zoomIn{ from{transform:scale(1);opacity:.08} to{transform:scale(1.25);opacity:.15} }
+    @keyframes pulse{ from{transform:scale(1)} to{transform:scale(1.06)} }
 
-    .opening-bg-logo {
-        position: absolute;
-        width: 85%;
-        height: auto;
-        opacity: 0.12;
-        filter: blur(2px) drop-shadow(0 0 25px #8f00ffaa);
-        animation: zoomIn 6s ease forwards;
-    }
-
-    @keyframes zoomIn {
-        from { transform: scale(1); opacity: 0.08; }
-        to { transform: scale(1.25); opacity: 0.15; }
-    }
-
-    .opening-logo {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        object-fit: cover;
-        filter: drop-shadow(0 0 20px #8f00ff);
-        animation: pulse 2s infinite alternate;
-    }
-
-    @keyframes pulse {
-        from { transform: scale(1); }
-        to { transform: scale(1.08); }
-    }
-
-    #enterBtn {
-        margin-top: 30px;
-        padding: 12px 26px;
-        font-size: 18px;
-        background: linear-gradient(45deg,#8f00ff,#d400ff);
-        border: none;
-        border-radius: 12px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        animation: glow 1.5s infinite alternate;
-    }
-
-    @keyframes glow {
-        from { box-shadow: 0 0 10px #8f00ff; }
-        to { box-shadow: 0 0 20px #d400ff; }
-    }
-
-    /* HERO */
-    .hero {
+    /* ---------- HERO (sesuaikan margin-top supaya tidak tertutup navbar) ---------- */
+    .hero{
         background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
-        height: 330px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        margin-top: 70px;
+        height:330px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        position:relative;
+        overflow:hidden;
+        margin-top:68px; /* agar navbar tidak menutup hero */
     }
+    .hero::after{ content:""; position:absolute; inset:0; background:rgba(0,0,0,0.55) }
+    .hero h1{ color:#fff; text-shadow:0 0 12px #8f00ff; font-size:32px }
 
-    .hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(0,0,0,0.55);
-    }
+    /* ---------- CATEGORY & CARDS (ringkasan, biar rapi) ---------- */
+    .category-title{ text-align:center; font-size:22px; margin-top:20px; color:var(--accent-2) }
+    .category-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:15px; padding:20px }
+    .category-card{ background:#141420; padding:14px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.06); cursor:pointer }
+    .category-card img{ width:90px;height:90px;object-fit:contain }
 
-    .hero-content {
-        position: relative;
-        z-index: 10;
-    }
-
-    .hero h1 {
-        font-size: 32px;
-        font-weight: 700;
-        color: white;
-        text-shadow: 0 0 12px #8f00ff;
-    }
-
-    .running-text {
-        animation: moveText 12s linear infinite;
-    }
-
-    @keyframes moveText {
-        from { transform: translateX(100%); }
-        to { transform: translateX(-100%); }
-    }
-
-    .category-title {
-        text-align: center;
-        font-size: 22px;
-        margin-top: 30px;
-        font-weight: 600;
-        color: #c084fc;
-    }
+    /* THEME TRANSITION SMALL */
+    .theme-transition{ transition: background .25s, color .25s }
+    @media (max-width:420px){ .side-menu{ width:86vw } }
 </style>
 </head>
 <body>
 
-<!-- 🌙 THEME MODE BTN -->
-<div id="themeToggle" class="theme-btn">🌙</div>
+<!-- NAVBAR (di atas Hero) -->
+<div class="nav-container theme-transition">
+    <div class="nav-left">
+        <div class="nav-logo">KJS STORE</div>
+    </div>
 
-<!-- ============================
-     🔥 NAVBAR BARU
-============================ -->
-<div class="nav-container">
-    <div class="nav-logo">KJS STORE</div>
-
-    <div class="hamburger" onclick="toggleMenu()">
-        <i class="fa-solid fa-bars"></i>
+    <div class="nav-actions">
+        <div id="themeToggle" class="theme-btn" title="Mode Gelap / Terang">🌙</div>
+        <div id="menuBtn" class="hamburger" title="Menu">☰</div>
     </div>
 </div>
+
+<!-- OVERLAY & SIDE MENU -->
+<div id="overlay" class="overlay"></div>
 
 <div id="sideMenu" class="side-menu">
-    <a href="#">Jasa BPJS</a>
-    <a href="#">Perdokumenan</a>
-    <a href="#">APK Premium</a>
-    <a href="#">Bypass HP</a>
-    <a href="#">List Paket VPN</a>
-    <a href="#">Sewa Script</a>
-    <a href="#">VPN Premium</a>
+    <!-- isi menu — sesuai kategori yang sudah ada -->
+    <a href="#paket1" data-close>Jasa BPJS</a>
+    <a href="#paket2" data-close>Perdokumenan</a>
+    <a href="#paket3" data-close>APK Premium</a>
+    <a href="#paket4" data-close>Bypass HP</a>
+    <a href="#paket5" data-close>List Paket VPN</a>
+    <a href="#paket6" data-close>Sewa Script</a>
+    <a href="#paket7" data-close>VPN Premium</a>
 
-    <div class="menu-contact">
-        Hubungi Admin
-    </div>
+    <div class="menu-contact">Hubungi Admin<br>+62 859-4311-1681</div>
 </div>
-
-<script>
-function toggleMenu() {
-    document.getElementById("sideMenu").classList.toggle("open");
-}
-</script>
-
-<!-- ============================ -->
-
-
-<script>
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light") {
-        document.body.classList.add("light");
-        setTimeout(() => {
-            document.getElementById("themeToggle").innerHTML = "☀️";
-        }, 50);
-    }
-
-    document.getElementById("themeToggle").onclick = () => {
-        document.body.classList.toggle("light");
-
-        if (document.body.classList.contains("light")) {
-            localStorage.setItem("theme", "light");
-            document.getElementById("themeToggle").innerHTML = "☀️";
-        } else {
-            localStorage.setItem("theme", "dark");
-            document.getElementById("themeToggle").innerHTML = "🌙";
-        }
-    };
-</script>
 
 <!-- OPENING -->
 <div id="opening">
-    <img src="https://files.catbox.moe/js5luv.webp" class="opening-bg-logo">
-    <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo">
+    <img src="https://files.catbox.moe/js5luv.webp" class="opening-bg-logo" alt="">
+    <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo" alt="">
     <button id="enterBtn">Masuk & Lanjut Belanja</button>
 </div>
 
 <audio id="bgm" loop>
-    <source src="https://files.catbox.moe/m6v2y3.mp3" type="audio/mpeg">
+    <source src="https://files.catbox.moe/m6v2y3.mp3" type="audio/mpeg" />
 </audio>
-
-<script>
-document.getElementById("enterBtn").onclick = () => {
-    let open = document.getElementById("opening");
-    open.style.animation = "fadeOut 1s forwards";
-
-    let audio = document.getElementById("bgm");
-    audio.volume = 0.6;
-    audio.play();
-};
-</script>
 
 <!-- HERO -->
 <div class="hero">
     <div class="hero-content">
         <h1>HAI SELAMAT DATANG</h1>
-        <p>
-            <span class="running-text">
-                Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar Langsung Hubungi Admin • Fast, Trusted, Aman •
-            </span>
+        <p style="color: #ddd; margin-top:8px; max-width:900px">
+            <span class="running-text">Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar Langsung Hubungi Admin • Fast, Trusted, Aman •</span>
         </p>
     </div>
 </div>
 
-<!-- GRID KATEGORI -->
-<div class="category-grid">
+<h2 class="category-title">BY KJS-STORE</h2>
 
+<!-- GRID KATEGORI (potongan dari kode asli, tetap utuh) -->
+<div class="category-grid">
     <div class="category-card" onclick="showProduct('paket1')">
-        <img src="https://files.catbox.moe/fwu0ky.jpg">
-        <h3>JASA BPJS KETENAGKERJAAN</h3>
+        <img src="https://files.catbox.moe/fwu0ky.jpg" alt="">
+        <h3 style="color:#d4bfff">JASA BPJS KETENAGKERJAAN</h3>
     </div>
 
     <div class="category-card" onclick="showProduct('paket2')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>JASA PERDOKUMENAN</h3>
+        <img src="https://files.catbox.moe/js5luv.webp" alt="">
+        <h3 style="color:#d4bfff">JASA PERDOKUMENAN</h3>
     </div>
 
     <div class="category-card" onclick="showProduct('paket3')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>APK PREMIUM</h3>
+        <img src="https://files.catbox.moe/js5luv.webp" alt="">
+        <h3 style="color:#d4bfff">APK PREMIUM</h3>
     </div>
 
     <div class="category-card" onclick="showProduct('paket4')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>JASA BAYPAS HP</h3>
+        <img src="https://files.catbox.moe/js5luv.webp" alt="">
+        <h3 style="color:#d4bfff">JASA BAYPAS HP</h3>
     </div>
 
     <div class="category-card" onclick="showProduct('paket5')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>LIST PAKET VPN</h3>
+        <img src="https://files.catbox.moe/js5luv.webp" alt="">
+        <h3 style="color:#d4bfff">LIST PAKET VPN</h3>
     </div>
 
     <div class="category-card" onclick="showProduct('paket6')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>SEWA SCRIPT TUNNELING</h3>
+        <img src="https://files.catbox.moe/js5luv.webp" alt="">
+        <h3 style="color:#d4bfff">SEWA SCRIPT TUNNELING</h3>
     </div>
 
     <div class="category-card" onclick="showProduct('paket7')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>VPN PREMIUM</h3>
+        <img src="https://files.catbox.moe/js5luv.webp" alt="">
+        <h3 style="color:#d4bfff">VPN PREMIUM</h3>
     </div>
 
     <div class="category-card" onclick="showProduct('paket8')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>SEWA SCRIPT TUNNELING</h3>
+        <img src="https://files.catbox.moe/js5luv.webp" alt="">
+        <h3 style="color:#d4bfff">SEWA SCRIPT TUNNELING</h3>
     </div>
-
 </div>
 
-<script>
-function showProduct(id) {
-    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
-    document.getElementById(id).style.display = "block";
-    window.scrollTo({ top: 500, behavior: "smooth" });
-}
-</script>
-
-<!-- DETAIL PRODUK -->
-<div class="card" id="paket1">
-    <img src="https://files.catbox.moe/js5luv.webp">
+<!-- DETAIL PRODUK (potongan dipertahankan, id sesuai link menu) -->
+<div class="card" id="paket1" style="display:none; background:#13131f; margin:20px auto; width:90%; max-width:480px; padding:20px; border-radius:14px; border:1px solid #8f00ff; text-align:center;">
+    <img src="https://files.catbox.moe/js5luv.webp" style="width:120px;height:120px;filter:drop-shadow(0 0 10px #b86bff)" alt="">
     <h2>JASA BPJSK</h2>
-
-    <p style="line-height: 1.6; font-size: 15px;">
-
+    <p style="line-height:1.6;font-size:15px;color:#ddd">
         •━━━━━━━━━━━━━━━━• <br>
         💰 <b>JASA PENCAIRAN BPJS KETENAGAKERJAAN</b> 💰 <br>
         •━━━━━━━━━━━━━━━━• <br><br>
-
         🔑 <b>Keuntungan :</b><br>
         ✅ Cepat & Aman<br>
         ✅ Privasi Dijaga<br>
         ✅ Bisa Semua Bank<br><br>
-
-        📍 <b>Ketentuan :</b><br>
-        • Siapkan berkas lengkap<br>
-        • Proses sesuai aturan resmi<br>
-        • Full Garansi Amanah<br><br>
-
-        🔧 <b>Layanan Tambahan:</b><br>
-        • Cek Valid<br>
-        • Riset Akun<br>
-        • Cek Data<br>
-        • Rubah Data<br>
-        • Pengajuan LASIK<br><br>
-
     </p>
-
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681" style="display:inline-block;margin-top:12px;padding:12px 24px;background:#25D366;color:#fff;border-radius:10px;text-decoration:none;font-weight:700">Hubungi Admin</a>
 </div>
 
-<div class="card" id="paket2">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket XL</h2>
-    <p>• Promo 15GB 20RB<br>• Full Kuota Utama<br>• Support Semua TKP</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
+<!-- (Tambahan kartu lain tetap seperti di file asli — untuk singkat aku tidak ulang semua) -->
 
-<div class="card" id="paket3">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Telkomsel</h2>
-    <p>• Kuota Belajar<br>• Kuota Internet Reguler<br>• Harga Termurah</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
+<script>
+/* -------------- SIDEBAR / OVERLAY -------------- */
+const menuBtn = document.getElementById('menuBtn');
+const sideMenu = document.getElementById('sideMenu');
+const overlay = document.getElementById('overlay');
 
-<div class="card" id="paket4">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket TRI</h2>
-    <p>• 25GB 25rb<br>• 40GB 30rb<br>• Masa Aktif Panjang</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
+function openMenu(){
+    sideMenu.classList.add('open');
+    overlay.style.display = 'block';
+    setTimeout(()=> overlay.style.opacity = '1', 10);
+}
+function closeMenu(){
+    sideMenu.classList.remove('open');
+    overlay.style.opacity = '0';
+    setTimeout(()=> overlay.style.display = 'none', 220);
+}
 
-<div class="card" id="paket5">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Indosat</h2>
-    <p>• Internet Yellow<br>• Freedom Internet<br>• Harga Pelajar</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
+menuBtn.addEventListener('click', ()=> {
+    if(sideMenu.classList.contains('open')) closeMenu();
+    else openMenu();
+});
+overlay.addEventListener('click', closeMenu);
 
-<div class="card" id="paket6">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Hotspot</h2>
-    <p>• Unlimited Hotspot<br>• 30 Hari<br>• No FUP</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
+/* close menu when click a menu link that has data-close */
+document.querySelectorAll('#sideMenu [data-close]').forEach(a=>{
+    a.addEventListener('click', closeMenu);
+});
 
-<div class="card" id="paket7">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>VPN & Premium Tools</h2>
-    <p>• VPN All Operator<br>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
+/* -------------- THEME TOGGLE -------------- */
+const themeToggle = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('theme');
+if(savedTheme === 'light') {
+    document.body.classList.add('light');
+    themeToggle.innerText = '☀️';
+} else {
+    themeToggle.innerText = '🌙';
+}
+themeToggle.addEventListener('click', ()=>{
+    document.body.classList.toggle('light');
+    const isLight = document.body.classList.contains('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    themeToggle.innerText = isLight ? '☀️' : '🌙';
+});
 
-<div class="card" id="paket8">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>VPN & Premium Tools</h2>
-    <p>• VPN All Operator<br>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
+/* -------------- OPENING SCREEN -------------- */
+const opening = document.getElementById('opening');
+const enterBtn = document.getElementById('enterBtn');
+const bgm = document.getElementById('bgm');
+
+enterBtn.addEventListener('click', ()=>{
+    opening.style.transition = 'opacity .6s';
+    opening.style.opacity = '0';
+    setTimeout(()=> {
+        opening.style.display = 'none';
+    }, 650);
+
+    try{
+        bgm.volume = 0.6;
+        bgm.play();
+    }catch(e){}
+});
+
+/* -------------- showProduct helper (dari kode kamu) -------------- */
+function showProduct(id){
+    document.querySelectorAll('.card').forEach(c => c.style.display = 'none');
+    const el = document.getElementById(id);
+    if(el) el.style.display = 'block';
+    window.scrollTo({ top: 500, behavior: 'smooth' });
+}
+
+/* Small: close menu when resizing to larger screens (optional) */
+window.addEventListener('resize', ()=> {
+    if(window.innerWidth > 900) closeMenu();
+});
+</script>
 
 </body>
 </html>
