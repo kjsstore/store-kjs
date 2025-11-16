@@ -12,11 +12,61 @@
         font-family: 'Poppins', sans-serif;
         color: white;
         overflow-x: hidden;
+        transition: .3s; /* transisi untuk mode terang/gelap */
     }
 
-    /* ============================
-       OPENING SCREEN
-    ============================ */
+    /* BUTTON MODE TERANG/GELAP */
+    .theme-btn {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        background: #1a1a1a;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 20px;
+        color: white;
+        cursor: pointer;
+        z-index: 99999;
+        box-shadow: 0 0 10px rgba(0,0,0,0.4);
+        transition: .3s;
+    }
+
+    .theme-btn:hover {
+        transform: scale(1.1);
+    }
+
+    /* MODE TERANG */
+    body.light {
+        background: #f2f2f7;
+        color: #000;
+    }
+
+    body.light .category-card {
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.15);
+    }
+
+    body.light .card {
+        background: #fff;
+        border: 1px solid #8f00ff;
+        color: #000;
+    }
+
+    body.light .hero::after {
+        background: rgba(255,255,255,0.45);
+    }
+
+    body.light .category-title {
+        color: #8f00ff;
+    }
+
+    body.light .theme-btn {
+        background: #fff;
+        color: #000;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    /* OPENING SCREEN */
     #opening {
         position: fixed;
         inset: 0;
@@ -30,7 +80,6 @@
         overflow: hidden;
     }
 
-    /* LOGO BESAR TRANSPARAN BELAKANG */
     .opening-bg-logo {
         position: absolute;
         width: 85%;
@@ -45,7 +94,6 @@
         to { transform: scale(1.25); opacity: 0.15; }
     }
 
-    /* LOGO BULAT UTAMA */
     .opening-logo {
         width: 180px;
         height: 180px;
@@ -90,9 +138,7 @@
         to { opacity: 1; }
     }
 
-    /* ============================
-       HERO SECTION
-    ============================ */
+    /* HERO */
     .hero {
         background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
         height: 330px;
@@ -123,7 +169,6 @@
         text-shadow: 0 0 12px #8f00ff;
     }
 
-    /* TEXT RUNNING */
     .hero p {
         margin-top: 8px;
         font-size: 16px;
@@ -143,9 +188,7 @@
         to { transform: translateX(-100%); }
     }
 
-    /* ============================
-       PRODUCT GRID
-    ============================ */
+    /* GRID */
     .category-title {
         text-align: center;
         font-size: 22px;
@@ -189,7 +232,7 @@
         color: #d4bfff;
     }
 
-    /* PRODUCT DETAIL */
+    /* PRODUK CARD */
     .card {
         display: none;
         background: #13131f;
@@ -201,6 +244,7 @@
         border: 1px solid #8f00ff;
         animation: fadeIn .4s;
         text-align: center;
+        color: white;
     }
 
     .card img {
@@ -221,22 +265,41 @@
         font-weight: bold;
         transition: .3s;
     }
-</style>
 
+</style>
 </head>
 <body>
 
-<!-- ============================
-     OPENING SCREEN
-============================ -->
+<!-- 🔥 TOMBOL MODE GELAP / TERANG -->
+<div id="themeToggle" class="theme-btn">🌙</div>
+
+<script>
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+        document.body.classList.add("light");
+        setTimeout(() => {
+            document.getElementById("themeToggle").innerHTML = "☀️";
+        }, 50);
+    }
+
+    document.getElementById("themeToggle").onclick = () => {
+        document.body.classList.toggle("light");
+
+        if (document.body.classList.contains("light")) {
+            localStorage.setItem("theme", "light");
+            document.getElementById("themeToggle").innerHTML = "☀️";
+        } else {
+            localStorage.setItem("theme", "dark");
+            document.getElementById("themeToggle").innerHTML = "🌙";
+        }
+    };
+</script>
+
+
+<!-- OPENING -->
 <div id="opening">
-
-    <!-- LOGO BESAR TRANSPARAN -->
     <img src="https://files.catbox.moe/js5luv.webp" class="opening-bg-logo">
-
-    <!-- LOGO BULAT DEPAN -->
     <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo">
-
     <button id="enterBtn">Masuk & Lanjut Belanja</button>
 </div>
 
@@ -255,16 +318,14 @@ document.getElementById("enterBtn").onclick = () => {
 };
 </script>
 
-<!-- ============================
-     HERO SECTION
-============================ -->
+<!-- HERO -->
 <div class="hero">
     <div class="hero-content">
         <h1>HAI SELAMAT DATANG</h1>
         <p>
             <span class="running-text">
                 Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar Langsung Hubungi Admin •
-                Pilih Produk Sesuai Kebutuhan Anda Dan Lanjut Membayar Langsung Hubungi Admin– Fast, Trusted, Aman •
+                Fast, Trusted, Aman •
             </span>
         </p>
     </div>
@@ -272,9 +333,7 @@ document.getElementById("enterBtn").onclick = () => {
 
 <h2 class="category-title">BY KJS-STORE</h2>
 
-<!-- ============================
-     GRID KATEGORI
-============================ -->
+<!-- GRID KATEGORI -->
 <div class="category-grid">
 
     <div class="category-card" onclick="showProduct('paket1')">
@@ -319,9 +378,6 @@ document.getElementById("enterBtn").onclick = () => {
 
 </div>
 
-<!-- ============================
-     DETAIL PRODUK
-============================ -->
 <script>
 function showProduct(id) {
     document.querySelectorAll(".card").forEach(c => c.style.display = "none");
@@ -330,6 +386,7 @@ function showProduct(id) {
 }
 </script>
 
+<!-- DETAIL PRODUK -->
 <div class="card" id="paket1">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>JASA BPJSK</h2>
@@ -340,16 +397,15 @@ function showProduct(id) {
         💰 <b>JASA PENCAIRAN BPJS KETENAGAKERJAAN</b> 💰 <br>
         •━━━━━━━━━━━━━━━━• <br><br>
 
-        🔑 <b>Keuntungan Jasa Kami :</b><br>
-        ✅ Proses Cepat & Aman<br>
-        ✅ Data Terjamin Privasi<br>
-        ✅ Tanpa Ribet<br>
+        🔑 <b>Keuntungan :</b><br>
+        ✅ Cepat & Aman<br>
+        ✅ Privasi Dijaga<br>
         ✅ Bisa Semua Bank<br><br>
 
         📍 <b>Ketentuan :</b><br>
-        • Cukup siapkan data & berkas lengkap<br>
-        • Proses sesuai ketentuan resmi BPJS<br>
-        • Full Garansi 100% Amanah<br><br>
+        • Siapkan berkas lengkap<br>
+        • Proses sesuai aturan resmi<br>
+        • Full Garansi Amanah<br><br>
 
         🔧 <b>Layanan Tambahan:</b><br>
         • Cek Valid<br>
@@ -358,7 +414,6 @@ function showProduct(id) {
         • Rubah Data<br>
         • Pengajuan LASIK<br><br>
 
-        •━━━━━━━━━━━━━━━━•
     </p>
 
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
@@ -412,7 +467,6 @@ function showProduct(id) {
     <p>• VPN All Operator<br>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
-
 
 </body>
 </html>
