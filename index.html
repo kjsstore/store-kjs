@@ -166,30 +166,30 @@
 
 <!-- APP HEADER -->
 <header class="app-header" role="banner" aria-label="App header">
-    <div class="hamburger" id="hamburger" title="Menu" aria-label="Buka menu">
-        <span class="bar"></span>
-    </div>
+    <button class="hamburger" id="hamburger" title="Menu" aria-label="Buka menu" aria-expanded="false">
+        <span class="bar" aria-hidden="true"></span>
+    </button>
 
-    <div class="brand" onclick="goHome()" style="cursor:pointer">
+    <div class="brand" id="brand" style="cursor:pointer" role="button" tabindex="0" aria-label="KJS STORE">
         <img src="https://files.catbox.moe/js5luv.webp" alt="logo" />
         <span>KJS STORE</span>
     </div>
 
     <div class="header-actions">
-        <div class="btn-icon" id="audioToggle" title="Pause / Play musik">
+        <button class="btn-icon" id="audioToggle" title="Pause / Play musik" aria-pressed="false" aria-label="Kontrol audio">
             <!-- speaker icon -->
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+        </button>
 
-        <div class="btn-icon" id="themeToggle" title="Ganti Tema (gelap/terang)">
+        <button class="btn-icon" id="themeToggle" title="Ganti Tema (gelap/terang)" aria-label="Ganti tema">
             <!-- sun/moon icon -->
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
+        </button>
     </div>
 </header>
 
 <!-- SIDEBAR -->
-<nav class="sidebar" id="sidebar" aria-label="Sidebar menu">
+<nav class="sidebar" id="sidebar" aria-label="Sidebar menu" aria-hidden="true">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
         <img src="https://files.catbox.moe/js5luv.webp" alt="logo" style="width:56px;height:56px;border-radius:10px;object-fit:cover;filter:drop-shadow(0 0 8px var(--accent))">
         <div>
@@ -200,30 +200,30 @@
 
     <h3>Menu</h3>
 
-    <a class="side-link" href="#" onclick="goHome();toggleSidebar(false)">
-        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <a class="side-link" href="#" id="link-home">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         Home
     </a>
 
-    <a class="side-link" href="#" onclick="scrollToGrid();toggleSidebar(false)">
-        <svg width="18" height="18" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
+    <a class="side-link" href="#" id="link-produk">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
         Produk
     </a>
 
-    <a class="side-link" href="https://wa.me/6285943111681" target="_blank" onclick="toggleSidebar(false)">
-        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.4-6.7A8.38 8.38 0 013.5 11.5 8.5 8.5 0 1112 20a8.38 8.38 0 013.8-.9z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+    <a class="side-link" href="https://wa.me/6285943111681" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.4-6.7A8.38 8.38 0 013.5 11.5 8.5 8.5 0 1112 20a8.38 8.38 0 013.8-.9z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
         Hubungi WA
     </a>
 
-    <a class="side-link" href="#" onclick="toggleSidebar(false);alert('About: KJS STORE - Jasa & Produk Digital')">
-        <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M12 8v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <a class="side-link" href="#" id="link-about">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M12 8v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
         About
     </a>
 
     <div class="side-footer">© KJS STORE · Digital Services</div>
 </nav>
 
-<div class="overlay" id="overlay" onclick="toggleSidebar(false)"></div>
+<div class="overlay" id="overlay" tabindex="-1" aria-hidden="true"></div>
 
 <!-- ============================
      OPENING SCREEN
@@ -231,7 +231,7 @@
 <div id="opening" role="dialog" aria-modal="true" aria-label="Opening screen">
     <img src="https://files.catbox.moe/js5luv.webp" class="opening-bg-logo" alt="bg logo">
     <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo" alt="logo utama">
-    <button id="enterBtn">Masuk & Lanjut Belanja</button>
+    <button id="enterBtn" aria-label="Masuk & Lanjut Belanja">Masuk & Lanjut Belanja</button>
 </div>
 
 <!-- Audio -->
@@ -253,42 +253,42 @@
 
     <!-- GRID KATEGORI -->
     <div class="category-grid" id="grid">
-        <div class="category-card" onclick="showProduct('paket1')">
+        <div class="category-card" data-id="paket1" role="button" tabindex="0">
             <img src="https://files.catbox.moe/fwu0ky.jpg" alt="">
             <h3>JASA BPJS KETENAGAKERJAAN</h3>
         </div>
 
-        <div class="category-card" onclick="showProduct('paket2')">
+        <div class="category-card" data-id="paket2" role="button" tabindex="0">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h3>JASA PERDOKUMENAN</h3>
         </div>
 
-        <div class="category-card" onclick="showProduct('paket3')">
+        <div class="category-card" data-id="paket3" role="button" tabindex="0">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h3>APK PREMIUM</h3>
         </div>
 
-        <div class="category-card" onclick="showProduct('paket4')">
+        <div class="category-card" data-id="paket4" role="button" tabindex="0">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h3>JASA BAYPAS HP</h3>
         </div>
 
-        <div class="category-card" onclick="showProduct('paket5')">
+        <div class="category-card" data-id="paket5" role="button" tabindex="0">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h3>LIST PAKET VPN</h3>
         </div>
 
-        <div class="category-card" onclick="showProduct('paket6')">
+        <div class="category-card" data-id="paket6" role="button" tabindex="0">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h3>SEWA SCRIPT TUNNELING</h3>
         </div>
 
-        <div class="category-card" onclick="showProduct('paket7')">
+        <div class="category-card" data-id="paket7" role="button" tabindex="0">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h3>VPN PREMIUM</h3>
         </div>
 
-        <div class="category-card" onclick="showProduct('paket8')">
+        <div class="category-card" data-id="paket8" role="button" tabindex="0">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h3>SEWA SCRIPT TUNNELING</h3>
         </div>
@@ -296,7 +296,7 @@
 
     <!-- DETAIL PRODUK / CARD -->
     <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding-bottom:72px">
-        <div class="card" id="paket1">
+        <div class="card" id="paket1" aria-hidden="true">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h2>Jasa Pencairan BPJS Ketenagakerjaan</h2>
             <p style="line-height:1.6;font-size:15px;color:var(--muted)">
@@ -324,62 +324,63 @@
 
                 •━━━━━━━━━━━━━━━━•
             </p>
-            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank">Hubungi Admin</a>
+            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank" rel="noopener noreferrer">Hubungi Admin</a>
         </div>
 
-        <div class="card" id="paket2">
+        <div class="card" id="paket2" aria-hidden="true">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h2>Jasa Perdokumenan</h2>
             <p style="color:var(--muted)">Layanan pembuatan & pengurusan dokumen digital. Hubungi admin untuk detail & harga.</p>
-            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank">Hubungi Admin</a>
+            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank" rel="noopener noreferrer">Hubungi Admin</a>
         </div>
 
-        <div class="card" id="paket3">
+        <div class="card" id="paket3" aria-hidden="true">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h2>APK Premium</h2>
             <p style="color:var(--muted)">List aplikasi premium & lisensi. Support install & konfigurasi.</p>
-            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank">Hubungi Admin</a>
+            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank" rel="noopener noreferrer">Hubungi Admin</a>
         </div>
 
-        <div class="card" id="paket4">
+        <div class="card" id="paket4" aria-hidden="true">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h2>Jasa Bypass HP</h2>
             <p style="color:var(--muted)">Layanan bypass & repair perangkat. Garansi & support.</p>
-            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank">Hubungi Admin</a>
+            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank" rel="noopener noreferrer">Hubungi Admin</a>
         </div>
 
-        <div class="card" id="paket5">
+        <div class="card" id="paket5" aria-hidden="true">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h2>List Paket VPN</h2>
             <p style="color:var(--muted)">Kumpulan paket & harga VPN, update rutin.</p>
-            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank">Hubungi Admin</a>
+            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank" rel="noopener noreferrer">Hubungi Admin</a>
         </div>
 
-        <div class="card" id="paket6">
+        <div class="card" id="paket6" aria-hidden="true">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h2>Sewa Script Tunneling</h2>
             <p style="color:var(--muted)">Sewa script & maintenance. Custom setup tersedia.</p>
-            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank">Hubungi Admin</a>
+            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank" rel="noopener noreferrer">Hubungi Admin</a>
         </div>
 
-        <div class="card" id="paket7">
+        <div class="card" id="paket7" aria-hidden="true">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h2>VPN Premium</h2>
             <p style="color:var(--muted)">VPN premium multi operator & support konfigurasi.</p>
-            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank">Hubungi Admin</a>
+            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank" rel="noopener noreferrer">Hubungi Admin</a>
         </div>
 
-        <div class="card" id="paket8">
+        <div class="card" id="paket8" aria-hidden="true">
             <img src="https://files.catbox.moe/js5luv.webp" alt="">
             <h2>Tools & Script</h2>
             <p style="color:var(--muted)">Utility & script premium untuk kebutuhan tunneling & optimasi.</p>
-            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank">Hubungi Admin</a>
+            <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank" rel="noopener noreferrer">Hubungi Admin</a>
         </div>
     </div>
 </main>
 
 <script>
-    // Elements
+document.addEventListener('DOMContentLoaded', function () {
+    // Get elements safely
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
     const hamburger = document.getElementById('hamburger');
@@ -388,57 +389,33 @@
     const bgm = document.getElementById('bgm');
     const audioToggle = document.getElementById('audioToggle');
     const themeToggle = document.getElementById('themeToggle');
+    const brand = document.getElementById('brand');
+    const linkHome = document.getElementById('link-home');
+    const linkProduk = document.getElementById('link-produk');
+    const linkAbout = document.getElementById('link-about');
+    const cards = document.querySelectorAll('.card');
+    const grid = document.getElementById('grid');
+
+    // Small helper to guard
+    function safe(fn){ try{ fn(); } catch(e){ console.warn(e); } }
 
     // Sidebar toggle
     function toggleSidebar(show){
+        if(!sidebar || !overlay || !hamburger) return;
         if(show === undefined) show = !sidebar.classList.contains('open');
         sidebar.classList.toggle('open', show);
         overlay.classList.toggle('show', show);
+        sidebar.setAttribute('aria-hidden', show ? 'false' : 'true');
+        hamburger.setAttribute('aria-expanded', show ? 'true' : 'false');
+        overlay.setAttribute('aria-hidden', show ? 'false' : 'true');
     }
-    hamburger.addEventListener('click', ()=> toggleSidebar());
-    overlay.addEventListener('click', ()=> toggleSidebar(false));
+
+    if(hamburger) {
+        hamburger.addEventListener('click', ()=> toggleSidebar());
+        // keyboard activation
+        hamburger.addEventListener('keydown', (e)=> { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSidebar(); } });
+    }
+    if(overlay){ overlay.addEventListener('click', ()=> toggleSidebar(false)); }
 
     // Go home
-    function goHome(){ window.scrollTo({top:0,behavior:'smooth'}); hideAllCards(); }
-
-    // Scroll to grid
-    function scrollToGrid(){ document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'center'}); }
-
-    // Show product card
-    function showProduct(id){
-        hideAllCards();
-        const el = document.getElementById(id);
-        if(!el) return;
-        el.style.display = 'block';
-        el.scrollIntoView({behavior:'smooth', block:'center'});
-    }
-    function hideAllCards(){
-        document.querySelectorAll('.card').forEach(c=>c.style.display='none');
-    }
-
-    // Opening enter action
-    enterBtn.addEventListener('click', () => {
-        opening.style.animation = 'fadeOut 0.9s forwards';
-        setTimeout(()=> { opening.style.display='none'; }, 900);
-
-        // play bgm if allowed
-        try { bgm.volume = 0.6; bgm.play().catch(()=>{}); setAudioButton(true); } catch(e){}
-    });
-
-    // Audio toggle (play/pause)
-    function setAudioButton(isPlaying){
-        // change icon fill color by toggling class
-        audioToggle.setAttribute('aria-pressed', !!isPlaying);
-        // small visual feedback
-        audioToggle.style.opacity = isPlaying ? '1' : '0.7';
-    }
-    audioToggle.addEventListener('click', ()=>{
-        if(bgm.paused){ bgm.play().catch(()=>{}); setAudioButton(true); }
-        else { bgm.pause(); setAudioButton(false); }
-    });
-
-    // Theme handling (persist)
-    const stored = localStorage.getItem('kjs_theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', stored === 'light' ? 'light' : 'dark');
-    function toggleTheme(){
-        const cur = document.do
+    function hideAllCard
