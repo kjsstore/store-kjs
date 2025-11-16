@@ -22,6 +22,7 @@
         align-items: center;
         text-align: center;
         position: relative;
+        overflow: hidden;
     }
 
     .hero::after {
@@ -43,10 +44,26 @@
         text-shadow: 0 0 12px #8f00ff;
     }
 
+    /* TEXT RUNNING */
     .hero p {
         margin-top: 8px;
         font-size: 16px;
+        overflow: hidden;
+        width: 100%;
+        white-space: nowrap;
+        position: relative;
+    }
+
+    .running-text {
+        display: inline-block;
+        white-space: nowrap;
+        animation: moveText 12s linear infinite;
         opacity: .9;
+    }
+
+    @keyframes moveText {
+        from { transform: translateX(100%); }
+        to { transform: translateX(-100%); }
     }
 
     /* KATEGORI GRID */
@@ -156,11 +173,19 @@ function showProduct(id) {
 <div class="hero">
     <div class="hero-content">
         <h1>Redefine Your Experience With KJS Store</h1>
-        <p>Pilih Produk Sesuai Kebutuhan Anda – Fast, Trusted, Aman</p>
+
+        <p>
+            <span class="running-text">
+                Pilih Produk Sesuai Kebutuhan Anda – Fast, Trusted, Aman •
+                Pilih Produk Sesuai Kebutuhan Anda – Fast, Trusted, Aman •
+                Pilih Produk Sesuai Kebutuhan Anda – Fast, Trusted, Aman •
+            </span>
+        </p>
+
     </div>
 </div>
 
-<h2 class="category-title">STOTE BY KJS-STORE</h2>
+<h2 class="category-title">STORE BY KJS-STORE</h2>
 
 <!-- GRID CATEGORY -->
 <div class="category-grid">
