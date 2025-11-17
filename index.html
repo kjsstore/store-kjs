@@ -14,7 +14,6 @@
         --accent2: #d400ff;
     }
 
-    /* MODE TERANG */
     .light {
         --bg: #f4f4f4;
         --card: #ffffff;
@@ -29,12 +28,10 @@
         font-family: 'Poppins', sans-serif;
         color: var(--text);
         overflow-x: hidden;
-        transition: background .3s, color .3s;
+        transition: .3s;
     }
 
-    /* ============================
-       NAVBAR ALA APLIKASI
-    ============================ */
+    /* NAVBAR */
     .app-navbar {
         position: fixed;
         top: 0;
@@ -87,21 +84,13 @@
         cursor: pointer;
         transition: .3s;
         font-size: 13px;
-        box-shadow: 0 0 10px var(--accent2);
     }
 
-    .theme-btn:hover {
-        transform: scale(1.05);
-    }
-
-    /* memberi jarak konten dari navbar */
     .content {
         margin-top: 70px;
     }
 
-    /* ============================
-       OPENING SCREEN
-    ============================ */
+    /* OPENING */
     #opening {
         position: fixed;
         inset: 0;
@@ -112,35 +101,22 @@
         flex-direction: column;
         z-index: 9999;
         animation: fadeIn 1s ease;
-        overflow: hidden;
     }
 
     .opening-bg-logo {
         position: absolute;
         width: 85%;
         opacity: 0.12;
-        filter: blur(2px) drop-shadow(0 0 25px var(--accent));
-        animation: zoomIn 6s ease forwards;
-    }
-
-    @keyframes zoomIn {
-        from { transform: scale(1); opacity: 0.1; }
-        to { transform: scale(1.25); opacity: 0.15; }
+        filter: blur(2px);
     }
 
     .opening-logo {
         width: 180px;
         height: 180px;
         border-radius: 50%;
-        object-fit: cover;
         filter: drop-shadow(0 0 20px var(--accent));
         animation: pulse 2s infinite alternate;
         z-index: 5;
-    }
-
-    @keyframes pulse {
-        from { transform: scale(1); }
-        to { transform: scale(1.08); }
     }
 
     #enterBtn {
@@ -157,25 +133,9 @@
         z-index: 5;
     }
 
-    @keyframes glow {
-        from { box-shadow: 0 0 10px var(--accent); }
-        to   { box-shadow: 0 0 20px var(--accent2); }
-    }
+    @keyframes fadeOut { from{opacity:1;} to{opacity:0;} }
 
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; visibility: hidden; }
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-
-    /* ============================
-       HERO
-    ============================ */
+    /* HERO */
     .hero {
         background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
         height: 330px;
@@ -184,7 +144,6 @@
         align-items: center;
         text-align: center;
         position: relative;
-        overflow: hidden;
     }
 
     .hero::after {
@@ -205,21 +164,6 @@
         text-shadow: 0 0 12px var(--accent);
     }
 
-    .running-text {
-        display: inline-block;
-        white-space: nowrap;
-        animation: moveText 12s linear infinite;
-    }
-
-    @keyframes moveText {
-        from { transform: translateX(100%); }
-        to { transform: translateX(-100%); }
-    }
-
-
-    /* ============================
-       GRID PRODUK
-    ============================ */
     .category-title {
         text-align: center;
         font-size: 22px;
@@ -228,6 +172,7 @@
         margin-top: 35px;
     }
 
+    /* GRID PRODUK */
     .category-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -241,7 +186,6 @@
         padding: 15px;
         text-align: center;
         cursor: pointer;
-        border: 1px solid rgba(255,255,255,0.07);
         transition: .3s;
     }
 
@@ -254,16 +198,9 @@
         width: 90px;
         height: 90px;
         object-fit: contain;
-        filter: drop-shadow(0 0 8px var(--accent));
     }
 
-    .category-card h3 {
-        font-size: 15px;
-        margin-top: 10px;
-        color: var(--accent2);
-    }
-
-    /* DETAIL */
+    /* DETAIL PRODUK */
     .card {
         display: none;
         background: var(--card);
@@ -277,10 +214,17 @@
         text-align: center;
     }
 
-    .card img {
-        width: 120px;
-        height: 120px;
-        filter: drop-shadow(0 0 10px var(--accent));
+    .back-btn {
+        background: var(--accent);
+        border: none;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 10px;
+        box-shadow: 0 0 10px var(--accent2);
     }
 
     .whatsapp-btn {
@@ -289,11 +233,9 @@
         padding: 12px 24px;
         background: #25D366;
         color: white;
-        text-decoration: none;
         border-radius: 10px;
         font-size: 17px;
-        font-weight: bold;
-        transition: .3s;
+        text-decoration: none;
     }
 
 </style>
@@ -334,25 +276,21 @@ document.getElementById("enterBtn").onclick = () => {
 };
 </script>
 
-<!-- ============================
-     HERO
-============================ -->
+<!-- HERO -->
 <div class="hero">
     <div class="hero-content">
         <h1>HAI SELAMAT DATANG</h1>
-        <p><span class="running-text">Pilih Produk Sesuai Kebutuhan Anda • Fast • Trusted • Aman •</span></p>
     </div>
 </div>
 
 <h2 class="category-title">BY KJS-STORE</h2>
-
 
 <!-- GRID PRODUK -->
 <div class="category-grid">
 
     <div class="category-card" onclick="showProduct('paket1')">
         <img src="https://files.catbox.moe/fwu0ky.jpg">
-        <h3>JASA BPJS KETENAGKERJAAN</h3>
+        <h3>JASA BPJS KETENAGAKERJAAN</h3>
     </div>
 
     <div class="category-card" onclick="showProduct('paket2')">
@@ -367,40 +305,30 @@ document.getElementById("enterBtn").onclick = () => {
 
     <div class="category-card" onclick="showProduct('paket4')">
         <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>JASA BAYPAS HP</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket5')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>LIST PAKET VPN</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket6')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>SEWA SCRIPT TUNNELING</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket7')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>VPN PREMIUM</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket8')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>SEWA SCRIPT TUNNELING</h3>
+        <h3>BYPASS HP</h3>
     </div>
 
 </div>
 
-
-<!-- ============================
-     DETAIL PRODUK
-============================ -->
+<!-- SCRIPT PINDAH HALAMAN -->
 <script>
 function showProduct(id) {
+    document.querySelector(".category-grid").style.display = "none";
+    document.querySelector(".hero").style.display = "none";
+
     document.querySelectorAll(".card").forEach(c => c.style.display = "none");
     document.getElementById(id).style.display = "block";
-    window.scrollTo({ top: 450, behavior: "smooth" });
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function goBack() {
+    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
+
+    document.querySelector(".category-grid").style.display = "grid";
+    document.querySelector(".hero").style.display = "flex";
+
+    window.scrollTo({ top: 350, behavior: "smooth" });
 }
 
 function toggleTheme() {
@@ -408,20 +336,20 @@ function toggleTheme() {
 }
 </script>
 
-
-<!-- CARD PRODUK -->
+<!-- DETAIL PRODUK -->
 <div class="card" id="paket1">
+    <button class="back-btn" onclick="goBack()">← Kembali</button>
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>JASA BPJSK</h2>
     <p style="line-height:1.6;font-size:15px;">
         •━━━━━━━━━━━━━━━━• <br>
         💰 <b>PENCAIRAN BPJS KETENAGAKERJAAN</b> 💰 <br>
         •━━━━━━━━━━━━━━━━• <br><br>
-        🔑 <b>Keuntungan:</b><br>
+        🔑 Keuntungan:<br>
         ✅ Proses Cepat & Aman<br>
         ✅ Data Terjamin<br>
         ✅ Bisa Semua Bank<br><br>
-        🔧 <b>Layanan Tambahan:</b><br>
+        🔧 Layanan Tambahan:<br>
         • Cek Valid<br>
         • Riset Akun<br>
         • Rubah Data<br><br>
@@ -431,55 +359,29 @@ function toggleTheme() {
 </div>
 
 <div class="card" id="paket2">
+    <button class="back-btn" onclick="goBack()">← Kembali</button>
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket XL</h2>
-    <p>• Promo 15GB 20RB<br>• Kuota Utama<br>• Support Semua TKP</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+    <h2>JASA PERDOKUMENAN</h2>
+    <p>• Jasa Buat Surat<br>• Legal Dokumen<br>• Pemeriksaan Data</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
 
 <div class="card" id="paket3">
+    <button class="back-btn" onclick="goBack()">← Kembali</button>
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Telkomsel</h2>
-    <p>• Kuota Belajar<br>• Internet Reguler<br>• Murah</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+    <h2>APK PREMIUM</h2>
+    <p>• Netflix<br>• YouTube Premium<br>• Viu dll.</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
 
 <div class="card" id="paket4">
+    <button class="back-btn" onclick="goBack()">← Kembali</button>
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket TRI</h2>
-    <p>• 25GB 25rb<br>• 40GB 30rb<br>• Aktif Lama</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+    <h2>BYPASS HP</h2>
+    <p>• Reset HP<br>• Bypass FRP<br>• Unlock Akun</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
 
-<div class="card" id="paket5">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Indosat</h2>
-    <p>• Yellow<br>• Freedom Internet<br>• Harga Pelajar</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
-
-<div class="card" id="paket6">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Hotspot</h2>
-    <p>• Unlimited Hotspot<br>• 30 Hari<br>• No FUP</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="paket7">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>VPN Premium</h2>
-    <p>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="paket8">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>VPN Premium</h2>
-    <p>• All Operator<br>• Fast Server<br>• Stabil</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-</div> <!-- END CONTENT -->
-
 </body>
 </html>
