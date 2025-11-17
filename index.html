@@ -6,23 +6,18 @@
 <title>KJS STORE – Produk</title>
 
 <style>
+    /* Ubah Tema ke Gaya E-commerce (Aksen Merah/Oranye) */
     :root {
-        --bg: #0a0a0f;
-        --card: #141420;
-        --text: #ffffff;
-        --accent: #8f00ff;
-        --accent2: #d400ff;
+        --bg: #f5f5f5; /* Latar belakang cerah */
+        --card: #ffffff; /* Kartu putih */
+        --text: #333333; /* Teks gelap */
+        --accent: #ff4d4d; /* Merah Utama (Aksen) */
+        --accent2: #ff8c4d; /* Oranye (Aksen Sekunder) */
+        --shadow: rgba(0, 0, 0, 0.1);
     }
 
-    /* MODE TERANG */
-    .light {
-        --bg: #f4f4f4;
-        --card: #ffffff;
-        --text: #0a0a0f;
-        --accent: #8f00ff;
-        --accent2: #d400ff;
-    }
-
+    /* Hilangkan Mode Terang/Gelap karena defaultnya sudah cerah */
+    
     body {
         margin: 0;
         background: var(--bg);
@@ -33,27 +28,21 @@
     }
 
     /* ============================
-       NAVBAR ALA APLIKASI
+       NAVBAR (Ala Aplikasi E-commerce)
     ============================ */
     .app-navbar {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        height: 60px;
-        background: rgba(20,20,35,0.88);
-        backdrop-filter: blur(10px);
+        height: 55px;
+        background: var(--accent); /* Navbar Merah */
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 15px;
         z-index: 999;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .light .app-navbar {
-        background: rgba(255,255,255,0.75);
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px var(--shadow);
     }
 
     .nav-left {
@@ -63,354 +52,248 @@
     }
 
     .nav-logo {
-        width: 42px;
-        height: 42px;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
         object-fit: cover;
-        filter: drop-shadow(0 0 5px var(--accent));
+        /* Hapus filter drop-shadow ungu */
+        border: 2px solid white;
     }
 
     .nav-title {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
-        letter-spacing: 0.5px;
-        text-shadow: 0 0 10px var(--accent);
+        color: white; /* Teks Putih */
+        letter-spacing: 0;
     }
-
-    .theme-btn {
-        background: var(--accent);
+    
+    .search-bar {
+        flex-grow: 1;
+        margin: 0 15px;
+        background: white;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        padding: 6px 10px;
+        max-width: 60%;
+    }
+    
+    .search-input {
         border: none;
-        padding: 8px 14px;
-        border-radius: 10px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: .3s;
-        font-size: 13px;
-        box-shadow: 0 0 10px var(--accent2);
+        outline: none;
+        background: none;
+        font-size: 14px;
+        color: var(--text);
+        width: 90%;
     }
-
-    .theme-btn:hover {
-        transform: scale(1.05);
+    
+    .search-icon {
+        color: var(--accent);
+        font-size: 20px;
+        cursor: pointer;
+    }
+    
+    .nav-icons {
+        color: white;
+        font-size: 24px;
+        display: flex;
+        gap: 10px;
     }
 
     .content {
-        margin-top: 70px;
+        margin-top: 60px; /* Sesuaikan dengan tinggi navbar baru */
+    }
+    
+    .theme-btn {
+        display: none; /* Sembunyikan tombol tema karena sudah satu gaya */
     }
 
     /* ============================
-       OPENING SCREEN
+       QUICK MENU ICON (Pulsa, Tagihan, dll)
     ============================ */
-    #opening {
-        position: fixed;
-        inset: 0;
-        background: #000;
-        display: flex;
+    .quick-menu-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        padding: 15px;
+        background: var(--card);
+        margin-bottom: 10px;
+        box-shadow: 0 1px 3px var(--shadow);
+    }
+    
+    .quick-menu-item {
+        text-align: center;
+    }
+    
+    .quick-menu-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
+        background: var(--accent); /* Ganti dengan warna Ikon di Akulaku, misal biru atau hijau */
+        display: inline-flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
-        z-index: 9999;
-        animation: fadeIn 1s ease;
-        overflow: hidden;
-    }
-
-    .opening-bg-logo {
-        position: absolute;
-        width: 85%;
-        opacity: 0.12;
-        filter: blur(2px) drop-shadow(0 0 25px var(--accent));
-        animation: zoomIn 6s ease forwards;
-    }
-
-    @keyframes zoomIn {
-        from { transform: scale(1); opacity: 0.1; }
-        to { transform: scale(1.25); opacity: 0.15; }
-    }
-
-    .opening-logo {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        object-fit: cover;
-        filter: drop-shadow(0 0 20px var(--accent));
-        animation: pulse 2s infinite alternate;
-        z-index: 5;
-    }
-
-    @keyframes pulse {
-        from { transform: scale(1); }
-        to { transform: scale(1.08); }
-    }
-
-    #enterBtn {
-        margin-top: 30px;
-        padding: 12px 26px;
-        font-size: 18px;
-        background: linear-gradient(45deg,var(--accent),var(--accent2));
-        border: none;
-        border-radius: 12px;
+        font-size: 24px;
         color: white;
-        font-weight: bold;
-        cursor: pointer;
-        animation: glow 1.5s infinite alternate;
-        z-index: 5;
+        margin-bottom: 5px;
     }
-
-    @keyframes glow {
-        from { box-shadow: 0 0 10px var(--accent); }
-        to   { box-shadow: 0 0 20px var(--accent2); }
+    
+    .quick-menu-item p {
+        font-size: 11px;
+        color: #666;
+        margin: 0;
+        font-weight: 500;
     }
-
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; visibility: hidden; }
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
 
     /* ============================
-       HERO
+       HERO / BANNER PROMO
     ============================ */
     .hero {
-        background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
-        height: 330px;
+        background: linear-gradient(135deg, var(--accent2), var(--accent));
+        height: 180px; /* Lebih pendek untuk gaya e-commerce */
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
         position: relative;
         overflow: hidden;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        margin: 10px 15px;
+        box-shadow: 0 4px 8px rgba(255, 77, 77, 0.4);
     }
 
     .hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(0,0,0,0.55);
+        display: none; /* Hapus overlay gelap */
     }
 
     .hero-content {
         position: relative;
         z-index: 10;
+        color: white;
     }
 
     .hero h1 {
-        font-size: 32px;
+        font-size: 24px;
         font-weight: bold;
-        text-shadow: 0 0 12px var(--accent);
+        text-shadow: 0 0 5px rgba(0,0,0,0.5);
     }
-
+    
     .running-text {
-        display: inline-block;
-        white-space: nowrap;
-        animation: moveText 12s linear infinite;
-    }
-
-    @keyframes moveText {
-        from { transform: translateX(100%); }
-        to { transform: translateX(-100%); }
+        color: #ffe0e0;
     }
 
 
     /* ============================
-       NAVIGASI TAB (Ala MyXL)
+       NAVIGASI TAB (Gaya Merah)
     ============================ */
     .category-title {
-        text-align: center;
-        font-size: 22px;
-        font-weight: 600;
-        color: var(--accent2);
-        margin-top: 35px;
-        margin-bottom: 15px;
+        text-align: left;
+        font-size: 18px;
+        font-weight: bold;
+        color: var(--text);
+        padding: 0 15px;
+        margin-top: 20px;
+        margin-bottom: 10px;
     }
     
     .tab-nav {
-        display: flex;
-        overflow-x: auto; 
         padding: 0 15px;
-        margin-bottom: 20px;
-        gap: 10px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-    }
-
-    .tab-nav::-webkit-scrollbar {
-        display: none;
+        background: var(--card); /* Background putih agar tab menonjol */
+        padding-top: 10px;
+        padding-bottom: 10px;
+        box-shadow: 0 2px 4px var(--shadow);
     }
 
     .tab-button {
-        flex-shrink: 0;
-        padding: 10px 18px;
-        border: 2px solid var(--accent);
-        border-radius: 20px;
-        background: transparent;
-        color: var(--text);
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        font-size: 14px;
+        padding: 8px 15px;
+        border: none; 
+        border-radius: 0; /* Tab modern biasanya kotak */
+        border-bottom: 3px solid transparent; /* Garis bawah */
+        color: #777; /* Warna abu-abu saat tidak aktif */
+        font-weight: 500;
+        transition: all 0.3s;
     }
 
     .tab-button.active {
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-        border-color: var(--accent2);
-        color: white;
-        box-shadow: 0 4px 12px rgba(143, 0, 255, 0.4);
-    }
-
-    .tab-button:hover:not(.active) {
-        border-color: var(--accent2);
-        color: var(--accent2);
+        background: transparent;
+        border-bottom-color: var(--accent); /* Garis bawah merah saat aktif */
+        color: var(--accent); 
+        font-weight: bold;
+        box-shadow: none;
     }
 
     .tab-content {
-        padding: 0 15px;
-        min-height: 200px;
-    }
-
-    .tab-pane {
-        display: none;
-        animation: fadeIn 0.5s;
-    }
-
-    .tab-pane.active {
-        display: block;
+        padding: 15px 15px 0 15px;
+        background: var(--bg);
+        min-height: 250px;
     }
 
     /* ============================
-       LIST GROUP (Ala Aplikasi)
+       LIST GROUP (Gaya E-commerce)
     ============================ */
-    .list-group {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
     .list-item {
         background: var(--card);
         padding: 15px;
-        border-radius: 12px;
+        border-radius: 8px;
         margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .light .list-item {
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border: 1px solid #eee;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
     .list-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(143, 0, 255, 0.2);
+        transform: translateY(-1px);
+        box-shadow: 0 2px 5px rgba(255, 77, 77, 0.2);
     }
 
     .list-icon {
-        width: 45px;
-        height: 45px;
-        background: var(--accent);
-        border-radius: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 15px;
-        color: white;
-        font-size: 20px;
-        box-shadow: 0 0 8px rgba(143, 0, 255, 0.5);
+        width: 35px;
+        height: 35px;
+        background: #f0f0f0; /* Latar Ikon lebih netral */
+        border-radius: 6px;
+        color: var(--accent); /* Warna Ikon Merah */
+        box-shadow: none;
+        font-size: 18px;
     }
 
     .list-details h4 {
-        margin: 0;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
+        color: var(--text);
     }
 
     .list-details p {
-        margin: 2px 0 0;
-        font-size: 13px;
-        color: #bbb;
-    }
-
-    .light .list-details p {
-        color: #666;
+        font-size: 12px;
+        color: #999;
     }
 
     /* DETAIL CARD */
     .card {
-        display: none;
-        background: var(--card);
-        margin: 20px auto;
-        width: 90%;
-        max-width: 480px;
-        padding: 20px;
-        border-radius: 14px;
+        margin: 15px auto;
         border: 1px solid var(--accent);
-        animation: fadeIn .4s;
-        text-align: center;
+        box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
     }
-
-    .card img {
-        width: 120px;
-        height: 120px;
-        filter: drop-shadow(0 0 10px var(--accent));
-    }
-
+    
     .whatsapp-btn {
-        display: inline-block;
-        margin-top: 12px;
-        padding: 12px 24px;
-        background: #25D366;
-        color: white;
-        text-decoration: none;
-        border-radius: 10px;
-        font-size: 17px;
-        font-weight: bold;
-        transition: .3s;
+        background: #007bff; /* Ganti WA Hijau ke Biru/Aksen Lain */
     }
 
     /* ============================
        WAVY FOOTER
     ============================ */
     .wave-footer {
-        margin-top: 60px;
-        width: 100%;
-        overflow: hidden;
+        margin-top: 40px;
     }
 
-    .wave-footer svg {
-        width: 100%;
-        display: block;
+    .wave-footer svg path {
+        fill: var(--accent); /* Warna footer disamakan dengan aksen */
     }
-
+    
     /* ============================
        FLOATING WHATSAPP BUTTON
     ============================ */
     .wa-float {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        z-index: 9999;
-        width: 65px;
-        height: 65px;
-    }
-
-    .wa-float img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        filter: drop-shadow(0 0 10px #25D366);
-        animation: pop 1.2s infinite alternate;
-    }
-
-    @keyframes pop {
-        from { transform: scale(1); }
-        to { transform: scale(1.12); }
+        bottom: 80px; /* Geser ke atas agar tidak tertutup bottom bar */
     }
 
 </style>
@@ -418,12 +301,17 @@
 <body>
 
 <div class="app-navbar">
-    <div class="nav-left">
-        <img src="https://files.catbox.moe/js5luv.webp" class="nav-logo">
-        <div class="nav-title">KJS STORE</div>
+    <img src="https://files.catbox.moe/js5luv.webp" class="nav-logo">
+    
+    <div class="search-bar">
+        <input type="text" class="search-input" placeholder="Cari iPhone 13...">
+        <span class="search-icon">🔍</span>
     </div>
-
-    <button class="theme-btn" onclick="toggleTheme()">Tema</button>
+    
+    <div class="nav-icons">
+        <span class="nav-icon">🛒</span>
+        <span class="nav-icon">🔔</span>
+    </div>
 </div>
 
 <div class="content">
@@ -449,54 +337,69 @@ document.getElementById("enterBtn").onclick = () => {
 };
 
 function toggleTheme() {
-    document.body.classList.toggle("light");
+    // Tombol tema dinonaktifkan untuk gaya e-commerce
+    alert("Tema sudah diatur ke mode cerah!");
 }
 
 function openTab(evt, tabName) {
-    // Sembunyikan semua tab-pane
     let tabcontent = document.getElementsByClassName("tab-pane");
     for (let i = 0; i < tabcontent.length; i++) {
         tabcontent[i].classList.remove("active");
     }
 
-    // Hapus class 'active' dari semua tombol tab
     let tablinks = document.getElementsByClassName("tab-button");
     for (let i = 0; i < tablinks.length; i++) {
         tablinks[i].classList.remove("active");
     }
 
-    // Tampilkan tab saat ini dan tambahkan class 'active' ke tombol yang diklik
     document.getElementById(tabName).classList.add("active");
     evt.currentTarget.classList.add("active");
-
-    // Sembunyikan semua detail card saat ganti tab
     document.querySelectorAll(".card").forEach(c => c.style.display = "none");
 }
 
 function showProduct(id) {
-    // Sembunyikan semua detail card
     document.querySelectorAll(".card").forEach(c => c.style.display = "none");
-    // Tampilkan detail card yang diklik
     document.getElementById(id).style.display = "block";
-    // Scroll ke tampilan detail
     window.scrollTo({ top: 450, behavior: "smooth" });
 }
 
-// Set tab default saat halaman dimuat
 document.addEventListener("DOMContentLoaded", () => {
-    // Secara otomatis aktifkan tab pertama saat memuat
-    document.getElementById("jasa").classList.add("active");
+    // Aktifkan tab pertama saat memuat
+    const firstTabButton = document.querySelector(".tab-button");
+    if (firstTabButton) {
+        openTab({ currentTarget: firstTabButton }, 'jasa');
+    }
 });
 </script>
 
 <div class="hero">
     <div class="hero-content">
-        <h1>HAI SELAMAT DATANG</h1>
-        <p><span class="running-text">Pilih Produk Sesuai Kebutuhan Anda • Fast • Trusted • Aman •</span></p>
+        <h1>PROMO SPESIAL KJS</h1>
+        <p><span class="running-text">Fast Sale! Diskon Hingga 50% untuk Semua Jasa & Layanan!</span></p>
     </div>
 </div>
 
-<h2 class="category-title">PILIH KATEGORI</h2>
+<div class="quick-menu-container">
+    <div class="quick-menu-item">
+        <div class="quick-menu-icon" style="background: #007bff;">💳</div>
+        <p>Bayar Cepat</p>
+    </div>
+    <div class="quick-menu-item">
+        <div class="quick-menu-icon" style="background: #28a745;">💰</div>
+        <p>Zona Pinjaman</p>
+    </div>
+    <div class="quick-menu-item">
+        <div class="quick-menu-icon" style="background: #ffc107;">🎁</div>
+        <p>Hadiah Harian</p>
+    </div>
+    <div class="quick-menu-item">
+        <div class="quick-menu-icon" style="background: #dc3545;">🚨</div>
+        <p>Flash Sale</p>
+    </div>
+</div>
+
+
+<h2 class="category-title">JELAJAHI PRODUK</h2>
 
 <div class="tab-nav">
     <button class="tab-button active" onclick="openTab(event, 'jasa')">✨ Jasa</button>
@@ -506,7 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <div class="tab-content">
     
-    <div id="jasa" class="tab-pane active">
+    <div id="jasa" class="tab-pane">
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_bpjs')">
                 <div class="list-icon">💼</div>
@@ -664,7 +567,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </div> <div class="wave-footer">
     <svg viewBox="0 0 1440 320">
-        <path fill="#25D366" fill-opacity="1"
+        <path fill="#ff4d4d" fill-opacity="1"
         d="M0,96L48,112C96,128,192,160,288,181.3C384,203,480,213,576,192C672,171,768,117,864,117.3C960,117,1056,171,1152,170.7C1248,171,1344,117,1392,90.7L1440,64V320H0Z"></path>
     </svg>
 </div>
