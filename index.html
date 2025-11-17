@@ -199,6 +199,34 @@
         z-index: 10;
     }
 
+    /* ============================
+       UNICODE ART FLOATING
+    ============================ */
+    .floating-art {
+        color: var(--accent); /* Warna sesuai tema ungu */
+        font-size: 8px; /* Sesuaikan ukuran font agar gambar terlihat proporsional */
+        line-height: 1.0; /* Hilangkan spasi antar baris */
+        margin: 0 auto 10px auto; /* Margin di bawah art */
+        text-shadow: 0 0 15px var(--accent2); /* Efek glow/shadow */
+        white-space: pre; 
+        
+        /* Animasi Floating */
+        animation: floatArt 4s ease-in-out infinite alternate;
+    }
+
+    /* Keyframes untuk animasi mengambang */
+    @keyframes floatArt {
+        0% {
+            transform: translateY(0);
+            opacity: 0.9;
+        }
+        100% {
+            transform: translateY(-8px); /* Bergerak naik 8px */
+            opacity: 1;
+        }
+    }
+
+
     .hero h1 {
         font-size: 32px;
         font-weight: bold;
@@ -538,7 +566,13 @@ function openTab(evt, tabName) {
 function showProduct(id) {
     document.querySelectorAll(".card").forEach(c => c.style.display = "none");
     document.getElementById(id).style.display = "block";
-    window.scrollTo({ top: 450, behavior: "smooth" });
+    // Mengubah target scroll ke card detail yang aktif
+    const targetCard = document.getElementById(id);
+    if (targetCard) {
+        targetCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+        window.scrollTo({ top: 450, behavior: "smooth" });
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -553,6 +587,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <div class="hero">
     <div class="hero-content">
+        <pre class="floating-art">
+⠀⠀⠀⣿⣿⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢀⣿⣿⣿⣿⣿⣿⣆⡀⠀⠀⠀⠀⣠⣴⣦⡄⢤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣷⣷⣶⣶⣿⣿⣿⣿⡀⣽⡿⣶⣦⡀⠀⠀⠀⠀⠀
+⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡿⣿⣿⣿⣿⣆⠀⠀⠀⠀
+⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿⣿⣿⣿⣿⣦⠀⠀⠀
+⠀⠀⢾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣟⣿⣿⣿⣿⣿⡿⢟⣿⣷⡀⠀
+⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣭⣿⣿⣽⣿⣽⣾⣿⣿⣿⠛⠉⠉⠀⢈⣿⣿⡇⠀
+⠀⠀⠀⢻⣿⣿⠛⠉⠛⠻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠡⠤⠄⠁⠀⠀⢻⣿⡇⠀
+⠀⠀⠀⠘⣿⣿⠄⠀⠀⠀⠀⠀⣉⠙⠋⢿⣿⣯⠀⠀⠀⠀⠀⠀⣰⣿⣿⡿⡃⠀
+⠀⠀⠀⠀⢹⣿⣇⣀⠀⠈⠉⠉⠁⠀⣤⢠⣿⣿⣧⡆⣤⣤⡀⣾⣿⣿⣿⢠⡇⠀
+⠀⠀⠀⠀⠀⣿⣿⣿⣷⣤⠄⣀⣴⣧⣹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⠇⠀
+⠀⠀⠀⠀⠀⠸⣿⣯⠉⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⡯⠁⡌⠀⠀
+⠀⠀⠀⠀⠀⠀⠙⢿⡄⢿⣿⣿⣿⣿⣿⣎⠙⠻⠛⣁⣼⣿⣿⡿⠛⠁⡸⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠈⢿⡄⠉⣿⡿⣿⣿⣿⣿⣷⣬⣿⡿⠟⠋⢀⣴⡞⠁⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⢳⠀⠀⠀⠀⠉⠉⠋⠉⠉⠁⠀⢀⣴⣿⡿⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⣿⣿⣿⣿⣿⠿⢃⣴⣿⣿⣿⠃⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⠟⠀
+</pre>
         <h1>HAI SELAMAT DATANG</h1>
         <p><span class="running-text">Pilih Produk Sesuai Kebutuhan Anda • Fast • Trusted • Aman •</span></p>
     </div>
