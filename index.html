@@ -305,7 +305,7 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        margin-bottom: 30px; /* Jarak antar grup */
+        margin-bottom: 30px; 
     }
 
     .list-item {
@@ -329,6 +329,7 @@
         box-shadow: 0 4px 10px rgba(143, 0, 255, 0.2);
     }
 
+    /* ICON LIST DENGAN DUKUNGAN GAMBAR KUSTOM */
     .list-icon {
         width: 45px;
         height: 45px;
@@ -341,6 +342,13 @@
         color: white;
         font-size: 20px;
         box-shadow: 0 0 8px rgba(143, 0, 255, 0.5);
+        overflow: hidden; /* Penting agar gambar tidak keluar dari batas */
+    }
+    
+    .list-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Memastikan gambar mengisi area ikon */
     }
 
     .list-details h4 {
@@ -377,11 +385,28 @@
     .card img {
         width: 120px;
         height: 120px;
-        border-radius: 50%; /* Membuat gambar di detail tampak berbeda */
+        border-radius: 50%; 
         object-fit: cover;
         filter: drop-shadow(0 0 10px var(--accent));
         margin-bottom: 15px;
     }
+
+    /* IKON GELOMBANG WHATSAPP */
+    .wa-wave-icon {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        margin-top: 10px;
+        background: url('https://files.catbox.moe/1x60ax.png') no-repeat center/contain; /* Gambar ikon WA */
+        filter: drop-shadow(0 0 5px #25D366);
+        animation: waveBounce 1s infinite alternate;
+    }
+
+    @keyframes waveBounce {
+        from { transform: translateY(0) scale(1); opacity: 1; }
+        to { transform: translateY(-5px) scale(1.1); opacity: 0.8; }
+    }
+
 
     .whatsapp-btn {
         display: inline-block;
@@ -481,43 +506,31 @@ function toggleTheme() {
 }
 
 function openTab(evt, tabName) {
-    // Sembunyikan semua tab-pane
     let tabcontent = document.getElementsByClassName("tab-pane");
     for (let i = 0; i < tabcontent.length; i++) {
         tabcontent[i].classList.remove("active");
     }
 
-    // Hapus class 'active' dari semua tombol tab
     let tablinks = document.getElementsByClassName("tab-button");
     for (let i = 0; i < tablinks.length; i++) {
         tablinks[i].classList.remove("active");
     }
 
-    // Tampilkan tab saat ini dan tambahkan class 'active' ke tombol yang diklik
     document.getElementById(tabName).classList.add("active");
     evt.currentTarget.classList.add("active");
 
-    // Sembunyikan semua detail card saat ganti tab
     document.querySelectorAll(".card").forEach(c => c.style.display = "none");
 }
 
 function showProduct(id) {
-    // Sembunyikan semua detail card
     document.querySelectorAll(".card").forEach(c => c.style.display = "none");
-    // Tampilkan detail card yang diklik
     document.getElementById(id).style.display = "block";
-    // Scroll ke tampilan detail
     window.scrollTo({ top: 450, behavior: "smooth" });
 }
 
-// Set tab default saat halaman dimuat
 document.addEventListener("DOMContentLoaded", () => {
-    // Secara otomatis aktifkan tab pertama saat memuat
-    // Cek apakah ada tombol dengan class 'active' yang sudah ada
     const firstTabButton = document.querySelector(".tab-nav .tab-button");
     if (firstTabButton && !document.querySelector(".tab-pane.active")) {
-        // Jika belum ada tab aktif, panggil openTab untuk yang pertama
-        // Ambil ID tab dari atribut onclick
         const tabId = firstTabButton.getAttribute('onclick').match(/'([^']*)'/)[1];
         document.getElementById(tabId).classList.add("active");
         firstTabButton.classList.add("active");
@@ -546,14 +559,18 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3 class="group-title">Layanan Umum</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_bpjs')">
-                <div class="list-icon">💼</div>
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/g2444r.png" alt="Icon BPJS">
+                </div>
                 <div class="list-details">
                     <h4>JASA BPJS KETENAGAKERJAAN</h4>
                     <p>Pencairan Cepat, Aman, dan Data Terjamin.</p>
                 </div>
             </li>
             <li class="list-item" onclick="showProduct('detail_dokumen')">
-                <div class="list-icon">📄</div>
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/1845h9.png" alt="Icon Dokumen">
+                </div>
                 <div class="list-details">
                     <h4>JASA PERDOKUMENAN</h4>
                     <p>Layanan pengurusan dan pembuatan dokumen.</p>
@@ -564,7 +581,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3 class="group-title">Perangkat Elektronik</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_bypass')">
-                <div class="list-icon">🔓</div>
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/d6y4w4.png" alt="Icon Bypass">
+                </div>
                 <div class="list-details">
                     <h4>JASA BAYPAS HP</h4>
                     <p>Bypass dan buka kunci perangkat HP.</p>
@@ -577,7 +596,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3 class="group-title">Aplikasi & Hiburan</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_apk')">
-                <div class="list-icon">💎</div>
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/o3d7e8.png" alt="Icon APK">
+                </div>
                 <div class="list-details">
                     <h4>APK PREMIUM</h4>
                     <p>Koleksi berbagai Aplikasi Premium.</p>
@@ -588,14 +609,18 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3 class="group-title">Layanan VPN</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_vpn_server')">
-                <div class="list-icon">🌐</div>
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/08e2f8.png" alt="Icon VPN Server">
+                </div>
                 <div class="list-details">
                     <h4>VPN PREMIUM SERVER</h4>
                     <p>DarkTunnel, HA Tunnel, dan Script Premium.</p>
                 </div>
             </li>
             <li class="list-item" onclick="showProduct('detail_vpn_all')">
-                <div class="list-icon">⚡</div>
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/t0h8l1.png" alt="Icon VPN All Op">
+                </div>
                 <div class="list-details">
                     <h4>VPN PREMIUM ALL OP</h4>
                     <p>Fast Server, Stabil, untuk Semua Operator.</p>
@@ -608,14 +633,18 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3 class="group-title">Layanan Tunneling</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_list_vpn')">
-                <div class="list-icon">📋</div>
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/4e2d31.png" alt="Icon List VPN">
+                </div>
                 <div class="list-details">
                     <h4>LIST PAKET VPN</h4>
                     <p>Daftar berbagai pilihan paket layanan VPN.</p>
                 </div>
             </li>
             <li class="list-item" onclick="showProduct('detail_sewa_script')">
-                <div class="list-icon">📜</div>
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/a2c0i7.png" alt="Icon Sewa Script">
+                </div>
                 <div class="list-details">
                     <h4>SEWA SCRIPT TUNNELING</h4>
                     <p>Layanan penyewaan script tunneling (berbagai jenis).</p>
@@ -626,7 +655,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3 class="group-title">Paket Data</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_hotspot')">
-                <div class="list-icon">🔥</div>
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/p9o4q2.png" alt="Icon Hotspot">
+                </div>
                 <div class="list-details">
                     <h4>PAKET HOTSPOT</h4>
                     <p>Hotspot Unlimited 30 Hari Tanpa FUP.</p>
@@ -654,6 +685,7 @@ document.addEventListener("DOMContentLoaded", () => {
         • Rubah Data<br><br>
         •━━━━━━━━━━━━━━━━•
     </p>
+    <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
 
@@ -661,6 +693,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>JASA PERDOKUMENAN</h2>
     <p>Layanan jasa untuk pengurusan berbagai jenis dokumen. Silahkan hubungi admin untuk detail lebih lanjut.</p>
+    <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
@@ -668,38 +701,11 @@ document.addEventListener("DOMContentLoaded", () => {
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>JASA BAYPAS HP</h2>
     <p>Jasa bypass/buka kunci untuk berbagai tipe HP. Hubungi kami dengan detail tipe HP Anda.</p>
+    <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
 <div class="card" id="detail_apk">
     <img src="https://files.catbox.moe/js5luv.webp">
     <h2>APK PREMIUM</h2>
-    <p>Dapatkan akses ke berbagai aplikasi premium dengan harga terjangkau. (Contoh: Spotify, Netflix, dll).</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_vpn_server">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>VPN PREMIUM SERVER</h2>
-    <p>Pilihan DarkTunnel, HA Tunnel, atau Script Premium. Server cepat dan stabil.</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_vpn_all">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>VPN PREMIUM ALL OP</h2>
-    <p>VPN Premium untuk semua operator. Fast Server dan koneksi yang stabil.</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_list_vpn">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>LIST PAKET VPN</h2>
-    <p>Berbagai pilihan paket VPN dengan durasi dan spesifikasi server yang berbeda-beda.</p>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_sewa_script">
-    <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>SEWA SCRIPT TUNNELING</h2>
-    <p>Sewa script tunneli
+    <p>Dapatkan akses ke berbagai aplikasi premium dengan harga terjangkau. (Contoh: Spotify, Netflix, dll).<
