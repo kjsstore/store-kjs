@@ -217,7 +217,7 @@
 
 
     /* ============================
-       GRID PRODUK
+       NAVIGASI TAB (Ala MyXL)
     ============================ */
     .category-title {
         text-align: center;
@@ -225,44 +225,123 @@
         font-weight: 600;
         color: var(--accent2);
         margin-top: 35px;
+        margin-bottom: 15px;
+    }
+    
+    .tab-nav {
+        display: flex;
+        overflow-x: auto; 
+        padding: 0 15px;
+        margin-bottom: 20px;
+        gap: 10px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
     }
 
-    .category-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 15px;
-        padding: 20px;
+    .tab-nav::-webkit-scrollbar {
+        display: none;
     }
 
-    .category-card {
-        background: var(--card);
-        border-radius: 14px;
-        padding: 15px;
-        text-align: center;
+    .tab-button {
+        flex-shrink: 0;
+        padding: 10px 18px;
+        border: 2px solid var(--accent);
+        border-radius: 20px;
+        background: transparent;
+        color: var(--text);
+        font-weight: 600;
         cursor: pointer;
-        border: 1px solid rgba(255,255,255,0.07);
-        transition: .3s;
+        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        font-size: 14px;
     }
 
-    .category-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 15px var(--accent);
+    .tab-button.active {
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        border-color: var(--accent2);
+        color: white;
+        box-shadow: 0 4px 12px rgba(143, 0, 255, 0.4);
     }
 
-    .category-card img {
-        width: 90px;
-        height: 90px;
-        object-fit: contain;
-        filter: drop-shadow(0 0 8px var(--accent));
-    }
-
-    .category-card h3 {
-        font-size: 15px;
-        margin-top: 10px;
+    .tab-button:hover:not(.active) {
+        border-color: var(--accent2);
         color: var(--accent2);
     }
 
-    /* DETAIL */
+    .tab-content {
+        padding: 0 15px;
+        min-height: 200px;
+    }
+
+    .tab-pane {
+        display: none;
+        animation: fadeIn 0.5s;
+    }
+
+    .tab-pane.active {
+        display: block;
+    }
+
+    /* ============================
+       LIST GROUP (Ala Aplikasi)
+    ============================ */
+    .list-group {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .list-item {
+        background: var(--card);
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .light .list-item {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .list-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(143, 0, 255, 0.2);
+    }
+
+    .list-icon {
+        width: 45px;
+        height: 45px;
+        background: var(--accent);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+        color: white;
+        font-size: 20px;
+        box-shadow: 0 0 8px rgba(143, 0, 255, 0.5);
+    }
+
+    .list-details h4 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .list-details p {
+        margin: 2px 0 0;
+        font-size: 13px;
+        color: #bbb;
+    }
+
+    .light .list-details p {
+        color: #666;
+    }
+
+    /* DETAIL CARD */
     .card {
         display: none;
         background: var(--card);
@@ -338,7 +417,6 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
 <div class="app-navbar">
     <div class="nav-left">
         <img src="https://files.catbox.moe/js5luv.webp" class="nav-logo">
@@ -350,7 +428,6 @@
 
 <div class="content">
 
-<!-- OPENING -->
 <div id="opening">
     <img src="https://files.catbox.moe/js5luv.webp" class="opening-bg-logo">
     <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo">
@@ -370,9 +447,48 @@ document.getElementById("enterBtn").onclick = () => {
     audio.volume = 0.6;
     audio.play();
 };
+
+function toggleTheme() {
+    document.body.classList.toggle("light");
+}
+
+function openTab(evt, tabName) {
+    // Sembunyikan semua tab-pane
+    let tabcontent = document.getElementsByClassName("tab-pane");
+    for (let i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+    }
+
+    // Hapus class 'active' dari semua tombol tab
+    let tablinks = document.getElementsByClassName("tab-button");
+    for (let i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+    }
+
+    // Tampilkan tab saat ini dan tambahkan class 'active' ke tombol yang diklik
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+
+    // Sembunyikan semua detail card saat ganti tab
+    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
+}
+
+function showProduct(id) {
+    // Sembunyikan semua detail card
+    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
+    // Tampilkan detail card yang diklik
+    document.getElementById(id).style.display = "block";
+    // Scroll ke tampilan detail
+    window.scrollTo({ top: 450, behavior: "smooth" });
+}
+
+// Set tab default saat halaman dimuat
+document.addEventListener("DOMContentLoaded", () => {
+    // Secara otomatis aktifkan tab pertama saat memuat
+    document.getElementById("jasa").classList.add("active");
+});
 </script>
 
-<!-- HERO -->
 <div class="hero">
     <div class="hero-content">
         <h1>HAI SELAMAT DATANG</h1>
@@ -380,71 +496,99 @@ document.getElementById("enterBtn").onclick = () => {
     </div>
 </div>
 
-<h2 class="category-title">BY KJS-STORE</h2>
+<h2 class="category-title">PILIH KATEGORI</h2>
 
-<!-- GRID PRODUK -->
-<div class="category-grid">
-
-    <div class="category-card" onclick="showProduct('paket1')">
-        <img src="https://files.catbox.moe/fwu0ky.jpg">
-        <h3>JASA BPJS KETENAGKERJAAN</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket2')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>JASA PERDOKUMENAN</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket3')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>APK PREMIUM</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket4')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>JASA BAYPAS HP</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket5')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>LIST PAKET VPN</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket6')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>SEWA SCRIPT TUNNELING</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket7')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>VPN PREMIUM</h3>
-    </div>
-
-    <div class="category-card" onclick="showProduct('paket8')">
-        <img src="https://files.catbox.moe/js5luv.webp">
-        <h3>SEWA SCRIPT TUNNELING</h3>
-    </div>
-
+<div class="tab-nav">
+    <button class="tab-button active" onclick="openTab(event, 'jasa')">✨ Jasa</button>
+    <button class="tab-button" onclick="openTab(event, 'digital')">📱 Digital & VPN</button>
+    <button class="tab-button" onclick="openTab(event, 'jaringan')">⚙️ Jaringan & Script</button>
 </div>
 
+<div class="tab-content">
+    
+    <div id="jasa" class="tab-pane active">
+        <ul class="list-group">
+            <li class="list-item" onclick="showProduct('detail_bpjs')">
+                <div class="list-icon">💼</div>
+                <div class="list-details">
+                    <h4>JASA BPJS KETENAGAKERJAAN</h4>
+                    <p>Pencairan Cepat, Aman, dan Data Terjamin.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_dokumen')">
+                <div class="list-icon">📄</div>
+                <div class="list-details">
+                    <h4>JASA PERDOKUMENAN</h4>
+                    <p>Layanan pengurusan dan pembuatan dokumen.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_bypass')">
+                <div class="list-icon">🔓</div>
+                <div class="list-details">
+                    <h4>JASA BAYPAS HP</h4>
+                    <p>Bypass dan buka kunci perangkat HP.</p>
+                </div>
+            </li>
+        </ul>
+    </div>
 
-<script>
-function showProduct(id) {
-    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
-    document.getElementById(id).style.display = "block";
-    window.scrollTo({ top: 450, behavior: "smooth" });
-}
+    <div id="digital" class="tab-pane">
+        <ul class="list-group">
+            <li class="list-item" onclick="showProduct('detail_apk')">
+                <div class="list-icon">💎</div>
+                <div class="list-details">
+                    <h4>APK PREMIUM</h4>
+                    <p>Koleksi berbagai Aplikasi Premium.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_vpn_server')">
+                <div class="list-icon">🌐</div>
+                <div class="list-details">
+                    <h4>VPN PREMIUM SERVER</h4>
+                    <p>DarkTunnel, HA Tunnel, dan Script Premium.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_vpn_all')">
+                <div class="list-icon">⚡</div>
+                <div class="list-details">
+                    <h4>VPN PREMIUM ALL OP</h4>
+                    <p>Fast Server, Stabil, untuk Semua Operator.</p>
+                </div>
+            </li>
+        </ul>
+    </div>
 
-function toggleTheme() {
-    document.body.classList.toggle("light");
-}
-</script>
+    <div id="jaringan" class="tab-pane">
+        <ul class="list-group">
+            <li class="list-item" onclick="showProduct('detail_list_vpn')">
+                <div class="list-icon">📋</div>
+                <div class="list-details">
+                    <h4>LIST PAKET VPN</h4>
+                    <p>Daftar berbagai pilihan paket layanan VPN.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_sewa_script')">
+                <div class="list-icon">📜</div>
+                <div class="list-details">
+                    <h4>SEWA SCRIPT TUNNELING</h4>
+                    <p>Layanan penyewaan script tunneling (berbagai jenis).</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_hotspot')">
+                <div class="list-icon">🔥</div>
+                <div class="list-details">
+                    <h4>PAKET HOTSPOT</h4>
+                    <p>Hotspot Unlimited 30 Hari Tanpa FUP.</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+</div>
 
-
-<!-- CARD PRODUK -->
-<div class="card" id="paket1">
+<div class="card" id="detail_bpjs">
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>JASA BPJSK</h2>
+    <h2>JASA BPJS KETENAGAKERJAAN</h2>
     <p style="line-height:1.6;font-size:15px;">
         •━━━━━━━━━━━━━━━━• <br>
         💰 <b>PENCAIRAN BPJS KETENAGAKERJAAN</b> 💰 <br>
@@ -462,66 +606,69 @@ function toggleTheme() {
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
 
-<div class="card" id="paket2">
+<div class="card" id="detail_dokumen">
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket XL</h2>
-    <p>• Promo 15GB 20RB<br>• Kuota Utama<br>• Support Semua TKP</p>
+    <h2>JASA PERDOKUMENAN</h2>
+    <p>Layanan jasa untuk pengurusan berbagai jenis dokumen. Silahkan hubungi admin untuk detail lebih lanjut.</p>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
-<div class="card" id="paket3">
+<div class="card" id="detail_bypass">
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Telkomsel</h2>
-    <p>• Kuota Belajar<br>• Internet Reguler<br>• Murah</p>
+    <h2>JASA BAYPAS HP</h2>
+    <p>Jasa bypass/buka kunci untuk berbagai tipe HP. Hubungi kami dengan detail tipe HP Anda.</p>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
-<div class="card" id="paket4">
+<div class="card" id="detail_apk">
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket TRI</h2>
-    <p>• 25GB 25rb<br>• 40GB 30rb<br>• Aktif Lama</p>
+    <h2>APK PREMIUM</h2>
+    <p>Dapatkan akses ke berbagai aplikasi premium dengan harga terjangkau. (Contoh: Spotify, Netflix, dll).</p>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
-<div class="card" id="paket5">
+<div class="card" id="detail_vpn_server">
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Indosat</h2>
-    <p>• Yellow<br>• Freedom Internet<br>• Harga Pelajar</p>
+    <h2>VPN PREMIUM SERVER</h2>
+    <p>Pilihan DarkTunnel, HA Tunnel, atau Script Premium. Server cepat dan stabil.</p>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
-<div class="card" id="paket6">
+<div class="card" id="detail_vpn_all">
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>Paket Hotspot</h2>
-    <p>• Unlimited Hotspot<br>• 30 Hari<br>• No FUP</p>
+    <h2>VPN PREMIUM ALL OP</h2>
+    <p>VPN Premium untuk semua operator. Fast Server dan koneksi yang stabil.</p>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
-<div class="card" id="paket7">
+<div class="card" id="detail_list_vpn">
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>VPN Premium</h2>
-    <p>• DarkTunnel<br>• HA Tunnel<br>• Premium Script</p>
+    <h2>LIST PAKET VPN</h2>
+    <p>Berbagai pilihan paket VPN dengan durasi dan spesifikasi server yang berbeda-beda.</p>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
-<div class="card" id="paket8">
+<div class="card" id="detail_sewa_script">
     <img src="https://files.catbox.moe/js5luv.webp">
-    <h2>VPN Premium</h2>
-    <p>• All Operator<br>• Fast Server<br>• Stabil</p>
+    <h2>SEWA SCRIPT TUNNELING</h2>
+    <p>Sewa script tunneling untuk kebutuhan jaringan Anda. Tersedia pilihan bulanan atau tahunan.</p>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
-</div> <!-- END CONTENT -->
+<div class="card" id="detail_hotspot">
+    <img src="https://files.catbox.moe/js5luv.webp">
+    <h2>PAKET HOTSPOT</h2>
+    <p>Nikmati Unlimited Hotspot selama 30 Hari, Tanpa Batasan FUP!</p>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
 
-<!-- WAVY FOOTER -->
-<div class="wave-footer">
+</div> <div class="wave-footer">
     <svg viewBox="0 0 1440 320">
         <path fill="#25D366" fill-opacity="1"
         d="M0,96L48,112C96,128,192,160,288,181.3C384,203,480,213,576,192C672,171,768,117,864,117.3C960,117,1056,171,1152,170.7C1248,171,1344,117,1392,90.7L1440,64V320H0Z"></path>
     </svg>
 </div>
 
-<!-- FLOATING WHATSAPP BUTTON -->
 <a href="https://wa.me/6285943111681" class="wa-float" target="_blank">
     <img src="https://files.catbox.moe/1x60ax.png">
 </a>
