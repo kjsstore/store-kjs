@@ -268,8 +268,9 @@
         color: var(--accent2);
     }
 
+    /* MODIFIKASI: Hapus padding di .tab-content agar card-nya bisa full width */
     .tab-content {
-        padding: 0 15px;
+        padding: 0; 
         min-height: 200px;
     }
 
@@ -283,7 +284,7 @@
     }
 
     /* ============================
-       LIST GROUP (Ala Aplikasi)
+       LIST GROUP (GAYA MYXL CARD)
     ============================ */
     
     /* GAYA UNTUK JUDUL GROUP */
@@ -292,7 +293,7 @@
         font-weight: 700;
         color: var(--accent2);
         margin: 25px 0 10px 0;
-        padding-left: 5px;
+        padding-left: 15px; /* Pertahankan padding untuk judul grup */
         border-left: 4px solid var(--accent);
         text-shadow: 0 0 5px rgba(143, 0, 255, 0.3);
     }
@@ -303,63 +304,76 @@
 
     .list-group {
         list-style: none;
-        padding: 0;
+        padding: 0 15px; /* Berikan padding ke list group untuk card */
         margin: 0;
         margin-bottom: 30px; 
+        
+        /* NEW: Tambahkan Grid Layout untuk tampilan 2 kolom seperti di MyXL */
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+        gap: 15px;
+        
+        /* Ganti grid template columns untuk layar lebih lebar jika perlu */
+        @media (min-width: 600px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 
     .list-item {
+        /* Ganti gaya list item menjadi Card Kotak */
         background: var(--card);
         padding: 15px;
         border-radius: 12px;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
+        margin-bottom: 0; /* Hapus margin bawah karena sekarang pakai gap */
+        
+        display: flex; /* Ubah ke flex column */
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center; /* Konten di tengah */
+        text-align: center;
+        
         cursor: pointer;
         border: 1px solid rgba(255, 255, 255, 0.05);
         transition: transform 0.2s, box-shadow 0.2s;
+        height: auto; /* Biarkan tinggi menyesuaikan konten */
     }
 
-    .light .list-item {
-        border: 1px solid rgba(0, 0, 0, 0.1);
-    }
-
-    .list-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(143, 0, 255, 0.2);
-    }
-
-    /* ICON LIST DENGAN DUKUNGAN GAMBAR KUSTOM */
+    /* Modifikasi Icon dalam List Item */
     .list-icon {
-        width: 45px;
-        height: 45px;
-        background: var(--accent);
-        border-radius: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 15px;
-        color: white;
-        box-shadow: 0 0 8px rgba(143, 0, 255, 0.5);
-        overflow: hidden; /* Penting agar gambar tidak keluar dari batas */
+        width: 60px; /* Ukuran lebih besar agar ikon lebih menonjol */
+        height: 60px;
+        background: linear-gradient(45deg, var(--accent), var(--accent2)); /* Beri gradien */
+        border-radius: 10px; /* Sedikit lebih kotak */
+        margin-right: 0; /* Hapus margin kanan */
+        margin-bottom: 10px; /* Tambah margin bawah */
+        box-shadow: 0 5px 15px rgba(143, 0, 255, 0.5); /* Shadow lebih kuat */
+        overflow: hidden; 
     }
     
     .list-icon img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Memastikan gambar mengisi area ikon */
+        object-fit: cover; 
+    }
+
+    /* Modifikasi Detail Teks dalam List Item */
+    .list-details {
+        width: 100%;
     }
 
     .list-details h4 {
-        margin: 0;
-        font-size: 16px;
-        font-weight: 600;
+        margin: 5px 0 2px 0; /* Sedikit spasi di atas dan bawah judul */
+        font-size: 15px; /* Ukuran font judul sedikit dikecilkan agar muat */
+        font-weight: 700;
+        /* Tambahkan warna ungu agar menonjol seperti di MyXL */
+        color: var(--accent2); 
     }
 
     .list-details p {
-        margin: 2px 0 0;
-        font-size: 13px;
-        color: #bbb;
+        margin: 0;
+        font-size: 12px; /* Ukuran font deskripsi lebih kecil */
+        color: var(--text); /* Warna teks deskripsi diubah agar lebih kontras */
+        opacity: 0.7;
     }
 
     .light .list-details p {
