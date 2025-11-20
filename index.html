@@ -78,7 +78,7 @@
         text-shadow: 0 0 10px var(--accent);
     }
 
-    /* Tombol Tema */
+    /* Tombol 🌒 */
     .theme-btn {
         background: var(--accent);
         border: none;
@@ -770,7 +770,7 @@
     </div>
     
     <div style="display: flex; align-items: center; gap: 10px;">
-        <button class="theme-btn" onclick="toggleTheme()">Tema</button>
+        <button class="theme-btn" onclick="toggleTheme()">🌓</button>
         <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button> 
     </div>
 </div>
@@ -795,12 +795,37 @@
             </a>
         </li>
         <li class="menu-list-item">
-            <a href="#" onclick="alert('Ini contoh link ke halaman Pemasaran/Affiliate. Ganti # dengan link halaman.')">
-                Peluang Bisnis
+            <a href="#" onclick="daftarReseller()">
+                Daftar Reseller 📝
             </a>
         </li>
     </ul>
 
+<script>
+    function daftarReseller() {
+        // !!! HARAP GANTI DENGAN NOMOR WHATSAPP ANDA (Contoh: 628123456789) !!!
+        const noWaAnda = '6285943111681'; 
+
+        // 1. Meminta pengguna memasukkan nama
+        const nama = prompt('Mohon masukkan Nama Anda untuk mendaftar Reseller:');
+
+        // 2. Memastikan pengguna memasukkan nama
+        if (nama) {
+            // 3. Membuat pesan WhatsApp otomatis
+            const pesanWa = encodeURIComponent(`Halo, saya *${nama}* tertarik untuk mendaftar sebagai Reseller. Mohon infonya lebih lanjut.`);
+
+            // 4. Membuat URL WhatsApp
+            const urlWa = `https://wa.me/${noWaAnda}?text=${pesanWa}`;
+
+            // 5. Mengarahkan ke WhatsApp
+            window.location.href = urlWa;
+        } else if (nama === '') {
+            alert('Pendaftaran Reseller dibatalkan. Nama tidak boleh kosong.');
+        } else {
+            alert('Pendaftaran Reseller dibatalkan.');
+        }
+    }
+</script>
     <div class="menu-section-title" style="margin-top: 30px;">Kontak & Testimoni</div>
     <ul class="menu-list">
         <li class="menu-list-item">
@@ -820,8 +845,16 @@
 <div id="opening">
     <img src="https://files.catbox.moe/js5luv.webp" class="opening-bg-logo">
     <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo">
+
     <button id="enterBtn">Masuk & Lanjut Belanja</button>
 </div>
+
+<style>
+    #enterBtn {
+        color: #000;          /* hitam */
+        font-weight: 700;     /* tebal */
+    }
+</style>
 
 <audio id="bgm" loop>
     <source src="Link musik" type="audio/mpeg">
@@ -980,15 +1013,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p>Upgrade sistem operasi perangkat.</p>
                 </div>
             </li>
-            <li class="list-item" onclick="showProduct('detail_elektronik_tambahan_b')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Elektronik B">
-                </div>
-                <div class="list-details">
-                    <h4>PENGHAPUSAN AKUN PERMANEN (New)</h4>
-                    <p>Layanan penghapusan data akun/cloud.</p>
-                </div>
-            </li>
         </ul>
     </div>
 
@@ -1006,11 +1030,11 @@ document.addEventListener("DOMContentLoaded", () => {
             </li>
             <li class="list-item" onclick="showProduct('detail_paket_bebas')">
                 <div class="list-icon">
-                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Paket Bebas">
+                    <img src="https://files.catbox.moe/8iazs9.jpg" alt="Icon Paket Bebas">
                 </div>
                 <div class="list-details">
-                    <h4>PAKET BEBAS</h4>
-                    <p>Deskripsi awal yang bisa Anda sesuaikan nanti.</p>
+                    <h4>PAKET UNLOCKTOOL</h4>
+                    <p>Sewa server unlocktool 6jam/24jam .</p>
                 </div>
             </li>
             <li class="list-item" onclick="showProduct('detail_digital_tambahan_a')">
@@ -1033,7 +1057,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </li>
         </ul>
         
-        <h3 class="group-title" style="color: rgb(211, 211, 238);">Layanan VPN (3 Items)</h3>
+        <h3 class="group-title" style="color: rgb(211, 211, 238);">Layanan Server</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_root')">
                 <div class="list-icon">
@@ -1042,24 +1066,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="list-details">
                     <h4>PANEL PETERODY PREMIUM</h4>
                     <p>layanan penyedia panel server vps / panel Premium.</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_vpn_all')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/t0h8l1.png" alt="Icon VPN All Op">
-                </div>
-                <div class="list-details">
-                    <h4>VPN PREMIUM ALL OP</h4>
-                    <p>Fast Server, Stabil, untuk Semua Operator.</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_vpn_tambahan_a')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/default.jpg" alt="Icon VPN A">
-                </div>
-                <div class="list-details">
-                    <h4>RESELLER VPN MURAH (New)</h4>
-                    <p>Pilihan paket untuk menjadi reseller.</p>
                 </div>
             </li>
         </ul>
@@ -1079,11 +1085,11 @@ document.addEventListener("DOMContentLoaded", () => {
             </li>
             <li class="list-item" onclick="showProduct('detail_sewa_script')">
                 <div class="list-icon">
-                    <img src="https://files.catbox.moe/25dmv9.jpg" alt="Icon Sewa Script">
+                    <img src="https://files.catbox.moe/contqh.jpg" alt="Icon Sewa Script">
                 </div>
                 <div class="list-details">
                     <h4>SEWA SCRIPT TUNNELING</h4>
-                    <p>Layanan penyewaan script tunneling (berbagai jenis).</p>
+                    <p>Layanan penyewaan script tunneling (buat vpn).</p>
                 </div>
             </li>
             <li class="list-item" onclick="showProduct('detail_tunneling_tambahan_a')">
@@ -1106,7 +1112,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </li>
         </ul>
 
-        <h3 class="group-title" style="color: rgb(211, 211, 238);">Paket Data (2 Items)</h3>
+        <h3 class="group-title" style="color: rgb(211, 211, 238);">Paket Akses (media sosial)</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_gmail_kemet')"> <div class="list-icon">
                     <img src="https://files.catbox.moe/iab9oo.jpg" alt="Icon Hotspot">
@@ -1118,11 +1124,11 @@ document.addEventListener("DOMContentLoaded", () => {
             </li>
             <li class="list-item" onclick="showProduct('detail_new')">
                 <div class="list-icon">
-                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Data A">
+                    <img src="https://files.catbox.moe/tslr4f.jpg" alt="Icon Data A">
                 </div>
                 <div class="list-details">
-                    <h4>PAKET DATA MURAH ALL OP (New)</h4>
-                    <p>Berbagai pilihan paket data reguler.</p>
+                    <h4>PAKET NOKOS/OTP ALL APK/NEGARA</h4>
+                    <p>Berbagai pilihan paket otp dan nokos all negara.</p>
                 </div>
             </li>
         </ul>
@@ -1302,9 +1308,20 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 
 <div class="card" id="detail_paket_bebas">
-    <img src="https://files.catbox.moe/default.jpg">
-    <h2>PAKET BEBAS</h2>
-    <p>Paket layanan digital yang fleksibel, dapat disesuaikan dengan kebutuhan Anda. Tanyakan ke admin untuk konsultasi paket.</p>
+    <img src="https://files.catbox.moe/8iazs9.jpg">
+    <h2>PAKET SEWA UNLOCKTOOL</h2>
+
+    <p style="line-height:1.6;font-size:15px;">
+        •━━━━━━━━━━━━━━━━• <br>
+        🔓 <b>SEWA UNLOCKTOOL</b> <br><br>
+
+        ✔ 6 Jam = <b>Rp 5.000</b> <br>
+        ✔ 24 Jam = <b>Rp 10.000</b> <br>
+        ✔ Full akses semua fitur <br>
+        ✔ Proses cepat – aman – bergaransi <br>
+        •━━━━━━━━━━━━━━━━•
+    </p>
+
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
@@ -1380,9 +1397,41 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 
 <div class="card" id="detail_sewa_script">
-    <img src="https://files.catbox.moe/25dmv9.jpg">
+    <img src="https://files.catbox.moe/contqh.jpg.jpg">
     <h2>SEWA SCRIPT TUNNELING</h2>
-    <p>Layanan penyewaan script tunneling (SSH, V2RAY, Trojan, dll.) siap pakai untuk kebutuhan server Anda.</p>
+
+    <p style="line-height:1.6;">
+        🚀 Full Fitur – Ringan – Stabil 24 Jam!  
+        Layanan penyewaan script tunneling siap pakai untuk kebutuhan server Anda.
+    </p>
+
+    <!-- Fitur -->
+    <h3 style="margin-top:10px;">✨ Fitur Script:</h3>
+    <ul style="margin-left:18px; line-height:1.6;">
+        <li>Support All OS VPS (Debian, Ubuntu, CentOS, dll)</li>
+        <li>SSH / OpenVPN / XRAY (Vmess, Vless, Trojan, Shadowsocks)</li>
+        <li>Auto Menu Interaktif</li>
+        <li>Integrasi Bot Telegram</li>
+        <li>Backup & Restore otomatis</li>
+        <li>Update Script sekali klik</li>
+        <li>Hemat RAM & CPU, cocok untuk semua spek VPS</li>
+    </ul>
+
+    <!-- Keunggulan -->
+    <h3 style="margin-top:10px;">💎 Keunggulan:</h3>
+    <ul style="margin-left:18px; line-height:1.6;">
+        <li>✔️ Lancar & Stabil</li>
+        <li>✔️ Auto Expired & Auto Renew akun</li>
+        <li>✔️ Full Dokumentasi + Free Support</li>
+        <li>✔️ Bisa Custom sesuai kebutuhan</li>
+    </ul>
+
+    <!-- Harga -->
+    <p style="margin-top:10px; font-weight:bold;">
+        💰 Harga Sewa: 10K / Bulan  
+        <span style="font-weight:normal;">(Gratis bantuan setting + update script)</span>
+    </p>
+
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
@@ -1403,9 +1452,26 @@ document.addEventListener("DOMContentLoaded", () => {
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
 
-<div class="card" id="detail_gmail"> <img src="https://files.catbox.moe/iab9oo.jpg">
-    <h2>PAKET GANDA GMAIL</h2>
-    <p>Nikmati Paket Hotspot Unlimited 30 Hari Tanpa FUP (sesuai S&K operator).</p>
+<div class="card" id="detail_new">
+    <img src="https://files.catbox.moe/tslr4f.jpg">
+    <h2>PAKET NOKOS / OTP ALL APK / NEGARA</h2>
+
+    <p style="line-height:1.6;margin-top:10px;">
+        Nikmati layanan Nokos & OTP untuk berbagai aplikasi dan negara.  
+        Berikut daftar lengkap paket yang tersedia:
+    </p>
+
+    <ul style="margin:10px 0 15px 15px; line-height:1.6;">
+        <li>Nokos Indonesia – Mulai Rp 4.000</li>
+        <li>Nokos Luar Negeri – Mulai Rp 10.000</li>
+        <li>OTP WhatsApp / Telegram</li>
+        <li>OTP Shopee / Tokopedia / Akulaku</li>
+        <li>OTP Gmail / Yahoo Mail</li>
+        <li>OTP Facebook / IG / TikTok</li>
+        <li>OTP Marketplace & E-Wallet Lainnya</li>
+        <li>Garansi Gagal SMS / Kode Tidak Masuk</li>
+    </ul>
+
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
