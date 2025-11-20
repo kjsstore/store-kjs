@@ -78,6 +78,7 @@
         text-shadow: 0 0 10px var(--accent);
     }
 
+    /* Tombol Tema */
     .theme-btn {
         background: var(--accent);
         border: none;
@@ -99,6 +100,107 @@
         margin-top: 70px;
     }
 
+    /* ============================
+       MODIFIKASI: HAMBURGER MENU OVERLAY
+    ============================ */
+
+    /* Ikon Menu Garis Tiga (Hamburger) */
+    .menu-toggle {
+        background: none;
+        border: none;
+        color: var(--text);
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0;
+        transition: color 0.3s;
+        line-height: 1; /* Penting agar tidak ada spasi vertikal */
+    }
+
+    /* Menu Overlay */
+    .overlay-menu {
+        position: fixed;
+        top: 60px; /* Di bawah navbar */
+        right: 0;
+        width: 280px; /* Lebar menu */
+        height: calc(100% - 60px); /* Tinggi sisa layar */
+        background: var(--card);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        transform: translateX(100%); /* Sembunyikan ke kanan */
+        transition: transform 0.4s ease-in-out;
+        padding: 20px;
+        overflow-y: auto;
+        border-left: 1px solid var(--accent);
+    }
+
+    .overlay-menu.open {
+        transform: translateX(0); /* Tampilkan */
+    }
+
+    .light .overlay-menu {
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        border-left: 1px solid var(--accent2);
+    }
+
+    /* Gaya List di Menu */
+    .menu-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-list-item a {
+        display: block;
+        padding: 12px 0;
+        margin-bottom: 5px;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: color 0.2s;
+    }
+
+    .light .menu-list-item a {
+        color: var(--text);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-list-item a:hover {
+        color: var(--accent2);
+    }
+
+    .menu-section-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent);
+        margin: 15px 0 10px 0;
+        border-bottom: 2px solid var(--accent2);
+        padding-bottom: 5px;
+    }
+
+    /* Gaya Button Testimoni */
+    .testimoni-btn {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        padding: 12px;
+        background: linear-gradient(45deg, #07a65b, #25D366); /* Warna hijau WA/Cyan */
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+        transition: transform 0.3s;
+    }
+
+    .testimoni-btn:hover {
+        transform: scale(0.98);
+    }
+    
     /* ============================
        OPENING SCREEN
     ============================ */
@@ -271,32 +373,45 @@
         display: none;
     }
 
+    /* GAYA TOMBOL TAB NEUMORPHISM */
     .tab-button {
         flex-shrink: 0;
+        border: none; 
+        background: var(--card);
         padding: 10px 18px;
-        border: 2px solid var(--accent);
         border-radius: 20px;
-        background: transparent;
         color: var(--text);
         font-weight: 600;
         cursor: pointer;
-        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
         font-size: 14px;
+
+        /* Neumorphism Shadow */
+        box-shadow: 
+            3px 3px 8px rgba(0, 0, 0, 0.3), 
+            -3px -3px 8px rgba(35, 35, 50, 0.3);
     }
 
     .tab-button.active {
+        /* Saat aktif, buat efek 'tertekan' dan beri aksen glow */
         background: linear-gradient(90deg, var(--accent), var(--accent2));
         border-color: var(--accent2);
         color: white;
-        box-shadow: 0 4px 12px rgba(143, 0, 255, 0.4);
+        box-shadow: 
+            inset 2px 2px 5px rgba(0, 0, 0, 0.4), /* Shadow dalam gelap */
+            inset -2px -2px 5px rgba(255, 255, 255, 0.1), /* Shadow dalam terang */
+            0 0 15px var(--accent2); /* Aksen Glow */
     }
 
     .tab-button:hover:not(.active) {
-        border-color: var(--accent2);
+        /* Efek tertekan saat hover non-aktif */
         color: var(--accent2);
+        box-shadow: 
+            inset 2px 2px 5px rgba(0, 0, 0, 0.4), 
+            inset -2px -2px 5px rgba(35, 35, 50, 0.2); 
+        transform: scale(0.98);
     }
 
-    /* MODIFIKASI: Hapus padding di .tab-content agar card-nya bisa full width */
     .tab-content {
         padding: 0; 
         min-height: 200px;
@@ -312,7 +427,7 @@
     }
 
     /* ============================
-       LIST GROUP (GAYA MYXL CARD)
+       LIST GROUP (NEUMORPHISM CARD)
     ============================ */
     
     /* GAYA UNTUK JUDUL GROUP */
@@ -321,7 +436,7 @@
         font-weight: 700;
         color: var(--accent2);
         margin: 25px 0 10px 0;
-        padding-left: 15px; /* Pertahankan padding untuk judul grup */
+        padding-left: 15px; 
         border-left: 4px solid var(--accent);
         text-shadow: 0 0 5px rgba(143, 0, 255, 0.3);
     }
@@ -332,56 +447,73 @@
 
     .list-group {
         list-style: none;
-        padding: 0 15px; /* Berikan padding ke list group untuk card */
+        padding: 0 15px; 
         margin: 0;
         margin-bottom: 30px; 
         
-        /* NEW: Tambahkan Grid Layout untuk tampilan 2 kolom seperti di MyXL */
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
         gap: 15px;
         
-        /* Ganti grid template columns untuk layar lebih lebar jika perlu */
         @media (min-width: 600px) {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 
+    /* GAYA LIST ITEM NEUMORPHISM */
     .list-item {
-        /* Ganti gaya list item menjadi Card Kotak */
         background: var(--card);
         padding: 15px;
-        border-radius: 12px;
-        margin-bottom: 0; /* Hapus margin bawah karena sekarang pakai gap */
+        border-radius: 15px;
         
-        display: flex; /* Ubah ke flex column */
+        display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: center; /* Konten di tengah */
+        align-items: center; 
         text-align: center;
         
         cursor: pointer;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        transition: transform 0.2s, box-shadow 0.2s;
-        height: auto; /* Biarkan tinggi menyesuaikan konten */
+        border: none;
+        box-shadow: 
+            5px 5px 15px rgba(0, 0, 0, 0.4),   
+            -5px -5px 15px rgba(35, 35, 50, 0.4); 
+        
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+    }
+
+    .list-item:hover {
+        transform: translateY(-2px); 
+        box-shadow: 
+            inset 3px 3px 8px rgba(0, 0, 0, 0.5), 
+            inset -3px -3px 8px rgba(35, 35, 50, 0.3),
+            0 0 15px var(--accent) 
     }
 
     /* Modifikasi Icon dalam List Item */
     .list-icon {
-        width: 60px; /* Ukuran lebih besar agar ikon lebih menonjol */
-        height: 60px;
-        background: linear-gradient(45deg, var(--accent), var(--accent2)); /* Beri gradien */
-        border-radius: 10px; /* Sedikit lebih kotak */
-        margin-right: 0; /* Hapus margin kanan */
-        margin-bottom: 10px; /* Tambah margin bawah */
-        box-shadow: 0 5px 15px rgba(143, 0, 255, 0.5); /* Shadow lebih kuat */
+        width: 65px; 
+        height: 65px;
+        background: linear-gradient(135deg, var(--accent), var(--accent2)); 
+        border-radius: 50%;
+        margin-right: 0;
+        margin-bottom: 15px;
+        box-shadow: 
+            0 0 15px var(--accent2), 
+            inset 0 0 5px rgba(255, 255, 255, 0.5); 
         overflow: hidden; 
+        border: 3px solid rgba(255, 255, 255, 0.1);
     }
     
     .list-icon img {
         width: 100%;
         height: 100%;
         object-fit: cover; 
+        transition: transform 0.3s;
+    }
+
+    .list-item:hover .list-icon img {
+        transform: scale(1.05) rotate(2deg); 
     }
 
     /* Modifikasi Detail Teks dalam List Item */
@@ -390,22 +522,37 @@
     }
 
     .list-details h4 {
-        margin: 5px 0 2px 0; /* Sedikit spasi di atas dan bawah judul */
-        font-size: 15px; /* Ukuran font judul sedikit dikecilkan agar muat */
+        margin: 5px 0 4px 0; 
+        font-size: 16px; 
         font-weight: 700;
-        /* Tambahkan warna ungu agar menonjol seperti di MyXL */
         color: var(--accent2); 
+        line-height: 1.2;
     }
 
     .list-details p {
         margin: 0;
-        font-size: 12px; /* Ukuran font deskripsi lebih kecil */
-        color: var(--text); /* Warna teks deskripsi diubah agar lebih kontras */
-        opacity: 0.7;
+        font-size: 11px;
+        color: var(--text); 
+        opacity: 0.8;
     }
 
     .light .list-details p {
-        color: #666;
+        color: #444;
+        opacity: 1;
+    }
+    
+    /* Penyesuaian Mode Terang untuk Neumorphism */
+    .light .list-item {
+        box-shadow: 
+            5px 5px 15px rgba(0, 0, 0, 0.15),    
+            -5px -5px 15px rgba(255, 255, 255, 0.8); 
+    }
+
+    .light .list-item:hover {
+        box-shadow: 
+            inset 3px 3px 8px rgba(0, 0, 0, 0.2), 
+            inset -3px -3px 8px rgba(255, 255, 255, 0.6), 
+            0 0 15px var(--accent) 
     }
 
     /* DETAIL CARD */
@@ -516,8 +663,51 @@
         <img src="https://files.catbox.moe/js5luv.webp" class="nav-logo">
         <div class="nav-title">KJS STORE</div>
     </div>
+    
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <button class="theme-btn" onclick="toggleTheme()">Tema</button>
+        <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button> 
+    </div>
+</div>
 
-    <button class="theme-btn" onclick="toggleTheme()">Tema</button>
+<div id="sideMenu" class="overlay-menu">
+    <div class="menu-section-title">Akses Cepat (Saluran & Grup)</div>
+    
+    <ul class="menu-list">
+        <li class="menu-list-item">
+            <a href="https://whatsapp.com/channel/0029Vb2rH11KgsNta17V643i" target="_blank">
+                Saluran Utama ⚡️
+            </a>
+        </li>
+        <li class="menu-list-item">
+            <a href="https://chat.whatsapp.com/H9KuDJvtHOF3INZlumunBt?mode=wwt" target="_blank">
+                Group Diskusi VIP 🏘️
+            </a>
+        </li>
+        <li class="menu-list-item">
+            <a href="https://chat.whatsapp.com/F9drB3A1zZr85m5FO2GxKw?mode=wwt" target="_blank">
+                Group Penjoki Prakerja 🏛️
+            </a>
+        </li>
+        <li class="menu-list-item">
+            <a href="#" onclick="alert('Ini contoh link ke halaman Pemasaran/Affiliate. Ganti # dengan link halaman.')">
+                Peluang Bisnis
+            </a>
+        </li>
+    </ul>
+
+    <div class="menu-section-title" style="margin-top: 30px;">Kontak & Testimoni</div>
+    <ul class="menu-list">
+        <li class="menu-list-item">
+            <a href="https://wa.me/6285943111681" target="_blank" style="border-bottom: none;">
+                Hubungi Admin: 6285943111681 (WA)
+            </a>
+        </li>
+    </ul>
+    
+    <a href="https://whatsapp.com/channel/0029Vb5vqYv8PgsFBpgAb91F" target="_blank" class="testimoni-btn">
+        📣 Saluran Testimoni
+    </a>
 </div>
 
 <div class="content">
@@ -529,7 +719,7 @@
 </div>
 
 <audio id="bgm" loop>
-    <source src="https://files.catbox.moe/m6v2y3.mp3" type="audio/mpeg">
+    <source src="Link musik" type="audio/mpeg">
 </audio>
 
 <script>
@@ -544,6 +734,12 @@ document.getElementById("enterBtn").onclick = () => {
 
 function toggleTheme() {
     document.body.classList.toggle("light");
+}
+
+// FUNGSI BARU UNTUK MEMBUKA/MENUTUP MENU OVERLAY
+function toggleMenu() {
+    const menu = document.getElementById("sideMenu");
+    menu.classList.toggle("open");
 }
 
 function openTab(evt, tabName) {
@@ -620,7 +816,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <div class="tab-content">
     
     <div id="jasa" class="tab-pane active">
-        <h3 class="group-title">Layanan Umum</h3>
+        <h3 class="group-title">Layanan Umum (4 Items)</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_bpjs')">
                 <div class="list-icon">
@@ -633,16 +829,34 @@ document.addEventListener("DOMContentLoaded", () => {
             </li>
             <li class="list-item" onclick="showProduct('detail_dokumen')">
                 <div class="list-icon">
-                    <img src="https://files.catbox.moe/1845h9.png" alt="Icon Dokumen">
+                    <img src="https://files.catbox.moe/no3d1x.jpg" alt="Icon Dokumen">
                 </div>
                 <div class="list-details">
                     <h4>JASA PERDOKUMENAN</h4>
                     <p>Layanan pengurusan dan pembuatan dokumen.</p>
                 </div>
             </li>
+            <li class="list-item" onclick="showProduct('detail_jasa_tambahan_a')">
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Tambahan A">
+                </div>
+                <div class="list-details">
+                    <h4>LAYANAN JASA TAMBAHAN A (New)</h4>
+                    <p>Tempat untuk layanan umum baru.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_jasa_tambahan_b')">
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Tambahan B">
+                </div>
+                <div class="list-details">
+                    <h4>LAYANAN JASA TAMBAHAN B (New)</h4>
+                    <p>Contoh layanan umum ke-4.</p>
+                </div>
+            </li>
         </ul>
 
-        <h3 class="group-title">Perangkat Elektronik</h3>
+        <h3 class="group-title">Perangkat Elektronik (3 Items)</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_bypass')">
                 <div class="list-icon">
@@ -653,11 +867,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p>Bypass dan buka kunci perangkat HP.</p>
                 </div>
             </li>
+            <li class="list-item" onclick="showProduct('detail_elektronik_tambahan_a')">
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Elektronik A">
+                </div>
+                <div class="list-details">
+                    <h4>JASA SERVIS SOFTWARE (New)</h4>
+                    <p>Perbaikan sistem operasi perangkat.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_elektronik_tambahan_b')">
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Elektronik B">
+                </div>
+                <div class="list-details">
+                    <h4>PENGHAPUSAN AKUN PERMANEN (New)</h4>
+                    <p>Layanan penghapusan data akun/cloud.</p>
+                </div>
+            </li>
         </ul>
     </div>
 
     <div id="digital" class="tab-pane">
-        <h3 class="group-title">Aplikasi & Hiburan</h3>
+        <h3 class="group-title">Aplikasi & Hiburan (4 Items)</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_apk')">
                 <div class="list-icon">
@@ -668,16 +900,43 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p>Koleksi berbagai Aplikasi Premium.</p>
                 </div>
             </li>
+            <li class="list-item" onclick="showProduct('detail_paket_bebas')">
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Paket Bebas">
+                </div>
+                <div class="list-details">
+                    <h4>PAKET BEBAS</h4>
+                    <p>Deskripsi awal yang bisa Anda sesuaikan nanti.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_digital_tambahan_a')">
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Digital A">
+                </div>
+                <div class="list-details">
+                    <h4>AKUN STREAMING PREMIUM (New)</h4>
+                    <p>Netflix, Spotify, dan layanan streaming lainnya.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_digital_tambahan_b')">
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Digital B">
+                </div>
+                <div class="list-details">
+                    <h4>JASA INSTALASI GAMES (New)</h4>
+                    <p>Instalasi game PC/Mobile premium.</p>
+                </div>
+            </li>
         </ul>
         
-        <h3 class="group-title">Layanan VPN</h3>
+        <h3 class="group-title">Layanan VPN (3 Items)</h3>
         <ul class="list-group">
-            <li class="list-item" onclick="showProduct('detail_vpn_server')">
+            <li class="list-item" onclick="showProduct('detail_root')">
                 <div class="list-icon">
                     <img src="https://files.catbox.moe/08e2f8.png" alt="Icon VPN Server">
                 </div>
                 <div class="list-details">
-                    <h4>VPN PREMIUM SERVER</h4>
+                    <h4>JASA ROOT HP</h4>
                     <p>DarkTunnel, HA Tunnel, dan Script Premium.</p>
                 </div>
             </li>
@@ -690,11 +949,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p>Fast Server, Stabil, untuk Semua Operator.</p>
                 </div>
             </li>
+            <li class="list-item" onclick="showProduct('detail_vpn_tambahan_a')">
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon VPN A">
+                </div>
+                <div class="list-details">
+                    <h4>RESELLER VPN MURAH (New)</h4>
+                    <p>Pilihan paket untuk menjadi reseller.</p>
+                </div>
+            </li>
         </ul>
     </div>
 
     <div id="jaringan" class="tab-pane">
-        <h3 class="group-title">Layanan Tunneling</h3>
+        <h3 class="group-title">Layanan Tunneling (4 Items)</h3>
         <ul class="list-group">
             <li class="list-item" onclick="showProduct('detail_list_vpn')">
                 <div class="list-icon">
@@ -714,24 +982,50 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p>Layanan penyewaan script tunneling (berbagai jenis).</p>
                 </div>
             </li>
-        </ul>
-
-        <h3 class="group-title">Paket Data</h3>
-        <ul class="list-group">
-            <li class="list-item" onclick="showProduct('detail_hotspot')">
+            <li class="list-item" onclick="showProduct('detail_tunneling_tambahan_a')">
                 <div class="list-icon">
-                    <img src="https://files.catbox.moe/25dmv9.jpg" alt="Icon Hotspot">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Tunneling A">
                 </div>
                 <div class="list-details">
-                    <h4>PAKET HOTSPOT</h4>
+                    <h4>PEMBUATAN AKUN SSH/V2RAY (New)</h4>
+                    <p>Akun tunneling pribadi server cepat.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_tunneling_tambahan_b')">
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Tunneling B">
+                </div>
+                <div class="list-details">
+                    <h4>JASA OPTIMASI SERVER (New)</h4>
+                    <p>Pengaturan dan optimalisasi server tunneling.</p>
+                </div>
+            </li>
+        </ul>
+
+        <h3 class="group-title">Paket Data (2 Items)</h3>
+        <ul class="list-group">
+            <li class="list-item" onclick="showProduct('detail_gmail_kemet')"> <div class="list-icon">
+                    <img src="https://files.catbox.moe/iab9oo.jpg" alt="Icon Hotspot">
+                </div>
+                <div class="list-details">
+                    <h4>PAKET GANDA GMAIL</h4>
                     <p>Hotspot Unlimited 30 Hari Tanpa FUP.</p>
+                </div>
+            </li>
+            <li class="list-item" onclick="showProduct('detail_new')">
+                <div class="list-icon">
+                    <img src="https://files.catbox.moe/default.jpg" alt="Icon Data A">
+                </div>
+                <div class="list-details">
+                    <h4>PAKET DATA MURAH ALL OP (New)</h4>
+                    <p>Berbagai pilihan paket data reguler.</p>
                 </div>
             </li>
         </ul>
     </div>
     
-</div>
-
+</div> 
+<div class="detail-cards-container"> 
 <div class="card" id="detail_bpjs">
     <img src="https://files.catbox.moe/fwu0ky.jpg">
     <h2>JASA BPJS KETENAGAKERJAAN</h2>
@@ -754,33 +1048,89 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 
 <div class="card" id="detail_dokumen">
-    <img src="https://files.catbox.moe/cjylw1.jpg">
+    <img src="https://files.catbox.moe/no3d1x.jpg">
     <h2>JASA PERDOKUMENAN</h2>
-    <p>Layanan jasa untuk pengurusan berbagai jenis dokumen. Silahkan hubungi admin untuk detail lebih lanjut.</p>
+    <p>Layanan jasa untuk pengurusan berbagai jenis dokumen (KTP, KK, Akta, dll). Silahkan hubungi admin untuk detail lebih lanjut.</p>
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
+
+<div class="card" id="detail_jasa_tambahan_a">
+    <img src="https://files.catbox.moe/default.jpg">
+    <h2>LAYANAN JASA TAMBAHAN A (New)</h2>
+    <p>Detail layanan umum baru yang bisa Anda sesuaikan. Contoh: Jasa Pembuatan Akun E-Wallet Premium.</p>
+    <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
+</div>
+
+<div class="card" id="detail_jasa_tambahan_b">
+    <img src="https://files.catbox.moe/default.jpg">
+    <h2>LAYANAN JASA TAMBAHAN B (New)</h2>
+    <p>Detail layanan umum ke-4. Contoh: Jasa Pembuatan SIUP/Surat Izin Usaha Mikro.</p>
+    <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
 
 <div class="card" id="detail_bypass">
     <img src="https://files.catbox.moe/qb8qag.jpg">
     <h2>JASA BAYPAS HP</h2>
-    <p>Jasa bypass/buka kunci untuk berbagai tipe HP. Hubungi kami dengan detail tipe HP Anda.</p>
+    <p>Jasa bypass/buka kunci untuk berbagai tipe HP (iCloud, FRP, dll). Hubungi kami dengan detail tipe HP Anda.</p>
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
+
+<div class="card" id="detail_elektronik_tambahan_a">
+    <img src="https://files.catbox.moe/default.jpg">
+    <h2>JASA SERVIS SOFTWARE (New)</h2>
+    <p>Melayani perbaikan sistem operasi, downgrade/upgrade OS, dan instalasi software khusus pada perangkat mobile atau PC.</p>
+    <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
+</div>
+
+<div class="card" id="detail_elektronik_tambahan_b">
+    <img src="https://files.catbox.moe/default.jpg">
+    <h2>PENGHAPUSAN AKUN PERMANEN (New)</h2>
+    <p>Layanan penghapusan data akun (seperti Mi Cloud atau Google Account) secara permanen dari server.</p>
+    <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
 
 <div class="card" id="detail_apk">
     <img src="https://files.catbox.moe/f7cdp0.jpg">
     <h2>APK PREMIUM</h2>
-    <p>Dapatkan akses ke berbagai aplikasi premium dengan harga terjangkau. (Contoh: Spotify, Netflix, dll).</p>
+    <p>Dapatkan akses ke berbagai aplikasi premium dan modifikasi dengan fitur lengkap dan bebas iklan.</p>
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
-<div class="card" id="detail_vpn_server">
+<div class="card" id="detail_paket_bebas">
+    <img src="https://files.catbox.moe/default.jpg">
+    <h2>PAKET BEBAS</h2>
+    <p>Paket layanan digital yang fleksibel, dapat disesuaikan dengan kebutuhan Anda. Tanyakan ke admin untuk konsultasi paket.</p>
+    <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
+</div>
+
+<div class="card" id="detail_digital_tambahan_a">
+    <img src="https://files.catbox.moe/default.jpg">
+    <h2>AKUN STREAMING PREMIUM (New)</h2>
+    <p>Jual beli akun premium untuk layanan streaming populer: Netflix, Spotify, Disney+, Viu, dll.</p>
+    <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
+
+<div class="card" id="detail_digital_tambahan_b">
+    <img src="https://files.catbox.moe/default.jpg">
+    <h2>JASA INSTALASI GAMES (New)</h2>
+    <p>Instalasi game PC/Mobile premium atau game modifikasi dengan data yang sudah terjamin aman.</p>
+    <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
+
+<div class="card" id="detail_root">
     <img src="https://files.catbox.moe/08e2f8.png">
-    <h2>VPN PREMIUM SERVER</h2>
-    <p>Pilihan DarkTunnel, HA Tunnel, atau Script Premium. Server cepat dan stabil.</p>
+    <h2>JASA ROOT HP</h2>
+    <p>Pilihan DarkTunnel, HA Tunnel, atau Script Premium. Layanan ini menawarkan modifikasi sistem operasi perangkat untuk akses penuh (Root).</p>
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
@@ -788,15 +1138,23 @@ document.addEventListener("DOMContentLoaded", () => {
 <div class="card" id="detail_vpn_all">
     <img src="https://files.catbox.moe/t0h8l1.png">
     <h2>VPN PREMIUM ALL OP</h2>
-    <p>VPN Premium untuk semua operator. Fast Server dan koneksi yang stabil.</p>
+    <p>VPN Premium untuk semua operator. Fast Server, stabil, dan tanpa batasan bandwidth.</p>
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
+
+<div class="card" id="detail_vpn_tambahan_a">
+    <img src="https://files.catbox.moe/default.jpg">
+    <h2>RESELLER VPN MURAH (New)</h2>
+    <p>Paket khusus untuk menjadi reseller VPN. Dapatkan harga modal termurah dan support penuh.</p>
+    <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
 </div>
 
 <div class="card" id="detail_list_vpn">
     <img src="https://files.catbox.moe/25dmv9.jpg">
     <h2>LIST PAKET VPN</h2>
-    <p>Daftar berbagai pilihan paket VPN dengan durasi dan spesifikasi server yang berbeda-beda.</p>
+    <p>Daftar lengkap berbagai pilihan paket VPN dengan durasi (harian/bulanan) dan spesifikasi server yang berbeda-beda.</p>
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
@@ -804,30 +1162,71 @@ document.addEventListener("DOMContentLoaded", () => {
 <div class="card" id="detail_sewa_script">
     <img src="https://files.catbox.moe/25dmv9.jpg">
     <h2>SEWA SCRIPT TUNNELING</h2>
-    <p>Layanan penyewaan script tunneling (berbagai jenis).</p>
+    <p>Layanan penyewaan script tunneling (SSH, V2RAY, Trojan, dll.) siap pakai untuk kebutuhan server Anda.</p>
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
-<div class="card" id="detail_hotspot">
-    <img src="https://files.catbox.moe/25dmv9.jpg">
-    <h2>PAKET HOTSPOT</h2>
-    <p>Nikmati Unlimited Hotspot selama 30 Hari Tanpa FUP!</p>
+<div class="card" id="detail_tunneling_tambahan_a">
+    <img src="https://files.catbox.moe/default.jpg">
+    <h2>PEMBUATAN AKUN SSH/V2RAY (New)</h2>
+    <p>Layanan pembuatan akun tunneling pribadi (SSH, V2RAY, Shadowsocks) dengan server cepat dan stabil.</p>
     <div class="wa-wave-icon"></div>
     <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
 </div>
 
-</div> 
+<div class="card" id="detail_tunneling_tambahan_b">
+    <img src="https://files.catbox.moe/default.jpg">
+    <h2>JASA OPTIMASI SERVER (New)</h2>
+    <p>Pengaturan, konfigurasi, dan optimalisasi server tunneling (VPS) agar performa dan kecepatan maksimal.</p>
+    <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
+</div>
+
+<div class="card" id="detail_gmail"> <img src="https://files.catbox.moe/iab9oo.jpg">
+    <h2>PAKET GANDA GMAIL</h2>
+    <p>Nikmati Paket Hotspot Unlimited 30 Hari Tanpa FUP (sesuai S&K operator).</p>
+    <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
+</div>
+
+<div class="detail-cards-container">
+    <div class="card" id="detail_gmail_kemet">
+        <img src="https://files.catbox.moe/iab9oo.jpg" alt="Layanan Gmail Massal" class="card-image">
+
+        <h2>PT GMAIL KEMET JS STORE</h2>
+
+        <p class="card-description">
+            •━━━━━━━━━━━━━━━━• <br>
+            📧 <b>ARMADA AKUN POWERED BY GOOGLE</b> 📧 <br>
+            •━━━━━━━━━━━━━━━━• <br><br>
+
+            🚀 <b>AKUISISI & SKALA</b><br>
+            ✔️ <b>Ganda Gmail Google:</b> Skala operasional Anda secara instan.<br>
+            ✔️ <b>Kapasitas Maksimal:</b> Mampu hingga <b>2.000 (2K) akun Gmail</b> sesuai kebutuhan.<br>
+            ✔️ <b>Standar Profesional:</b> Akun siap pakai (contoh: <b>KEMETJS@gmail.com</b>).<br><br>
+
+            💥 <b>Dominasi pasar tanpa hambatan.</b><br><br>
+            •━━━━━━━━━━━━━━━━•
+        </p>
+
+        <div class="wa-wave-icon"></div>
+    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
+    </div>
+</div>
+
 <div class="wave-footer">
-    <svg viewBox="0 0 1440 320">
-        <path fill="#25D366" fill-opacity="1"
-        d="M0,96L48,112C96,128,192,160,288,181.3C384,203,480,213,576,192C672,171,768,117,864,117.3C960,117,1056,171,1152,170.7C1248,171,1344,117,1392,90.7L1440,64V320H0Z"></path>
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" style="display: block; width: 100%; height: 100px;">
+        <path fill="var(--card)" fill-opacity="1" d="M0,192L48,192C96,192,192,192,288,181.3C384,171,480,149,576,160C672,171,768,213,864,229.3C960,245,1056,235,1152,213.3C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
     </svg>
+    <footer style="background: var(--card); text-align: center; padding: 20px 0;">
+        <p style="font-size: 12px; opacity: 0.6;">&copy; 2025/2026 KJS STORE. All Rights Reserved.</p>
+    </footer>
 </div>
 
-<a href="https://wa.me/6285943111681" class="wa-float" target="_blank">
-    <img src="https://files.catbox.moe/1x60ax.png">
+<a href="https://wa.me/6281234567890" target="_blank" class="wa-float">
+    <img src="https://files.catbox.moe/1x60ax.png" alt="WhatsApp Floating Button">
 </a>
 
-</body>
+</div> </body>
 </html>
