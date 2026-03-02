@@ -1,1697 +1,725 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KJS STORE – Produk</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"> 
-
-<style>
-    :root {
-        --bg: #0a0a0f;
-        --card: #141420;
-        --text: #ffffff;
-        --accent: #f0ecf3;
-        --accent2: #eee8f0;
-    }
-
-    /* MODE TERANG */
-   .light {
-        --bg: #f4f4f4;
-        --card: #ffffff;
-        --text: #0a0a0f;
-        --accent: #8f00ff;
-        --accent2: #0d0c0e;
-    }
-
-    body {
-        margin: 0;
-        background: var(--bg);
-        font-family: 'Poppins', sans-serif;
-        color: var(--text);
-        overflow-x: hidden;
-        transition: background .3s, color .3s;
-    }
-
-    /* ============================
-       NAVBAR ALA APLIKASI
-    ============================ */
-    .app-navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 60px;
-        background: rgba(20,20,35,0.88);
-        backdrop-filter: blur(10px);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 15px;
-        z-index: 999;
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .light .app-navbar {
-        background: rgba(255,255,255,0.75);
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .nav-left {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .nav-logo {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        object-fit: cover;
-        filter: drop-shadow(0 0 5px var(--accent));
-    }
-
-    .nav-title {
-        font-size: 18px;
-        font-weight: bold;
-        letter-spacing: 0.5px;
-        text-shadow: 0 0 10px var(--accent);
-    }
-
-    /* Tombol 🌒 */
-    .theme-btn {
-        background: var(--accent);
-        border: none;
-        padding: 8px 14px;
-        border-radius: 10px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: .3s;
-        font-size: 13px;
-        box-shadow: 0 0 10px var(--accent2);
-    }
-
-    .theme-btn:hover {
-        transform: scale(1.05);
-    }
-
-    .content {
-        margin-top: 70px;
-    }
-
-    /* ============================
-       MODIFIKASI: HAMBURGER MENU OVERLAY
-    ============================ */
-
-    /* Ikon Menu Garis Tiga (Hamburger) */
-    .menu-toggle {
-        background: none;
-        border: none;
-        color: var(--text);
-        font-size: 24px;
-        cursor: pointer;
-        padding: 0;
-        transition: color 0.3s;
-        line-height: 1; /* Penting agar tidak ada spasi vertikal */
-    }
-
-    /* Menu Overlay */
-    .overlay-menu {
-        position: fixed;
-        top: 60px; /* Di bawah navbar */
-        right: 0;
-        width: 280px; /* Lebar menu */
-        height: calc(100% - 60px); /* Tinggi sisa layar */
-        background: var(--card);
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
-        z-index: 998;
-        transform: translateX(100%); /* Sembunyikan ke kanan */
-        transition: transform 0.4s ease-in-out;
-        padding: 20px;
-        overflow-y: auto;
-        border-left: 1px solid var(--accent);
-    }
-
-    .overlay-menu.open {
-        transform: translateX(0); /* Tampilkan */
-    }
-
-    .light .overlay-menu {
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-        border-left: 1px solid var(--accent2);
-    }
-
-    /* Gaya List di Menu */
-    .menu-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .menu-list-item a {
-        display: block;
-        padding: 12px 0;
-        margin-bottom: 5px;
-        color: var(--text);
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        transition: color 0.2s;
-    }
-
-    .light .menu-list-item a {
-        color: var(--text);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    }
-
-    .menu-list-item a:hover {
-        color: var(--accent2);
-    }
-
-    .menu-section-title {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--accent);
-        margin: 15px 0 10px 0;
-        border-bottom: 2px solid var(--accent2);
-        padding-bottom: 5px;
-    }
-
-    /* Gaya Button Testimoni */
-    .testimoni-btn {
-        display: block;
-        width: 100%;
-        margin-top: 20px;
-        padding: 12px;
-        background: linear-gradient(45deg, #07a65b, #25D366); /* Warna hijau WA/Cyan */
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
-        transition: transform 0.3s;
-    }
-
-    .testimoni-btn:hover {
-        transform: scale(0.98);
-    }
-    
-    /* ============================
-       OPENING SCREEN
-    ============================ */
-    #opening {
-        position: fixed;
-        inset: 0;
-        background: #000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        z-index: 9999;
-        animation: fadeIn 1s ease;
-        overflow: hidden;
-    }
-
-    .opening-bg-logo {
-        position: absolute;
-        width: 85%;
-        opacity: 0.12;
-        filter: blur(2px) drop-shadow(0 0 25px var(--accent));
-        animation: zoomIn 6s ease forwards;
-    }
-
-    @keyframes zoomIn {
-        from { transform: scale(1); opacity: 0.1; }
-        to { transform: scale(1.25); opacity: 0.15; }
-    }
-
-    .opening-logo {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        object-fit: cover;
-        filter: drop-shadow(0 0 20px var(--accent));
-        animation: pulse 2s infinite alternate;
-        z-index: 5;
-    }
-
-    @keyframes pulse {
-        from { transform: scale(1); }
-        to { transform: scale(1.08); }
-    }
-
-    #enterBtn {
-        margin-top: 30px;
-        padding: 12px 26px;
-        font-size: 18px;
-        background: linear-gradient(45deg,var(--accent),var(--accent2));
-        border: none;
-        border-radius: 12px;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        animation: glow 1.5s infinite alternate;
-        z-index: 5;
-    }
-
-    @keyframes glow {
-        from { box-shadow: 0 0 10px var(--accent); }
-        to   { box-shadow: 0 0 20px var(--accent2); }
-    }
-
-    @keyframes fadeOut {
-        from { opacity: 1; }
-        to { opacity: 0; visibility: hidden; }
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-
-    /* ============================
-       HERO
-    ============================ */
-    .hero {
-        background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
-        height: 330px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .hero::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(0,0,0,0.55);
-    }
-
-    .hero-content {
-        position: relative;
-        z-index: 10;
-    }
-
-    /* ============================
-       UNICODE ART FLOATING
-    ============================ */
-    .floating-art {
-        color: #ffffff; /* Warna putih murni */
-        font-size: 8px; 
-        line-height: 1.0; 
-        margin: 0 auto 10px auto; 
-        text-shadow: 0 0 15px var(--accent2); 
-        white-space: pre; 
-        
-        /* Animasi Floating */
-        animation: floatArt 4s ease-in-out infinite alternate;
-    }
-
-    /* Keyframes untuk animasi mengambang */
-    @keyframes floatArt {
-        0% {
-            transform: translateY(0);
-            opacity: 0.9;
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RUANG DATER SE INDONESIA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --primary: #22c55e; 
+            --primary-glow: rgba(34, 197, 94, 0.4);
+            --purple: #bc6ff1; 
+            --red: #ff4747; 
+            --card-bg: rgba(5, 12, 5, 0.96); 
+            --accent: #0ea5e9; 
+            --wa-green: #25D366;
+            --gold: #FFD700;
+            --gold-glow: rgba(255, 215, 0, 0.3);
         }
-        100% {
-            transform: translateY(-8px); /* Bergerak naik 8px */
-            opacity: 1;
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0;
+            padding-bottom: 50px;
+            color: #e0f2e0;
+            background: #000;
+            overflow-x: hidden;
         }
-    }
 
-
-    .hero h1 {
-        font-size: 32px;
-        font-weight: bold;
-        text-shadow: 0 0 12px var(--accent);
-    }
-
-    .running-text {
-        display: inline-block;
-        white-space: nowrap;
-        animation: moveText 12s linear infinite;
-    }
-
-    @keyframes moveText {
-        from { transform: translateX(100%); }
-        to { transform: translateX(-100%); }
-    }
-
-
-    /* ============================
-       NAVIGASI TAB (Ala MyXL)
-    ============================ */
-    .category-title {
-        text-align: center;
-        font-size: 22px;
-        font-weight: 600;
-        color: var(--accent2);
-        margin-top: 35px;
-        margin-bottom: 15px;
-    }
-    
-    .tab-nav {
-        display: flex;
-        overflow-x: auto; 
-        padding: 0 15px;
-        margin-bottom: 20px;
-        gap: 10px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-    }
-
-    .tab-nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* GAYA TOMBOL TAB NEUMORPHISM */
-    .tab-button {
-        flex-shrink: 0;
-        border: none; 
-        background: var(--card);
-        padding: 10px 18px;
-        border-radius: 20px;
-        color: var(--text);
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-        font-size: 14px;
-
-        /* Neumorphism Shadow */
-        box-shadow: 
-            3px 3px 8px rgba(0, 0, 0, 0.3), 
-            -3px -3px 8px rgba(35, 35, 50, 0.3);
-    }
-
-    .tab-button.active {
-        /* Saat aktif, buat efek 'tertekan' dan beri aksen glow */
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-        border-color: var(--accent2);
-        color: white;
-        box-shadow: 
-            inset 2px 2px 5px rgba(0, 0, 0, 0.4), /* Shadow dalam gelap */
-            inset -2px -2px 5px rgba(255, 255, 255, 0.1), /* Shadow dalam terang */
-            0 0 15px var(--accent2); /* Aksen Glow */
-    }
-
-    .tab-button:hover:not(.active) {
-        /* Efek tertekan saat hover non-aktif */
-        color: var(--accent2);
-        box-shadow: 
-            inset 2px 2px 5px rgba(0, 0, 0, 0.4), 
-            inset -2px -2px 5px rgba(35, 35, 50, 0.2); 
-        transform: scale(0.98);
-    }
-
-    .tab-content {
-        padding: 0; 
-        min-height: 200px;
-    }
-
-    .tab-pane {
-        display: none;
-        animation: fadeIn 0.5s;
-    }
-
-    .tab-pane.active {
-        display: block;
-    }
-
-    /* ============================
-       LIST GROUP (NEUMORPHISM CARD)
-    ============================ */
-    
-    /* GAYA UNTUK JUDUL GROUP */
-    .group-title {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--accent2);
-        margin: 25px 0 10px 0;
-        padding-left: 15px; 
-        border-left: 4px solid var(--accent);
-        text-shadow: 0 0 5px rgba(143, 0, 255, 0.3);
-    }
-
-    .light .group-title {
-        border-left-color: var(--accent);
-    }
-
-    .list-group {
-        list-style: none;
-        padding: 0 15px; 
-        margin: 0;
-        margin-bottom: 30px; 
-        
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
-        gap: 15px;
-        
-        @media (min-width: 600px) {
-            grid-template-columns: repeat(3, 1fr);
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 4px;
+            z-index: 999;
+            pointer-events: none;
         }
-    }
-
-    /* GAYA LIST ITEM NEUMORPHISM */
-    .list-item {
-        background: var(--card);
-        padding: 15px;
-        border-radius: 15px;
         
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center; 
-        text-align: center;
+        header { 
+            background: rgba(0, 5, 0, 0.95); 
+            padding: 0.8rem 1rem; 
+            border-bottom: 2px solid var(--gold); 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            box-shadow: 0 0 20px var(--gold-glow);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-area img {
+            height: 40px;
+            width: auto;
+            border-radius: 8px;
+            border: 1px solid var(--gold);
+        }
+        .header-title {
+            font-weight: 800; 
+            color: var(--gold); 
+            font-size: 1.2rem; 
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+        .header-title i {
+            margin-right: 6px;
+            color: var(--primary);
+        }
+
+        .music-button {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(5px);
+        }
+        .music-button:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        .admin-button {
+            background: rgba(188, 111, 241, 0.15);
+            border: 1px solid var(--purple);
+            color: var(--purple);
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(5px);
+        }
+        .admin-button:hover {
+            background: var(--purple);
+            color: #000;
+            box-shadow: 0 0 15px var(--purple);
+        }
+
+        .container { max-width: 600px; margin: 1rem auto; padding: 0 12px; }
+
+        .premium-card { 
+            background: var(--card-bg); 
+            border: 1px solid rgba(255, 215, 0, 0.2); 
+            border-radius: 10px; 
+            padding: 1.2rem; 
+            margin-bottom: 15px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
         
-        cursor: pointer;
-        border: none;
-        box-shadow: 
-            5px 5px 15px rgba(0, 0, 0, 0.4),   
-            -5px -5px 15px rgba(35, 35, 50, 0.4); 
+        .search-box {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            background: rgba(0,0,0,0.7);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono';
+            font-size: 14px;
+            outline: none;
+        }
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+        .search-box button {
+            background: var(--gold);
+            border: none;
+            color: #000;
+            padding: 0 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+        }
+        .search-box button:hover {
+            background: #e6c200;
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        /* Admin panel */
+        #admin-panel {
+            display: none;
+        }
+
+        .upload-zone { 
+            border: 2px dashed var(--purple); 
+            padding: 1.2rem; 
+            text-align: center; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            background: rgba(188, 111, 241, 0.03); 
+            transition: 0.3s;
+        }
+
+        .btn-main { 
+            width: 100%; 
+            padding: 12px;
+            border: none; 
+            border-radius: 6px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            font-family: 'JetBrains Mono'; 
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-top: 8px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            transition: 0.2s;
+        }
+
+        .btn-save { 
+            background: var(--primary); 
+            color: #000; 
+            display: none; 
+            animation: pulse 1.5s infinite; 
+        }
         
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        height: 100%;
-    }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
 
-    .list-item:hover {
-        transform: translateY(-2px); 
-        box-shadow: 
-            inset 3px 3px 8px rgba(0, 0, 0, 0.5), 
-            inset -3px -3px 8px rgba(35, 35, 50, 0.3),
-            0 0 15px var(--accent) 
-    }
+        .file-manager-title { font-size: 11px; color: var(--accent); margin: 10px 0 8px; font-weight: bold; border-left: 3px solid var(--accent); padding-left: 8px; }
+        .file-list { background: rgba(0, 20, 5, 0.4); border-radius: 6px; border: 1px solid #1a3321; max-height: 200px; overflow-y: auto; padding: 8px; }
+        .file-item { display: flex; justify-content: space-between; align-items: center; font-size: 10px; padding: 6px; border-bottom: 1px solid #1a3321; }
 
-    /* Modifikasi Icon dalam List Item */
-    .list-icon {
-        width: 65px; 
-        height: 65px;
-        background: linear-gradient(135deg, var(--accent), var(--accent2)); 
-        border-radius: 50%;
-        margin-right: 0;
-        margin-bottom: 15px;
-        box-shadow: 
-            0 0 15px var(--accent2), 
-            inset 0 0 5px rgba(255, 255, 255, 0.5); 
-        overflow: hidden; 
-        border: 3px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .list-icon img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; 
-        transition: transform 0.3s;
-    }
+        .card-result { background: #051008; border-radius: 8px; margin-bottom: 12px; border: 1px solid #1a3321; overflow: hidden; }
+        .result-header { background: rgba(255, 215, 0, 0.1); padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gold); }
+        
+        pre { background: #000; padding: 12px; color: #adffad; font-size: 11px; white-space: pre-wrap; font-family: 'JetBrains Mono'; border-top: 1px solid #1a3321; margin: 0; }
+        
+        .mini-btn { padding: 5px 10px; font-size: 9px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
+        .copy-btn { background: var(--primary); color: #000; }
+        .del-btn { background: var(--red); color: #fff; }
+        .wa-btn { 
+            background: var(--wa-green); 
+            color: #000; 
+            padding: 6px 12px; 
+            border-radius: 20px; 
+            font-size: 10px; 
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .db-info { font-size: 10px; color: var(--primary); text-align: center; margin-top: 10px; letter-spacing: 1px; }
 
-    .list-item:hover .list-icon img {
-        transform: scale(1.05) rotate(2deg); 
-    }
+        .rd-modal-box { width: 85%; max-width: 320px; background: #050a05; border: 1px solid var(--primary); border-radius: 10px; padding: 20px; }
 
-    /* Modifikasi Detail Teks dalam List Item */
-    .list-details {
-        width: 100%;
-    }
+        .action-group {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
 
-    .list-details h4 {
-        margin: 5px 0 4px 0; 
-        font-size: 16px; 
-        font-weight: 700;
-        color: var(--accent2); 
-        line-height: 1.2;
-    }
+        .reset-btn {
+            background: transparent;
+            border: 1px solid var(--red);
+            color: var(--red);
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+        .reset-btn:hover {
+            background: var(--red);
+            color: #000;
+        }
 
-    .list-details p {
-        margin: 0;
-        font-size: 11px;
-        color: var(--text); 
-        opacity: 0.8;
-    }
-
-    .light .list-details p {
-        color: #444;
-        opacity: 1;
-    }
-    
-    /* Penyesuaian Mode Terang untuk Neumorphism */
-    .light .list-item {
-        box-shadow: 
-            5px 5px 15px rgba(0, 0, 0, 0.15),    
-            -5px -5px 15px rgba(255, 255, 255, 0.8); 
-    }
-
-    .light .list-item:hover {
-        box-shadow: 
-            inset 3px 3px 8px rgba(0, 0, 0, 0.2), 
-            inset -3px -3px 8px rgba(255, 255, 255, 0.6), 
-            0 0 15px var(--accent) 
-    }
-
-    /* DETAIL CARD */
-    .card {
-        display: none;
-        background: var(--card);
-        margin: 20px auto;
-        width: 90%;
-        max-width: 480px;
-        padding: 20px;
-        border-radius: 14px;
-        border: 1px solid var(--accent);
-        animation: fadeIn .4s;
-        text-align: center;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    }
-
-    .card img {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%; 
-        object-fit: cover;
-        filter: drop-shadow(0 0 10px var(--accent));
-        margin-bottom: 15px;
-    }
-
-    /* IKON GELOMBANG WHATSAPP */
-    .wa-wave-icon {
-        display: inline-block;
-        width: 35px;
-        height: 35px;
-        margin-top: 10px;
-        background: url('https://files.catbox.moe/1x60ax.png') no-repeat center/contain; /* Gambar ikon WA */
-        filter: drop-shadow(0 0 5px #25D366);
-        animation: waveBounce 1s infinite alternate;
-    }
-
-    @keyframes waveBounce {
-        from { transform: translateY(0) scale(1); opacity: 1; }
-        to { transform: translateY(-5px) scale(1.1); opacity: 0.8; }
-    }
-
-
-    .whatsapp-btn {
-        display: inline-block;
-        margin-top: 12px;
-        padding: 12px 24px;
-        background: #25D366;
-        color: white;
-        text-decoration: none;
-        border-radius: 10px;
-        font-size: 17px;
-        font-weight: bold;
-        transition: .3s;
-        box-shadow: 0 4px 10px rgba(37, 211, 102, 0.5);
-    }
-
-    .whatsapp-btn:hover {
-        background: #128C7E;
-        transform: scale(1.05);
-    }
-
-    /* ============================
-       WAVY FOOTER
-    ============================ */
-    .wave-footer {
-        margin-top: 60px;
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .wave-footer svg {
-        width: 100%;
-        display: block;
-    }
-
-    /* ============================
-       FLOATING WHATSAPP BUTTON
-    ============================ */
-    .wa-float {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        z-index: 9999;
-        width: 65px;
-        height: 65px;
-    }
-
-    .wa-float img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        filter: drop-shadow(0 0 10px #25D366);
-        animation: pop 1.2s infinite alternate;
-    }
-
-    @keyframes pop {
-        from { transform: scale(1); }
-        to { transform: scale(1.12); }
-    }
-
-/* ============================
-       CONTACT & SUPPORT SECTION (BARU)
-    ============================ */
-    .contact-section {
-        background: var(--card); /* Menggunakan warna card agar menyatu */
-        padding: 30px 20px;
-        margin-top: 50px;
-        border-top: 5px solid var(--accent); /* Garis aksen di atas */
-        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .light .contact-section {
-        border-top: 5px solid var(--accent2);
-        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.08);
-    }
-
-    .contact-logo-group {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .contact-logo {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
-
-    .contact-title {
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--accent);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .contact-desc {
-        font-size: 14px;
-        line-height: 1.6;
-        opacity: 0.9;
-        margin-bottom: 30px;
-    }
-
-    .contact-details h3 {
-        font-size: 16px;
-        font-weight: 700;
-        color: var(--text);
-        opacity: 0.9;
-        margin: 0 0 15px 0;
-    }
-
-    .contact-item {
-        display: flex;
-        align-items: center;
-        background: var(--bg); /* Latar belakang lebih gelap dari card */
-        padding: 12px 15px;
-        border-radius: 10px;
-        margin-bottom: 15px;
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-
-    .light .contact-item {
-        background: #f0f0f0;
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .contact-icon {
-        font-size: 20px;
-        color: var(--accent2);
-        margin-right: 15px;
-        min-width: 20px;
-        text-align: center;
-    }
-
-    .contact-info strong {
-        display: block;
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--accent);
-    }
-
-    .contact-info span {
-        font-size: 15px;
-        font-weight: 500;
-        opacity: 0.9;
-    }
-
-    .contact-info a {
-        color: inherit;
-        text-decoration: none;
-    }
-
-    .copyright {
-        text-align: center;
-        font-size: 12px;
-        opacity: 0.6;
-        margin-top: 30px;
-    }
-
-    .copyright a {
-        color: inherit;
-        margin: 0 5px;
-        text-decoration: underline;
-    }
-</style>
+        .store-description {
+            text-align: center;
+            font-size: 11px;
+            color: #aaa;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--gold);
+            padding-bottom: 10px;
+        }
+        .store-description i {
+            color: var(--gold);
+        }
+        
+        @keyframes blinker {
+            50% { opacity: 0.5; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="app-navbar">
-    <div class="nav-left">
-        <img src="https://files.catbox.moe/js5luv.webp" class="nav-logo">
-        <div class="nav-title">KJS STORE</div>
+<audio id="bgMusic" loop>
+    <source src="musik.mp3" type="audio/mpeg">
+</audio>
+
+<header>
+    <div class="logo-area">
+        <img src="logo.png" alt="Logo" onerror="this.style.display='none'"> <!-- Jika logo tidak ada, tidak muncul -->
+        <span class="header-title"><i class="fas fa-store"></i> RUANG DATER SE INDONESIA</span>
     </div>
-    
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <button class="theme-btn" onclick="toggleTheme()">🌓</button>
-        <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button> 
+    <div style="display: flex; gap: 8px;">
+        <div class="music-button" onclick="toggleMusic()" id="musicBtn">
+            <i class="fas fa-volume-up"></i> SOUND
+        </div>
+        <div class="admin-button" onclick="adminLogin()">
+            <i class="fas fa-crown"></i> ADMIN
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <!-- Deskripsi Store untuk Pembeli -->
+    <div class="store-description">
+        <i class="fas fa-map-marked-alt"></i> Cari data kependudukan berdasarkan nama atau wilayah (desa/kecamatan/kabupaten). 
+        Ketik kata kunci, temukan data, dan klik <span style="color:var(--wa-green); font-weight:bold;">BELI</span> untuk menghubungi admin via WhatsApp.
+    </div>
+
+    <!-- Panel admin (tersembunyi, hanya muncul setelah login) -->
+    <div id="admin-panel" class="premium-card">
+        <div style="font-size: 10px; color: var(--accent); margin-bottom: 8px;">⬇️ UPLOAD DATABASE (TXT)</div>
+        <div class="upload-zone" onclick="document.getElementById('file-input').click()">
+            <i class="fas fa-cloud-upload-alt" style="font-size: 24px; color: var(--purple); margin-bottom: 8px;"></i>
+            <p style="margin: 0; font-size: 11px; font-weight: bold;">IMPORT TXT DATABASE</p>
+            <span id="file-name" style="font-size: 9px; opacity: 0.5;">Tap to select file</span>
+            <input type="file" id="file-input" hidden accept=".txt">
+        </div>
+
+        <div id="preview-container" style="display:none; margin-top:10px; border: 1px solid var(--accent); border-radius:5px; overflow:hidden;">
+            <div style="background:var(--accent); color:#000; font-size:9px; padding:4px; text-align:center; font-weight:bold;">PREVIEW SCAN</div>
+            <div id="preview-list" style="max-height:100px; overflow-y:auto; font-size:10px; padding:8px; background:#000;"></div>
+        </div>
+
+        <button id="btn-process" class="btn-main" style="background: #111; color: var(--primary); border: 1px solid var(--primary);">
+            <i class="fas fa-sync-alt"></i> SCAN & VALIDATE
+        </button>
+        <button id="btn-confirm-save" class="btn-main btn-save">
+            <i class="fas fa-database"></i> INJECT TO CORE
+        </button>
+        
+        <button onclick="toggleFilePanel()" class="btn-main" style="background:transparent; border:1px solid var(--accent); color:var(--accent);">
+            <i class="fas fa-folder-open"></i> STORAGE MANAGER
+        </button>
+
+        <div id="file-panel" style="display:none; margin-top:10px;">
+            <div class="file-manager-title">LOCAL_FILES</div>
+            <div class="file-list" id="main-file-list"></div>
+        </div>
+
+        <!-- Tombol reset hanya untuk admin -->
+        <button onclick="clearAllData()" class="btn-main reset-btn">
+            <i class="fas fa-trash-alt"></i> SYSTEM FACTORY RESET
+        </button>
+
+        <div class="db-info" id="db-count"></div>
+    </div>
+
+    <!-- Panel pencarian satu kolom (untuk semua pengguna) -->
+    <div class="premium-card">
+        <div style="font-size: 10px; color: var(--gold); margin-bottom: 10px; font-weight: bold; text-align: center;">
+            <i class="fas fa-search"></i> PENCARIAN DATA
+        </div>
+        <div class="search-box">
+            <input type="text" id="search-free" placeholder="Contoh: Garut, Budi, Sukajadi, 12345..." autocomplete="off">
+            <button onclick="searchData()"><i class="fas fa-search"></i> CARI</button>
+        </div>
+        <div style="font-size: 9px; color: #aaa; text-align: center;">Ketik nama, desa, kecamatan, kabupaten, atau NIK</div>
+    </div>
+
+    <!-- Container hasil pencarian -->
+    <div id="hasil-container"></div>
+</div>
+
+<!-- Modal Login Admin -->
+<div id="adminModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); display:none; align-items:center; justify-content:center; z-index:2000; backdrop-filter:blur(6px);">
+    <div style="width:90%; max-width:350px; background:#050a05; border:1px solid var(--purple); border-radius:12px; padding:25px; box-shadow:0 0 25px rgba(188,111,241,0.3);">
+        <div style="text-align:center; color:var(--purple); font-weight:bold; margin-bottom:15px;">
+            <i class="fas fa-crown"></i> ADMIN ACCESS
+        </div>
+        <input type="password" id="adminPassword" placeholder="Masukkan password..."
+            style="width:100%; padding:12px; background:#000; border:1px solid var(--purple); color:var(--purple); border-radius:8px; font-family:'JetBrains Mono'; outline:none; margin-bottom:15px;">
+        <div style="display:flex; gap:10px;">
+            <button onclick="closeAdminModal()" 
+                style="flex:1; padding:10px; border:none; border-radius:8px; background:#111; color:#aaa; cursor:pointer;">
+                CANCEL
+            </button>
+            <button onclick="checkAdminLogin()" 
+                style="flex:1; padding:10px; border:none; border-radius:8px; background:linear-gradient(45deg, var(--purple), var(--primary)); color:#000; cursor:pointer;">
+                LOGIN
+            </button>
+        </div>
     </div>
 </div>
 
-<div id="sideMenu" class="overlay-menu">
-    <div class="menu-section-title">Akses Cepat (Saluran & Grup)</div>
-    
-    <ul class="menu-list">
-        <li class="menu-list-item">
-            <a href="https://whatsapp.com/channel/0029Vb2rH11KgsNta17V643i" target="_blank">
-                Saluran Utama ⚡️
-            </a>
-        </li>
-        <li class="menu-list-item">
-            <a href="https://chat.whatsapp.com/H9KuDJvtHOF3INZlumunBt?mode=wwt" target="_blank">
-                Group Diskusi VIP 🏘️
-            </a>
-        </li>
-        <li class="menu-list-item">
-            <a href="https://chat.whatsapp.com/F9drB3A1zZr85m5FO2GxKw?mode=wwt" target="_blank">
-                Group Penjoki Prakerja 🏛️
-            </a>
-        </li>
-        <li class="menu-list-item">
-            <a href="#" onclick="daftarReseller()">
-                Daftar Reseller 📝
-            </a>
-        </li>
-    </ul>
+<!-- Modal Konfirmasi Umum -->
+<div id="rdConfirm" style="position: fixed; inset: 0; background: rgba(0,0,0,0.8); display:none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px);">
+    <div class="rd-modal-box">
+        <div style="color:var(--primary); font-weight:bold; margin-bottom:10px; text-align:center;">SYSTEM_ALERT</div>
+        <div id="rdConfirmText" style="font-size:12px; text-align:center; margin-bottom:20px;"></div>
+        <div style="display:flex; gap:10px;">
+            <button class="mini-btn del-btn" style="flex:1; padding:10px;" onclick="closeRDConfirm()">CANCEL</button>
+            <button class="mini-btn copy-btn" style="flex:1; padding:10px;" id="rdConfirmOk">PROCEED</button>
+        </div>
+    </div>
+</div>
 
 <script>
-    function daftarReseller() {
-        // !!! HARAP GANTI DENGAN NOMOR WHATSAPP ANDA (Contoh: 628123456789) !!!
-        const noWaAnda = '6285943111681'; 
+    // Nomor WhatsApp admin (ganti dengan nomor Anda, format internasional tanpa +)
+    const ADMIN_WA = "6281234567890"; // Contoh: 6281234567890
 
-        // 1. Meminta pengguna memasukkan nama
-        const nama = prompt('Mohon masukkan Nama Anda untuk mendaftar Reseller:');
+    // Data utama
+    let localDatabase = JSON.parse(localStorage.getItem('daterDB_V32')) || [];
+    let tempStorage = [];
+    let currentFileName = "";
 
-        // 2. Memastikan pengguna memasukkan nama
-        if (nama) {
-            // 3. Membuat pesan WhatsApp otomatis
-            const pesanWa = encodeURIComponent(`Halo, saya *${nama}* tertarik untuk mendaftar sebagai Reseller. Mohon infonya lebih lanjut.`);
+    // Fungsi admin login modal
+    function adminLogin() {
+        document.getElementById("adminModal").style.display = "flex";
+        document.getElementById("adminPassword").value = "";
+        document.getElementById("adminPassword").focus();
+    }
 
-            // 4. Membuat URL WhatsApp
-            const urlWa = `https://wa.me/${noWaAnda}?text=${pesanWa}`;
+    function closeAdminModal() {
+        document.getElementById("adminModal").style.display = "none";
+    }
 
-            // 5. Mengarahkan ke WhatsApp
-            window.location.href = urlWa;
-        } else if (nama === '') {
-            alert('Pendaftaran Reseller dibatalkan. Nama tidak boleh kosong.');
+    function checkAdminLogin() {
+        const pwd = document.getElementById("adminPassword").value;
+        if (pwd === "dater2026") { // Ganti password sesuai keinginan
+            document.getElementById('admin-panel').style.display = 'block';
+            closeAdminModal();
         } else {
-            alert('Pendaftaran Reseller dibatalkan.');
+            alert("Password salah!");
+        }
+    }
+
+    // Update tampilan file manager dan info jumlah record
+    function updateSystemUI() {
+        const count = localDatabase.length;
+        document.getElementById('db-count').innerHTML = `CORE_DATABASE: <span style="color:#fff">${count}</span> RECORDS`;
+
+        const container = document.getElementById('main-file-list');
+        if (!container) return;
+        container.innerHTML = "";
+        const files = [...new Set(localDatabase.map(d => d.sourceFile))];
+        if (files.length === 0) {
+            container.innerHTML = "<div style='text-align:center; opacity:0.3; padding: 10px; font-size:9px;'>No files saved.</div>";
+            return;
+        }
+        files.forEach(fileName => {
+            const dataCount = localDatabase.filter(d => d.sourceFile === fileName).length;
+            const item = document.createElement('div');
+            item.className = 'file-item';
+            item.innerHTML = `
+                <span><i class="fas fa-file-code" style="color:var(--primary)"></i> ${fileName} (${dataCount})</span>
+                <div style="display:flex; gap:4px;">
+                    <button class="mini-btn copy-btn" style="background:#111; color:var(--primary); border:1px solid var(--primary)" onclick="viewFile('${fileName}')">VIEW</button>
+                    <button class="mini-btn del-btn" onclick="deleteByFile('${fileName}')"><i class="fas fa-times"></i></button>
+                </div>
+            `;
+            container.appendChild(item);
+        });
+    }
+
+    // Handle upload file
+    document.getElementById('file-input').addEventListener('change', (e) => {
+        if(e.target.files[0]) {
+            currentFileName = e.target.files[0].name;
+            document.getElementById('file-name').innerText = currentFileName;
+        }
+    });
+
+    document.getElementById('btn-process').addEventListener('click', () => {
+        const file = document.getElementById('file-input').files[0];
+        if(!file) return alert("Select .txt file!");
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const rawText = e.target.result;
+            const blocks = rawText.split(/🛑══BERHASIL══🛑/g);
+            const previewList = document.getElementById('preview-list');
+            previewList.innerHTML = "";
+            tempStorage = [];
+            blocks.forEach((block, index) => {
+                const text = block.trim();
+                if(text.length < 10) return;
+                
+                // Ekstraksi data
+                const nikMatch = text.match(/NIK\s*[:\-\s]*(\d+)/i) || text.match(/⚠️(\d+)/);
+                const kpjMatch = text.match(/KPJ\s*[:\-\s]*(\d+)/i);
+                const namaMatch = text.match(/Nama\s*[:\-\s]*([A-Za-z\s\.]+)/i) || text.match(/➬\s*:\s*([A-Za-z\s\.]+)/i);
+                
+                // Ekstraksi alamat dan wilayah
+                const alamatMatch = text.match(/Alamat\s*[:\-\s]*(.+)/i);
+                let kelurahan = "", kecamatan = "", kabkota = "";
+                if (alamatMatch) {
+                    const alamat = alamatMatch[1];
+                    const kelMatch = alamat.match(/Kelurahan\s+(\w+(?:\s+\w+)?)/i);
+                    const kecMatch = alamat.match(/Kecamatan\s+(\w+(?:\s+\w+)?)/i);
+                    const kabMatch = alamat.match(/(Kab\.?|Kota)\s+(\w+(?:\s+\w+)?)/i);
+                    kelurahan = kelMatch ? kelMatch[1].trim() : "";
+                    kecamatan = kecMatch ? kecMatch[1].trim() : "";
+                    kabkota = kabMatch ? kabMatch[2].trim() : "";
+                }
+
+                const item = {
+                    id: Date.now() + index + Math.random(),
+                    nik: nikMatch ? nikMatch[1] : "N/A",
+                    kpj: kpjMatch ? kpjMatch[1] : "N/A",
+                    nama: namaMatch ? namaMatch[1].trim().toLowerCase() : "unknown",
+                    kelurahan: kelurahan.toLowerCase(),
+                    kecamatan: kecamatan.toLowerCase(),
+                    kabkota: kabkota.toLowerCase(),
+                    raw: text,
+                    sourceFile: currentFileName
+                };
+                
+                // Cek duplikat sederhana berdasarkan NIK atau raw
+                const isDup = localDatabase.some(d => (item.nik !== "N/A" && d.nik === item.nik) || d.raw === item.raw);
+                if(!isDup) {
+                    tempStorage.push(item);
+                    const div = document.createElement('div');
+                    div.style = "display:flex; justify-content:space-between; padding:2px 0; border-bottom:1px solid #052205";
+                    div.innerHTML = `<span>${item.nama.toUpperCase()}</span><span style="color:var(--primary)">SCAN OK</span>`;
+                    previewList.appendChild(div);
+                }
+            });
+            if(tempStorage.length > 0) {
+                document.getElementById('preview-container').style.display = 'block';
+                document.getElementById('btn-confirm-save').style.display = 'flex';
+            } else { 
+                alert("Tidak ada data baru atau semua duplikat!"); 
+            }
+        };
+        reader.readAsText(file);
+    });
+
+    document.getElementById('btn-confirm-save').addEventListener('click', () => {
+        localDatabase = [...localDatabase, ...tempStorage];
+        localStorage.setItem('daterDB_V32', JSON.stringify(localDatabase));
+        alert("Injected: " + tempStorage.length + " items");
+        tempStorage = [];
+        document.getElementById('preview-container').style.display = 'none';
+        document.getElementById('btn-confirm-save').style.display = 'none';
+        updateSystemUI();
+    });
+
+    // Fungsi pencarian bebas (full-text di semua field)
+    function searchData() {
+        const keyword = document.getElementById('search-free').value.toLowerCase().trim();
+        const container = document.getElementById('hasil-container');
+        if(!keyword) return alert("Masukkan kata kunci pencarian!");
+
+        const results = localDatabase.filter(d => {
+            // Cari di semua field yang relevan (termasuk raw)
+            return d.nama.includes(keyword) || 
+                   d.kelurahan.includes(keyword) || 
+                   d.kecamatan.includes(keyword) || 
+                   d.kabkota.includes(keyword) ||
+                   d.nik.includes(keyword) ||
+                   d.kpj.includes(keyword) ||
+                   d.raw.toLowerCase().includes(keyword);
+        });
+
+        container.innerHTML = "";
+
+        if (results.length === 0) {
+            container.innerHTML = `
+            <div style="text-align:center; padding:40px; font-size:20px; font-weight:900; color:#ffffff;">
+                🚫 NOT FOUND ATAU STOK BELUM READY KAK 🙏
+            </div>
+        `;
+            return;
+        }
+        results.forEach((res, i) => {
+            const div = document.createElement('div');
+            div.className = 'card-result';
+            
+            // Buat info wilayah untuk ditampilkan di header
+            let wilayahInfo = [];
+            if (res.kelurahan) wilayahInfo.push(`Kel:${res.kelurahan}`);
+            if (res.kecamatan) wilayahInfo.push(`Kec:${res.kecamatan}`);
+            if (res.kabkota) wilayahInfo.push(`Kab:${res.kabkota}`);
+            const wilayahStr = wilayahInfo.length ? ` // ${wilayahInfo.join(' ')}` : '';
+            
+            // Siapkan tombol aksi
+            div.innerHTML = `
+                <div class="result-header">
+                    <span style="font-size:10px; font-weight:bold; color:var(--gold)">REC_${i+1}${wilayahStr}</span>
+                    <div class="action-group">
+                        <button class="mini-btn copy-btn" onclick="copyText(this)">COPY</button>
+                        <button class="wa-btn" onclick="waOrder(this)"><i class="fab fa-whatsapp"></i> BELI</button>
+                        <button class="mini-btn del-btn" onclick="deleteItem(${res.id})"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+                <pre>${res.raw}</pre>`;
+            container.appendChild(div);
+        });
+    }
+
+    // Fungsi untuk tombol BELI (WhatsApp)
+    function waOrder(btn) {
+        // Ambil teks record dari elemen pre terdekat
+        const pre = btn.closest('.card-result').querySelector('pre').innerText;
+        // Buat pesan singkat
+        const message = `Halo, saya tertarik dengan data berikut:\n\n${pre}\n\nApakah masih tersedia?`;
+        // Encode untuk URL
+        const encoded = encodeURIComponent(message);
+        // Buka WhatsApp
+        window.open(`https://wa.me/${ADMIN_WA}?text=${encoded}`, '_blank');
+    }
+
+    function toggleFilePanel() {
+        const panel = document.getElementById("file-panel");
+        panel.style.display = panel.style.display === "none" ? "block" : "none";
+    }
+
+    function viewFile(fileName) {
+        const container = document.getElementById('hasil-container');
+        container.innerHTML = `<div style="text-align:center; padding:10px; font-size:10px; color:var(--accent)">FILE_LOADED: ${fileName}</div>`;
+        const results = localDatabase.filter(d => d.sourceFile === fileName);
+        results.forEach((res, i) => {
+            const div = document.createElement('div');
+            div.className = 'card-result';
+            div.innerHTML = `
+                <div class="result-header">
+                    <span style="font-size:10px; font-weight:bold; color:var(--gold)">#${i+1}</span>
+                    <div class="action-group">
+                        <button class="mini-btn copy-btn" onclick="copyText(this)">COPY</button>
+                        <button class="wa-btn" onclick="waOrder(this)"><i class="fab fa-whatsapp"></i> BELI</button>
+                    </div>
+                </div>
+                <pre>${res.raw}</pre>`;
+            container.appendChild(div);
+        });
+    }
+
+    function deleteByFile(fileName) {
+        showRDConfirm(`Wipe all data from ${fileName}?`, () => {
+            localDatabase = localDatabase.filter(d => d.sourceFile !== fileName);
+            localStorage.setItem('daterDB_V32', JSON.stringify(localDatabase));
+            updateSystemUI();
+            document.getElementById('hasil-container').innerHTML = "";
+        });
+    }
+
+    function deleteItem(id) {
+        showRDConfirm("Delete record?", () => {
+            localDatabase = localDatabase.filter(d => d.id !== id);
+            localStorage.setItem('daterDB_V32', JSON.stringify(localDatabase));
+            updateSystemUI();
+            searchData(); // refresh hasil jika ada
+        });
+    }
+
+    function clearAllData() {
+        showRDConfirm("TOTAL WIPE FACTORY RESET?", () => {
+            localStorage.removeItem('daterDB_V32');
+            localDatabase = [];
+            updateSystemUI();
+            document.getElementById('hasil-container').innerHTML = "";
+        });
+    }
+
+    function copyText(btn) {
+        const text = btn.closest('.card-result').querySelector('pre').innerText;
+        navigator.clipboard.writeText(text);
+        const originalText = btn.innerText;
+        btn.innerText = "COPIED";
+        setTimeout(() => btn.innerText = originalText, 1000);
+    }
+
+    function showRDConfirm(message, callback) {
+        document.getElementById("rdConfirmText").innerText = message;
+        const modal = document.getElementById("rdConfirm");
+        modal.style.display = "flex";
+        document.getElementById("rdConfirmOk").onclick = () => { closeRDConfirm(); callback(); };
+    }
+
+    function closeRDConfirm() { document.getElementById("rdConfirm").style.display = "none"; }
+
+    // Inisialisasi
+    updateSystemUI();
+    document.getElementById('admin-panel').style.display = 'none';
+
+    // Tambahkan event enter pada input pencarian
+    document.getElementById('search-free').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') searchData();
+    });
+    
+    // Musik latar
+    let musicStarted = false;
+
+    function startMusic() {
+        if (!musicStarted) {
+            const audio = document.getElementById("bgMusic");
+            audio.volume = 0.3; 
+            audio.play().catch(() => {});
+            musicStarted = true;
+        }
+    }
+
+    document.addEventListener("click", startMusic);
+    document.addEventListener("touchstart", startMusic);
+
+    function toggleMusic() {
+        const audio = document.getElementById("bgMusic");
+        const btn = document.getElementById("musicBtn");
+
+        if (!audio.paused) {
+            let fadeOut = setInterval(() => {
+                if (audio.volume > 0.05) {
+                    audio.volume -= 0.05;
+                } else {
+                    audio.pause();
+                    audio.volume = 0.3;
+                    clearInterval(fadeOut);
+                }
+            }, 100);
+
+            btn.innerHTML = '<i class="fas fa-volume-mute"></i> MUTED';
+
+        } else {
+            audio.volume = 0;
+            audio.play();
+            let fadeIn = setInterval(() => {
+                if (audio.volume < 0.3) {
+                    audio.volume += 0.05;
+                } else {
+                    clearInterval(fadeIn);
+                }
+            }, 100);
+
+            btn.innerHTML = '<i class="fas fa-volume-up"></i> SOUND';
         }
     }
 </script>
-    <div class="menu-section-title" style="margin-top: 30px;">Kontak & Testimoni</div>
-    <ul class="menu-list">
-        <li class="menu-list-item">
-            <a href="https://wa.me/6285943111681" target="_blank" style="border-bottom: none;">
-                Hubungi Admin: 6285943111681 (WA)
-            </a>
-        </li>
-    </ul>
-    
-    <a href="https://whatsapp.com/channel/0029Vb5vqYv8PgsFBpgAb91F" target="_blank" class="testimoni-btn">
-        📣 Saluran Testimoni
-    </a>
-</div>
 
-<div class="content">
-
-<div id="opening">
-    <img src="https://files.catbox.moe/js5luv.webp" class="opening-bg-logo">
-    <img src="https://files.catbox.moe/js5luv.webp" class="opening-logo">
-
-    <button id="enterBtn">Masuk & Lanjut Belanja</button>
-</div>
-
-<style>
-    #enterBtn {
-        color: #000;          /* hitam */
-        font-weight: 700;     /* tebal */
-    }
-</style>
-
-<audio id="bgm" loop>
-    <source src="Link musik" type="audio/mpeg">
-</audio>
-
-<script>
-document.getElementById("enterBtn").onclick = () => {
-    let open = document.getElementById("opening");
-    open.style.animation = "fadeOut 1s forwards";
-
-    let audio = document.getElementById("bgm");
-    audio.volume = 0.6;
-    audio.play();
-};
-
-function toggleTheme() {
-    document.body.classList.toggle("light");
-}
-
-// FUNGSI BARU UNTUK MEMBUKA/MENUTUP MENU OVERLAY
-function toggleMenu() {
-    const menu = document.getElementById("sideMenu");
-    menu.classList.toggle("open");
-}
-
-function openTab(evt, tabName) {
-    let tabcontent = document.getElementsByClassName("tab-pane");
-    for (let i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].classList.remove("active");
-    }
-
-    let tablinks = document.getElementsByClassName("tab-button");
-    for (let i = 0; i < tablinks.length; i++) {
-        tablinks[i].classList.remove("active");
-    }
-
-    document.getElementById(tabName).classList.add("active");
-    evt.currentTarget.classList.add("active");
-
-    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
-}
-
-function showProduct(id) {
-    document.querySelectorAll(".card").forEach(c => c.style.display = "none");
-    document.getElementById(id).style.display = "block";
-    // Mengubah target scroll ke card detail yang aktif
-    const targetCard = document.getElementById(id);
-    if (targetCard) {
-        targetCard.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-        window.scrollTo({ top: 450, behavior: "smooth" });
-    }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    const firstTabButton = document.querySelector(".tab-nav .tab-button");
-    if (firstTabButton && !document.querySelector(".tab-pane.active")) {
-        const tabId = firstTabButton.getAttribute('onclick').match(/'([^']*)'/)[1];
-        document.getElementById(tabId).classList.add("active");
-        firstTabButton.classList.add("active");
-    }
-});
-</script>
-
-<div class="hero">
-    <div class="hero-content">
-        <pre class="floating-art">
-⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣴⣶⣾⣿⣿⣿⣿⣷⣶⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣠⣴⣿⠿⢛⣩⣥⣶⠶⠶⠶⠶⣶⣬⣍⡛⠿⣿⣦⣄⠀⠀⠀⠀⠀
-⠀⠀⠀⣠⣾⡿⢋⣥⠞⠋⠈⣿⣿⠀⠀⠀⠀⣿⣿⠉⠙⠳⣬⡛⢿⣷⣄⠀⠀⠀
-⠀⠀⣴⣿⠏⣴⠋⠀⠀⠀⠀⣿⣿⡆⠀⠀⢸⣿⣿⠀⠀⠀⠀⢹⣦⠻⣿⣦⠀⠀
-⠀⣼⣿⢃⣾⣿⣏⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⣹⣿⣷⡘⣿⣧⠀
-⢰⣿⠇⡾⠻⡅⠉⠛⢦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⡴⠛⠉⢨⠟⣧⢸⣿⡆
-⣾⣿⢸⡇⠀⠹⣄⠀⠀⠈⢻⣿⡿⢿⣿⣿⡿⢿⣿⡟⠁⠀⠀⣰⠋⠀⢸⡆⣿⣷
-⣿⣿⢸⡇⠀⠀⣘⣆⠀⠀⠀⠻⣷⣦⠀⠀⣴⣾⠏⠀⠀⠀⣰⣃⠀⠀⢸⡇⣿⣿
-⢿⣿⢸⣷⣾⣿⡿⠟⢦⠀⠀⠀⠹⣿⣇⣸⣿⠏⠀⠀⠀⡼⠻⢿⣿⣷⣾⠇⣿⡟
-⠸⣿⡆⢿⡉⠁⠀⠀⠈⢧⠀⠀⠀⠙⣿⣿⠃⠀⠀⢀⡜⠁⠀⠀⠈⢙⡟⣸⣿⠇
-⠀⢻⣿⡌⢷⡀⠀⣠⣴⣿⣷⡀⠀⠀⢸⡇⠀⠀⢀⣾⣿⣦⣄⠀⢀⡾⣡⣿⡟⠀
-⠀⠀⠻⣿⣦⠻⣿⣿⠿⠋⠀⠳⡄⠀⢸⡇⠀⢠⠎⠀⠙⢿⣿⣿⢟⣴⣿⠟⠀⠀
-⠀⠀⠀⠙⢿⣷⣬⡛⢦⣄⡀⠀⠹⣄⣸⣇⣠⠏⠀⢀⣠⡴⢛⣵⣾⡿⠃⠀⠀⠀
-⠀⠀⠀⠀⠀⠉⠻⣿⣶⣬⣉⣛⠲⠿⠿⠿⠿⠖⣛⣩⣥⣾⣿⠟⠉⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⣿⣿⣿⣿⠿⠿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀
-</pre>
-        <h1>𝗛𝗔𝗜 𝗦𝗘𝗟𝗔𝗠𝗔𝗧 𝗗𝗔𝗧𝗔𝗡𝗚</h1>
-        <p><span class="running-text">ᴘɪʟɪʜ ᴘʀᴏᴅᴜᴋ ꜱᴇꜱᴜᴀɪ ᴋᴇʙᴜᴛᴜʜᴀɴ ᴀɴᴅᴀ • ꜰᴀꜱᴛ • ᴛʀᴜꜱᴛᴇᴅ • ᴀᴍᴀɴ •</span></p>
-    </div>
-</div>
-
-<h2 class="category-title">PILIH KATEGORI</h2>
-<h2 class="category-title">⇩</h2>
-<div class="tab-nav">
-    <button class="tab-button active" onclick="openTab(event, 'jasa')">✨ Jasa</button>
-    <button class="tab-button" onclick="openTab(event, 'digital')">📱 Digital & VPN</button>
-    <button class="tab-button" onclick="openTab(event, 'jaringan')">⚙️ Jaringan & Script</button>
-</div>
-
-<div class="tab-content">
-    
-<div id="jasa" class="tab-pane active">
-        <h3 class="group-title" style="color: rgb(211, 211, 238);">Layanan Umum (JASA PERDOKUMENAN)</h3>
-        <ul class="list-group">
-            <li class="list-item" onclick="showProduct('detail_bpjs')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/fwu0ky.jpg" alt="Icon BPJS">
-                </div>
-                <div class="list-details">
-                    <h4>JASA BPJS KETENAGAKERJAAN</h4>
-                    <p>Pencairan Cepat, Aman, dan Data Terjamin.</p>
-                </div>            </li>
-            <li class="list-item" onclick="showProduct('detail_dokumen')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/no3d1x.jpg" alt="Icon Dokumen">
-                </div>
-                <div class="list-details">
-                    <h4>JASA PERDOKUMENAN</h4>
-                    <p>Layanan pengurusan dan pembuatan dokumen.</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_jasa_tambahan_a')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/ya26x6.jpg" alt="Icon Tambahan A">
-                </div>
-                <div class="list-details">
-                    <h4>LAYANAN JASA GESTUN (ALL PAYLETER)</h4>
-                    <p>Tempat untuk layanan pencairan limit.</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_jasa_tambahan_b')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/reawuh.jpg" alt="Icon Tambahan B">
-                </div>
-                <div class="list-details">
-                    <h4>LAYANAN JASA (UP EWALET)</h4>
-                    <p>jasa layanan upgrade ewalet premium.</p>
-                </div>
-            </li>
-        </ul>
-
-        <h3 class="group-title" style="color: rgb(211, 211, 238);">layanan umum (PERANGKAT ELEKTRONIK)</h3>
-        <ul class="list-group">
-            <li class="list-item" onclick="showProduct('detail_bypass')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/qb8qag.jpg" alt="Icon Bypass">
-                </div>
-                <div class="list-details">
-                    <h4>JASA BAYPAS HP</h4>
-                    <p>Bypass dan buka kunci perangkat HP.</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_elektronik_tambahan_a')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/35ggsc.jpg" alt="Icon Elektronik A">
-                </div>
-                <div class="list-details">
-                    <h4>JASA ROOT HP & MODIF SISTEM</h4>
-                    <p>Upgrade sistem operasi perangkat.</p>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <div id="digital" class="tab-pane">
-        <h3 class="group-title" style="color: rgb(211, 211, 238);">Aplikasi & Hiburan (4 Items)</h3>
-        <ul class="list-group">
-            <li class="list-item" onclick="showProduct('detail_apk')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/f7cdp0.jpg" alt="Icon APK">
-                </div>
-                <div class="list-details">
-                    <h4>APK PREMIUM</h4>
-                    <p>Koleksi berbagai Aplikasi Premium.</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_paket_bebas')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/8iazs9.jpg" alt="Icon Paket Bebas">
-                </div>
-                <div class="list-details">
-                    <h4>PAKET UNLOCKTOOL</h4>
-                    <p>Sewa server unlocktool 6jam/24jam .</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_digital_tambahan_a')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/guxt4g.jpg" alt="Icon Digital A">
-                </div>
-                <div class="list-details">
-                    <h4>OPEN MODIFIKASI APK MOD</h4>
-                    <p>berbagai apk lainya.</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_digital_tambahan_b')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/17riyf.jpg" alt="Icon Digital B">
-                </div>
-                <div class="list-details">
-                    <h4>BAHAN UP QRIS</h4>
-                    <p>Penyedia bahan qris work it.</p>
-                </div>
-            </li>
-        </ul>
-        
-        <h3 class="group-title" style="color: rgb(211, 211, 238);">Layanan Server</h3>
-        <ul class="list-group">
-            <li class="list-item" onclick="showProduct('detail_root')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/2hnw0f.webp" alt="Icon VPN Server">
-                </div>
-                <div class="list-details">
-                    <h4>PANEL PETERODY PREMIUM</h4>
-                    <p>layanan penyedia panel server vps / panel Premium.</p>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <div id="jaringan" class="tab-pane">
-        <h3 class="group-title" style="color: rgb(211, 211, 238);">Layanan Tunneling (4 Items)</h3>
-        <ul class="list-group">
-            <li class="list-item" onclick="showProduct('detail_list_vpn')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/74nm0s.jpg" alt="Icon List VPN">
-                </div>
-                <div class="list-details">
-                    <h4>LIST VPN PREMIUM</h4>
-                    <p>Daftar berbagai pilihan layanan VPN.</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_sewa_script')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/contqh.jpg" alt="Icon Sewa Script">
-                </div>
-                <div class="list-details">
-                    <h4>SEWA SCRIPT TUNNELING</h4>
-                    <p>Layanan penyewaan script tunneling (buat vpn).</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_tunneling_tambahan_a')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/rr58h4.jpg" alt="Icon Tunneling A">
-                </div>
-                <div class="list-details">
-                    <h4>MASA AKTIF KARTU ALL OPERATOR</h4>
-                    <p>penyedia masa aktif all operator.</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_tunneling_tambahan_b')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/b5b6m5.jpg" alt="Icon Tunneling B">
-                </div>
-                <div class="list-details">
-                    <h4>OPEN SUNTIK SOMED</h4>
-                    <p>Menyediakan suntik all sosmed like/followers//coment dll.</p>
-                </div>
-            </li>
-        </ul>
-
-        <h3 class="group-title" style="color: rgb(211, 211, 238);">Paket Akses (media sosial)</h3>
-        <ul class="list-group">
-            <li class="list-item" onclick="showProduct('detail_gmail_kemet')"> <div class="list-icon">
-                    <img src="https://files.catbox.moe/iab9oo.jpg" alt="Icon Hotspot">
-                </div>
-                <div class="list-details">
-                    <h4>PAKET GANDA GMAIL</h4>
-                    <p>Hotspot Unlimited 30 Hari Tanpa FUP.</p>
-                </div>
-            </li>
-            <li class="list-item" onclick="showProduct('detail_new')">
-                <div class="list-icon">
-                    <img src="https://files.catbox.moe/tslr4f.jpg" alt="Icon Data A">
-                </div>
-                <div class="list-details">
-                    <h4>PAKET NOKOS/OTP ALL APK/NEGARA</h4>
-                    <p>Berbagai pilihan paket otp dan nokos all negara.</p>
-                </div>
-            </li>
-        </ul>
-    </div>
-    
-</div> 
-<div class="detail-cards-container"> 
-<div class="card" id="detail_bpjs">
-    <img src="https://files.catbox.moe/fwu0ky.jpg">
-    <h2>JASA BPJS KETENAGAKERJAAN</h2>
-    <p style="line-height:1.6;font-size:15px;">
-        •━━━━━━━━━━━━━━━━• <br>
-        💰 <b>PENCAIRAN BPJS KETENAGAKERJAAN</b> 💰 <br>
-        •━━━━━━━━━━━━━━━━• <br><br>
-        🔑 <b>Keuntungan:</b><br>
-        ✅ Proses Cepat & Aman<br>
-        ✅ Data Terjamin<br>
-        ✅ Bisa Semua Bank<br><br>
-        🔧 <b>Layanan Tambahan:</b><br>
-        • Cek Valid<br>
-        • Riset Akun<br>
-        • Rubah Data<br><br>
-        •━━━━━━━━━━━━━━━━•
-    </p>
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
-</div>
-
-<div class="card" id="detail_dokumen">
-    <img src="https://files.catbox.moe/no3d1x.jpg">
-    <h2>JASA PERDOKUMENAN</h2>
-
-    <p>
-        <b>»» LIST LAYANAN DOKUMEN ««</b><br>
-        ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬<br>
-        ▧ Dokumen NPWP<br>
-        ▧ Aktivasi & Update Data NPWP<br>
-        ▧ Unduh / Cetak Sertifikat Vaksin<br>
-        ▧ Portofolio Profesional<br>
-        ▧ Curriculum Vitae (CV)<br>
-        ▧ Surat Keterangan Sehat / Sakit<br>
-        ▧ Surat Lamaran Kerja<br>
-        ▧ Cek Validitas Data Dokumen Resmi<br>
-        ▧ Registrasi Akun Layanan Resmi<br>
-        ▧ Pengurusan Data Kependudukan Legal<br>
-        ▧ Slip Gaji (Template/Desain)<br>
-        ▧ Konsultasi BPJS (Info proses resmi)<br>
-        ▧ Undangan Digital / Cetak<br>
-        ▧ Desain ID Card Event / Komunitas<br>
-        ▧ Kartu Kuning (Desain / Template)<br>
-        ▧ Pembuatan Email Massal Legal<br>
-        ▧ Nomor Virtual Legal<br>
-        ▧ Instalasi Aplikasi Premium Legal<br>
-        ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-    </p>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_jasa_tambahan_a">
-    <img src="https://files.catbox.moe/ya26x6.jpg" alt="Layanan Gestun">
-    <h2>LAYANAN JASA TAMBAHAN A (New)</h2>
-
-    <p style="line-height:1.6;">
-        💳✨ <b>GESTUN ALL PAYLATER — METSSTORE</b> ✨💳 <br>
-        ⚡ Limit Paylater Bisa Dicairkan <b>100%</b> ⚡ <br><br>
-
-        ✅ Kredivo <br>
-        ✅ Gopaylater <br>
-        ✅ Yuppaylater <br>
-        ✅ Traveloka <br>
-        ✅ Indodana <br>
-        ✅ Akulaku <br>
-        ...dan masih banyak lagi 🚀 <br><br>
-
-        💯 Work 100% | Aman | Cepat Proses <br><br>
-
-        ✦•━━━━━━━━━━━━•✦ <br>
-        🔥 <b>METSTORE — Amanah & Terpercaya</b> 🔥 <br>
-        ✦•━━━━━━━━━━━━•✦
-    </p>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
-</div>
-
-<div class="card" id="detail_jasa_tambahan_b">
-    <img src="https://files.catbox.moe/reawuh.jpg" alt="Layanan E-Wallet">
-    <h2>LAYANAN JASA (UP EWALET)</h2>
-
-    <p style="line-height:1.6;">
-        💠 <b>KEMET JS STORE</b> 💠 <br>
-        📲 Layanan E-Wallet & Rekening Digital Terlengkap! <br><br>
-
-        ⚡ <b>Support All E-Wallet & QRIS</b> ⚡ <br><br>
-
-        🔹 DANA <br>
-        🔹 GoPay <br>
-        🔹 OVO <br>
-        🔹 SeaBank <br>
-        🔹 ShopeePay <br>
-        🔹 QRIS GoPay Merchant <br>
-        🔹 QRIS All Pay <br><br>
-
-        ✨ Praktis • Aman • Cepat <br>
-        🔐 Dijamin Anti Ribet, All Ready On Request!
-    </p>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
-</div>
-
-<div class="card" id="detail_bypass">
-    <img src="https://files.catbox.moe/qb8qag.jpg" alt="Jasa Bypass HP">
-
-    <h2>🔓 JASA BYPASS / UNLOCK HP</h2>
-
-    <p style="line-height:1.6;">
-        ⚡ <b>Layanan Bypass & Unlock All Tipe HP</b> ⚡ <br><br>
-
-        🔧 iCloud Unlock (iPhone) <br>
-        🔧 FRP Google Lock (Android) <br>
-        🔧 Pola / PIN / Password <br>
-        🔧 Micloud Xiaomi <br>
-        🔧 Samsung Account Lock <br>
-        🔧 Oppo / Vivo / Realme Unlock <br><br>
-
-        📌 <i>Cukup kirim tipe HP + kendala, admin proses langsung!</i> <br>
-        ⚠️ Aman, cepat, dan bergaransi.
-    </p>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_elektronik_tambahan_a">
-    <img src="https://files.catbox.moe/35ggsc.jpg" alt="Jasa Root HP">
-    <h2>🔥 JASA ROOT HP & MODIF SISTEM 🔥</h2>
-
-    <p style="line-height:1.6;">
-        📱 <b>Layanan Software & Sistem Android/HP</b> <br><br>
-
-        🔹 Root Semua Tipe HP <br>
-        🔹 Install TWRP / Custom Recovery <br>
-        🔹 Unlock Bootloader (UBL) <br>
-        🔹 Pasang Custom ROM (MIUI, LineageOS, PixelOS, dll) <br>
-        🔹 Debloat Sistem (Hapus Aplikasi Sampah) <br>
-        🔹 Perbaikan Bootloop / Stuck Logo <br>
-        🔹 Perbaikan IMEI / Baseband (Legal & Non-IMEI Clone) <br>
-        🔹 Flashing Firmware All Brand <br>
-        🔹 Upgrade / Downgrade Android OS <br>
-        🔹 Bypass Error Software & Bug Sistem <br><br>
-
-        ⚡ <i>Proses cepat, aman, dan minim risiko.</i> <br>
-        📌 Tinggal kirim tipe HP + kendala, langsung kami bantu.
-    </p>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
-</div>
-
-<div class="card" id="detail_elektronik_tambahan_b">
-    <img src="https://files.catbox.moe/default.jpg">
-    <h2>PENGHAPUSAN AKUN PERMANEN (New)</h2>
-    <p>Layanan penghapusan data akun (seperti Mi Cloud atau Google Account) secara permanen dari server.</p>
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
-</div>
-
-<div class="card" id="detail_apk">
-    <img src="https://files.catbox.moe/f7cdp0.jpg">
-    <h2>APK PREMIUM</h2>
-    <p>Dapatkan akses ke berbagai aplikasi premium dan modifikasi dengan fitur lengkap dan bebas iklan.</p>
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_paket_bebas">
-    <img src="https://files.catbox.moe/8iazs9.jpg">
-    <h2>PAKET SEWA UNLOCKTOOL</h2>
-
-    <p style="line-height:1.6;font-size:15px;">
-        •━━━━━━━━━━━━━━━━• <br>
-        🔓 <b>SEWA UNLOCKTOOL</b> <br><br>
-
-        ✔ 6 Jam = <b>Rp 5.000</b> <br>
-        ✔ 24 Jam = <b>Rp 10.000</b> <br>
-        ✔ Full akses semua fitur <br>
-        ✔ Proses cepat – aman – bergaransi <br>
-        •━━━━━━━━━━━━━━━━•
-    </p>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
-</div>
-
-<div class="card" id="detail_digital_tambahan_a">
-    <img src="https://files.catbox.moe/guxt4g.jpg" alt="Jasa Mod Aplikasi">
-
-    <h2>⚡ JASA MODIFIKASI APLIKASI ⚡</h2>
-
-    <p style="line-height:1.6; font-size:15px;">
-        Layanan modifikasi aplikasi secara aman tanpa crack ilegal.  
-        Cocok untuk kamu yang ingin tampilan aplikasi lebih unik & personal.
-        <br><br>
-        ✔ Custom UI / Tema Aplikasi <br>
-        ✔ Clone App (gandakan aplikasi) <br>
-        ✔ Optimasi Aplikasi (ringan & smooth) <br>
-        ✔ Modifikasi ikon, style, & layout <br>
-        ✔ Setup launcher custom
-        <br><br>
-        ⚠ Tanpa crack / tanpa bypass lisensi – aman & legal
-    </p>
-
-    <div class="wa-wave-icon"></div>
-
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank">
-        Pesan via WhatsApp
-    </a>
-</div>
-
-<div class="card" id="detail_digital_tambahan_b">
-    <img src="https://files.catbox.moe/17riyf.jpg" alt="Bahan QRIS">
-    
-    <h2>⚡ PENYEDIA BAHAN QRIS DANA / ORKUT ⚡</h2>
-
-    <p style="line-height:1.6; font-size:15px;">
-        Layanan penyedia bahan QRIS untuk DANA / ORKUT yang siap digunakan.  
-        Proses cepat, aman, dan cocok untuk kebutuhan layanan digital Anda.  
-        Semua bahan sudah dipastikan valid & langsung bisa dipakai.
-        <br><br>
-        ✔ Bahan QRIS Siap Pakai <br>
-        ✔ Valid • Aman • Fast Process <br>
-        ✔ Support Berbagai Kebutuhan Digital
-    </p>
-
-    <div class="wa-wave-icon"></div>
-
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681" target="_blank">
-        Beli via WhatsApp
-    </a>
-</div>
-
-<div class="card" id="detail_root">
-    <img src="https://files.catbox.moe/2hnw0f.webp" alt="Panel Private">
-    <h2>⚡ PANEL PRIVATE / SERVER BOT WHATSAPP ⚡</h2>
-
-    <p style="line-height:1.6;">
-        📌 <b>List Panel Privat – Server Fresh PeTerody</b> <br><br>
-
-        ‣ 3GB = <b>Rp 4.000</b> <br>
-        ‣ 4GB = <b>Rp 5.000</b> <br>
-        ‣ 5GB = <b>Rp 6.000</b> <br>
-        ‣ 6GB = <b>Rp 8.000</b> <br>
-        ‣ 7GB = <b>Rp 10.000</b> <br>
-        ‣ 8GB = <b>Rp 12.000</b> <br>
-        ‣ 9GB = <b>Rp 14.000</b> <br>
-        ‣ 10GB = <b>Rp 15.000</b> <br>
-        ‣ ∞ / Unlimited = <b>Rp 16.000</b> <br><br>
-
-        ⚙️ Cocok untuk: <br>
-        – Panel Bot WhatsApp <br>
-        – Rest API <br>
-        – Host Script Bot / Tools <br>
-        – Mini Server Private <br><br>
-
-        🚀 Stabil • Fresh Server • Harga Termurah
-    </p>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_vpn_all">
-    <img src="https://files.catbox.moe/t0h8l1.png">
-    <h2>VPN PREMIUM ALL OP</h2>
-    <p>VPN Premium untuk semua operator. Fast Server, stabil, dan tanpa batasan bandwidth.</p>
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_vpn_tambahan_a">
-    <img src="https://files.catbox.moe/default.jpg">
-    <h2>RESELLER VPN MURAH (New)</h2>
-    <p>Paket khusus untuk menjadi reseller VPN. Dapatkan harga modal termurah dan support penuh.</p>
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
-</div>
-
-<div class="card" id="detail_list_vpn">
-    <img src="https://files.catbox.moe/74nm0s.jpg" alt="List Paket VPN">
-    <h2>LIST PAKET VPN</h2>
-
-    <p style="line-height:1.6;">
-        Daftar lengkap paket VPN premium dengan pilihan durasi harian maupun bulanan,
-        serta server stabil dan cepat.
-    </p>
-
-    <!-- Jenis Config -->
-    <h3 style="margin-top:10px;">✨ Config Premium:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>📦 SSH & OpenVPN</li>
-        <li>📦 Vmess / Vless</li>
-        <li>📦 Trojan</li>
-    </ul>
-
-    <!-- Server -->
-    <h3 style="margin-top:10px;">🌐 Server Tersedia:</h3>
-    <p style="margin-left:18px; line-height:1.6;">
-        🇸🇬 Singapore <br>
-        🇮🇩 Indonesia
-    </p>
-
-    <!-- Harga SG -->
-    <h3 style="margin-top:10px;">💰 Harga Paket — Server Singapore:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>⏳ 7 Hari — <b>4K</b></li>
-        <li>⏳ 30 Hari — <b>10K</b></li>
-        <li>⏳ 60 Hari — <b>20K</b></li>
-        <li>⏳ 75 Hari — <b>25K</b></li>
-    </ul>
-
-    <!-- Harga ID -->
-    <h3 style="margin-top:10px;">💰 Harga Paket — Server Indonesia:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>⏳ 7 Hari — <b>6K</b></li>
-        <li>⏳ 30 Hari — <b>15K</b></li>
-        <li>⏳ 60 Hari — <b>24K</b></li>
-        <li>⏳ 75 Hari — <b>30K</b></li>
-    </ul>
-
-    <!-- Keunggulan -->
-    <h3 style="margin-top:10px;">💎 Keunggulan:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>🔐 Aman • Stabil • Anti DC</li>
-        <li>⚡ Speed Mantap Dijamin Jos</li>
-    </ul>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_sewa_script">
-    <img src="https://files.catbox.moe/contqh.jpg.jpg">
-    <h2>SEWA SCRIPT TUNNELING</h2>
-
-    <p style="line-height:1.6;">
-        🚀 Full Fitur – Ringan – Stabil 24 Jam!  
-        Layanan penyewaan script tunneling siap pakai untuk kebutuhan server Anda.
-    </p>
-
-    <!-- Fitur -->
-    <h3 style="margin-top:10px;">✨ Fitur Script:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>Support All OS VPS (Debian, Ubuntu, CentOS, dll)</li>
-        <li>SSH / OpenVPN / XRAY (Vmess, Vless, Trojan, Shadowsocks)</li>
-        <li>Auto Menu Interaktif</li>
-        <li>Integrasi Bot Telegram</li>
-        <li>Backup & Restore otomatis</li>
-        <li>Update Script sekali klik</li>
-        <li>Hemat RAM & CPU, cocok untuk semua spek VPS</li>
-    </ul>
-
-    <!-- Keunggulan -->
-    <h3 style="margin-top:10px;">💎 Keunggulan:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>✔️ Lancar & Stabil</li>
-        <li>✔️ Auto Expired & Auto Renew akun</li>
-        <li>✔️ Full Dokumentasi + Free Support</li>
-        <li>✔️ Bisa Custom sesuai kebutuhan</li>
-    </ul>
-
-    <!-- Harga -->
-    <p style="margin-top:10px; font-weight:bold;">
-        💰 Harga Sewa: 10K / Bulan  
-        <span style="font-weight:normal;">(Gratis bantuan setting + update script)</span>
-    </p>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_tunneling_tambahan_a">
-    <img src="https://files.catbox.moe/rr58h4.jpg">
-    <h2>ENYEDIA LAYANAN MASA AKTIF KARTU</h2>
-
-    <p style="line-height:1.6;">
-        Layanan penambahan masa aktif untuk berbagai kartu operator Indonesia.
-        Proses cepat, aman, dan langsung masuk.
-    </p>
-
-    <!-- Daftar Operator -->
-    <h3 style="margin-top:10px;">📱 Operator yang Didukung:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>☎️ Telkomsel</li>
-        <li>📡 XL Axiata / Axis</li>
-        <li>📶 Indosat Ooredoo</li>
-        <li>📲 Tri (3)</li>
-        <li>🔋 Smartfren</li>
-    </ul>
-
-    <!-- Pilihan paket -->
-    <h3 style="margin-top:10px;">💰 Pilihan Masa Aktif:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>⏳ 7 Hari</li>
-        <li>⏳ 15 Hari</li>
-        <li>⏳ 30 Hari</li>
-        <li>⏳ 60 Hari</li>
-        <li>⏳ 90 Hari</li>
-        <li>⏳ 180 Hari</li>
-    </ul>
-
-    <!-- Catatan -->
-    <h3 style="margin-top:10px;">ℹ️ Catatan:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>✔️ Berlaku untuk semua operator di atas</li>
-        <li>✔️ Proses cepat & aman</li>
-        <li>✔️ Tidak membutuhkan data sensitif</li>
-    </ul>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="card" id="detail_tunneling_tambahan_b">
-    <img src="https://files.catbox.moe/b5b6m5.jpg" alt="Suntik Sosmed">
-    <h2>SUNTIK ALL SOSMED</h2>
-
-    <p style="line-height:1.6;">
-        Layanan boosting sosial media lengkap untuk memperkuat akun Anda.
-        Tersedia berbagai jenis suntik seperti Followers, Likes, Views, Comment,
-        dan interaksi lainnya untuk berbagai platform populer.
-    </p>
-
-    <!-- Platform -->
-    <h3 style="margin-top:10px;">📱 Platform yang Didukung:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>📌 Instagram (Followers, Likes, Views, Story Views, Comment)</li>
-        <li>📌 TikTok (Followers, Likes, Views, Live Viewers)</li>
-        <li>📌 Facebook (Like Page, Followers, React)</li>
-        <li>📌 YouTube (Subscribers, Views, Likes, Comment)</li>
-        <li>📌 Telegram (Member Channel / Group)</li>
-        <li>📌 Shopee / Tokopedia (Followers)</li>
-        <li>📌 WhatsApp (View Status, Save Status, Chat Masuk)</li>
-    </ul>
-
-    <!-- Jenis Layanan -->
-    <h3 style="margin-top:10px;">✨ Jenis Layanan:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>🚀 Suntik Followers</li>
-        <li>❤️ Suntik Likes</li>
-        <li>👁️ Views / Watchtime</li>
-        <li>💬 Comment</li>
-        <li>🔗 Connect / Engagement lainnya</li>
-        <li>📞 WhatsApp Boost (View Status / Chat Masuk / Save Status)</li>
-    </ul>
-
-    <!-- Catatan -->
-    <h3 style="margin-top:10px;">ℹ️ Catatan:</h3>
-    <ul style="margin-left:18px; line-height:1.6;">
-        <li>✔️ Proses cepat & aman</li>
-        <li>✔️ Bisa request jumlah sesuai kebutuhan</li>
-        <li>✔️ Tidak perlu login akun</li>
-    </ul>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
-</div>
-
-<div class="card" id="detail_new">
-    <img src="https://files.catbox.moe/tslr4f.jpg">
-    <h2>PAKET NOKOS / OTP ALL APK / NEGARA</h2>
-
-    <p style="line-height:1.6;margin-top:10px;">
-        Nikmati layanan Nokos & OTP untuk berbagai aplikasi dan negara.  
-        Berikut daftar lengkap paket yang tersedia:
-    </p>
-
-    <ul style="margin:10px 0 15px 15px; line-height:1.6;">
-        <li>Nokos Indonesia – Mulai Rp 4.000</li>
-        <li>Nokos Luar Negeri – Mulai Rp 10.000</li>
-        <li>OTP WhatsApp / Telegram</li>
-        <li>OTP Shopee / Tokopedia / Akulaku</li>
-        <li>OTP Gmail / Yahoo Mail</li>
-        <li>OTP Facebook / IG / TikTok</li>
-        <li>OTP Marketplace & E-Wallet Lainnya</li>
-        <li>Garansi Gagal SMS / Kode Tidak Masuk</li>
-    </ul>
-
-    <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Beli via WhatsApp</a>
-</div>
-
-<div class="detail-cards-container">
-    <div class="card" id="detail_gmail_kemet">
-        <img src="https://files.catbox.moe/iab9oo.jpg" alt="Layanan Gmail Massal" class="card-image">
-
-        <h2>PT GMAIL KEMET JS STORE</h2>
-
-        <p class="card-description">
-            •━━━━━━━━━━━━━━━━• <br>
-            📧 <b>ARMADA AKUN POWERED BY GOOGLE</b> 📧 <br>
-            •━━━━━━━━━━━━━━━━• <br><br>
-
-            🚀 <b>AKUISISI & SKALA</b><br>
-            ✔️ <b>Ganda Gmail Google:</b> Skala operasional Anda secara instan.<br>
-            ✔️ <b>Kapasitas Maksimal:</b> Mampu hingga <b>2.000 (2K) akun Gmail</b> sesuai kebutuhan.<br>
-            ✔️ <b>Standar Profesional:</b> Akun siap pakai (contoh: <b>KEMETJS@gmail.com</b>).<br><br>
-
-            💥 <b>Dominasi pasar tanpa hambatan.</b><br><br>
-            •━━━━━━━━━━━━━━━━•
-        </p>
-
-        <div class="wa-wave-icon"></div>
-    <a class="whatsapp-btn" href="https://wa.me/6285943111681">Hubungi Admin</a>
-    </div>
-</div>
-
-<div class="contact-section">
-    <div class="contact-logo-group">
-        <img src="https://files.catbox.moe/js5luv.webp" class="contact-logo">
-        <div class="contact-title">KJS STORE</div>
-    </div>
-    
-    <p class="contact-desc">
-        Penyedia layanan jasa, joki, paket vpn premium dan digital terpercaya dengan fokus pada kecepatan, keamanan, dan kepuasan pelanggan. Komitmen kami adalah memberikan solusi terbaik untuk kebutuhan digital Anda.
-    </p>
-
-    <div class="contact-details">
-        <h3>KONTAK & SUPPORT</h3>
-        
-        <div class="contact-item">
-            <span class="contact-icon">&#9993;</span> <div class="contact-info">
-                <strong>EMAIL SUPPORT</strong>
-                <a href="mailto:admin@kjsstore.com">admin@kjsstore.com</a>
-            </div>
-        </div>
-
-        <div class="contact-item">
-            <span class="contact-icon">&#128339;</span> <div class="contact-info">
-                <strong>SUPPORT</strong>
-                <span>24/10 Tersedia</span>
-            </div>
-        </div>
-
-        <div class="contact-item">
-            <span class="contact-icon">&#8986;</span> <div class="contact-info">
-                <strong>RESPONSE TIME</strong>
-                <span>&lt; 1 Menit</span>
-            </div>
-        </div>
-    </div>
-    
-    <div class="copyright">
-        &copy; 2025/2026 KJS STORE. All rights reserved.<br>
-        <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
-    </div>
-</div>
-
-<a href="https://wa.me/6281234567890" target="_blank" class="wa-float">
-    <img src="https://files.catbox.moe/1x60ax.png" alt="WhatsApp Floating Button">
-</a>
-
-</div> </body>
+</body>
 </html>
