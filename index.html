@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RUANG DATER SE INDONESIA</title>
+    <title>KEMET JS STORE | PREMIUM EDITION</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --primary: #22c55e; 
-            --primary-glow: rgba(34, 197, 94, 0.4);
-            --purple: #bc6ff1; 
-            --red: #ff4747; 
-            --card-bg: rgba(5, 12, 5, 0.96); 
-            --accent: #0ea5e9; 
+            --gold-primary: #D4AF37;
+            --gold-light: #FFD700;
+            --fire-red: #FF4500;
+            --dark-bg: #050505;
+            --dark-surface: #121212;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --fire-glow: rgba(255, 69, 0, 0.4);
             --wa-green: #25D366;
-            --gold: #FFD700;
-            --gold-glow: rgba(255, 215, 0, 0.3);
         }
 
+        * { box-sizing: border-box; }
+
         body {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            padding-bottom: 50px;
-            color: #e0f2e0;
-            background: #000;
+            padding-bottom: 80px;
+            color: #fff;
+            background: var(--dark-bg);
             overflow-x: hidden;
         }
 
+        /* Scanline / Grainy Effect for Cyber Look */
         body::after {
             content: "";
             position: fixed;
@@ -36,242 +38,205 @@
             background-size: 100% 4px;
             z-index: 999;
             pointer-events: none;
+            opacity: 0.3;
         }
-        
+
         header { 
-            background: rgba(0, 5, 0, 0.95); 
-            padding: 0.8rem 1rem; 
-            border-bottom: 2px solid var(--gold); 
+            background: linear-gradient(180deg, #1a1a1a 0%, #000 100%); 
+            padding: 1rem; 
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky; 
             top: 0; 
-            z-index: 100; 
-            box-shadow: 0 0 20px var(--gold-glow);
-            backdrop-filter: blur(10px);
+            z-index: 1000; 
+            border-bottom: 2px solid var(--gold-primary);
+            box-shadow: 0 4px 20px var(--fire-glow);
         }
 
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .logo-area img {
             height: 40px;
-            width: auto;
-            border-radius: 8px;
-            border: 1px solid var(--gold);
+            border-radius: 50%;
+            border: 2px solid var(--gold-primary);
+            box-shadow: 0 0 10px var(--gold-primary);
         }
         .header-title {
             font-weight: 800; 
-            color: var(--gold); 
+            color: var(--gold-light); 
             font-size: 1.2rem; 
-            text-shadow: 0 0 10px var(--gold-glow);
-        }
-        .header-title i {
-            margin-right: 6px;
-            color: var(--primary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
-        .music-button {
-            background: rgba(34, 197, 94, 0.15);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-size: 11px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            backdrop-filter: blur(5px);
+        /* Banner Flame Style */
+        .promo-banner {
+            background: linear-gradient(45deg, #000, #400000);
+            margin: 15px;
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--fire-red);
+            box-shadow: inset 0 0 20px var(--fire-glow);
         }
-        .music-button:hover {
-            background: var(--primary);
-            color: #000;
-            box-shadow: 0 0 15px var(--primary);
+        .promo-banner h2 { 
+            margin: 0; 
+            font-size: 1.3rem; 
+            color: var(--gold-light);
+            position: relative;
+            z-index: 2;
         }
-
-        .admin-button {
-            background: rgba(188, 111, 241, 0.15);
-            border: 1px solid var(--purple);
-            color: var(--purple);
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-size: 11px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            backdrop-filter: blur(5px);
-        }
-        .admin-button:hover {
-            background: var(--purple);
-            color: #000;
-            box-shadow: 0 0 15px var(--purple);
+        .promo-banner p { margin: 5px 0 0; font-size: 0.85rem; opacity: 0.9; position: relative; z-index: 2;}
+        .promo-banner i {
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            font-size: 100px;
+            color: var(--fire-red);
+            opacity: 0.3;
+            transform: rotate(-15deg);
         }
 
-        .container { max-width: 600px; margin: 1rem auto; padding: 0 12px; }
+        .container { max-width: 600px; margin: 0 auto; padding: 0 12px; }
 
         .premium-card { 
-            background: var(--card-bg); 
-            border: 1px solid rgba(255, 215, 0, 0.2); 
-            border-radius: 10px; 
-            padding: 1.2rem; 
-            margin-bottom: 15px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            background: var(--dark-surface); 
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            border-radius: 15px; 
+            padding: 1.5rem; 
+            margin-bottom: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
-        
+
+        /* Search Box Gold Style */
         .search-box {
             display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
+            background: #1a1a1a;
+            padding: 5px;
+            border-radius: 10px;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px var(--gold-glow);
         }
         .search-box input {
             flex: 1;
-            padding: 12px 15px;
-            background: rgba(0,0,0,0.7);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            border-radius: 8px;
-            font-family: 'JetBrains Mono';
-            font-size: 14px;
+            padding: 12px;
+            border: none;
             outline: none;
-        }
-        .search-box input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px var(--primary-glow);
+            font-size: 14px;
+            background: transparent;
+            color: #fff;
         }
         .search-box button {
-            background: var(--gold);
+            background: linear-gradient(45deg, var(--gold-primary), var(--gold-light));
             border: none;
             color: #000;
-            padding: 0 20px;
+            padding: 0 25px;
             border-radius: 8px;
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: 0.2s;
-        }
-        .search-box button:hover {
-            background: #e6c200;
-            box-shadow: 0 0 15px var(--gold);
-        }
-
-        /* Admin panel */
-        #admin-panel {
-            display: none;
-        }
-
-        .upload-zone { 
-            border: 2px dashed var(--purple); 
-            padding: 1.2rem; 
-            text-align: center; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            background: rgba(188, 111, 241, 0.03); 
             transition: 0.3s;
         }
+        .search-box button:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--gold-light); }
 
+        /* Button Style */
         .btn-main { 
             width: 100%; 
-            padding: 12px;
+            padding: 14px;
             border: none; 
-            border-radius: 6px; 
-            font-weight: 700; 
+            border-radius: 10px; 
+            font-weight: 800; 
             cursor: pointer; 
-            text-transform: uppercase; 
-            font-family: 'JetBrains Mono'; 
-            font-size: 12px;
-            letter-spacing: 1px;
-            margin-top: 8px; 
+            font-family: 'Plus Jakarta Sans'; 
+            margin-top: 10px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             gap: 8px; 
-            transition: 0.2s;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .btn-gold { 
+            background: linear-gradient(45deg, #8B6B1E, var(--gold-primary)); 
+            color: black; 
         }
 
-        .btn-save { 
-            background: var(--primary); 
-            color: #000; 
-            display: none; 
-            animation: pulse 1.5s infinite; 
+        /* Result Cards Style */
+        .card-result { 
+            background: #1a1a1a; 
+            border-radius: 12px; 
+            margin-bottom: 15px; 
+            overflow: hidden; 
+            border: 1px solid #333;
+            transition: 0.3s;
         }
-        
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+        .card-result:hover { border-color: var(--fire-red); box-shadow: 0 0 15px var(--fire-glow); }
 
-        .file-manager-title { font-size: 11px; color: var(--accent); margin: 10px 0 8px; font-weight: bold; border-left: 3px solid var(--accent); padding-left: 8px; }
-        .file-list { background: rgba(0, 20, 5, 0.4); border-radius: 6px; border: 1px solid #1a3321; max-height: 200px; overflow-y: auto; padding: 8px; }
-        .file-item { display: flex; justify-content: space-between; align-items: center; font-size: 10px; padding: 6px; border-bottom: 1px solid #1a3321; }
-
-        .card-result { background: #051008; border-radius: 8px; margin-bottom: 12px; border: 1px solid #1a3321; overflow: hidden; }
-        .result-header { background: rgba(255, 215, 0, 0.1); padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gold); }
-        
-        pre { background: #000; padding: 12px; color: #adffad; font-size: 11px; white-space: pre-wrap; font-family: 'JetBrains Mono'; border-top: 1px solid #1a3321; margin: 0; }
-        
-        .mini-btn { padding: 5px 10px; font-size: 9px; cursor: pointer; border: none; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
-        .copy-btn { background: var(--primary); color: #000; }
-        .del-btn { background: var(--red); color: #fff; }
-        .wa-btn { 
-            background: var(--wa-green); 
-            color: #000; 
-            padding: 6px 12px; 
-            border-radius: 20px; 
-            font-size: 10px; 
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
+        .result-header { 
+            background: #222; 
+            padding: 10px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #333; 
         }
-        .db-info { font-size: 10px; color: var(--primary); text-align: center; margin-top: 10px; letter-spacing: 1px; }
+        .badge-id {
+            background: rgba(255, 69, 0, 0.1);
+            color: var(--fire-red);
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 800;
+            border: 1px solid var(--fire-red);
+        }
 
-        .rd-modal-box { width: 85%; max-width: 320px; background: #050a05; border: 1px solid var(--primary); border-radius: 10px; padding: 20px; }
+        pre { 
+            background: #0a0a0a; 
+            padding: 15px; 
+            color: #00ff00; /* Neon green code like Matrix */
+            font-size: 12px; 
+            white-space: pre-wrap; 
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0;
+        }
 
-        .action-group {
+        .mini-btn { padding: 8px 15px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; font-size: 11px; }
+        .copy-btn { background: #333; color: #fff; }
+        .wa-btn { background: var(--wa-green); color: white; display: flex; align-items: center; gap: 5px; text-decoration: none; }
+        
+        .float-admin {
+            position: fixed;
+            bottom: 25px;
+            left: 20px;
+            background: #000;
+            color: var(--gold-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
-            gap: 6px;
             align-items: center;
+            justify-content: center;
+            z-index: 998;
+            cursor: pointer;
+            border: 2px solid var(--gold-primary);
+            box-shadow: 0 0 15px var(--gold-glow);
         }
 
-        .reset-btn {
-            background: transparent;
-            border: 1px solid var(--red);
-            color: var(--red);
-            margin-top: 20px;
-            opacity: 0.8;
-        }
-        .reset-btn:hover {
-            background: var(--red);
-            color: #000;
-        }
-
-        .store-description {
-            text-align: center;
-            font-size: 11px;
-            color: #aaa;
-            margin-bottom: 15px;
-            border-bottom: 1px dashed var(--gold);
-            padding-bottom: 10px;
-        }
-        .store-description i {
-            color: var(--gold);
-        }
+        .db-info { font-size: 11px; color: var(--gold-light); text-align: center; margin-top: 15px; font-weight: bold; }
         
-        @keyframes blinker {
-            50% { opacity: 0.5; }
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #555;
         }
+        .empty-state i { font-size: 50px; color: #222; margin-bottom: 15px; }
+
     </style>
 </head>
 <body>
@@ -282,128 +247,89 @@
 
 <header>
     <div class="logo-area">
-        <img src="logo.png" alt="Logo" onerror="this.style.display='none'"> <!-- Jika logo tidak ada, tidak muncul -->
-        <span class="header-title"><i class="fas fa-store"></i> RUANG DATER SE INDONESIA</span>
+        <img src="logo.png" alt="KJS" onerror="this.src='https://i.ibb.co/vzB7pYn/temp-logo.jpg'">
+        <span class="header-title">RUANG DATER SE-INDONESIA 🇮🇩</span>
     </div>
-    <div style="display: flex; gap: 8px;">
-        <div class="music-button" onclick="toggleMusic()" id="musicBtn">
-            <i class="fas fa-volume-up"></i> SOUND
-        </div>
-        <div class="admin-button" onclick="adminLogin()">
-            <i class="fas fa-crown"></i> ADMIN
-        </div>
+    <div style="display: flex; gap: 15px; align-items: center;">
+        <i class="fas fa-volume-mute" id="musicBtn" onclick="toggleMusic()" style="color: var(--gold-primary); cursor: pointer; font-size: 1.2rem;"></i>
+        <i class="fas fa-crown" style="color: var(--gold-light);"></i>
     </div>
 </header>
 
+<div class="promo-banner">
+    <h2><i class="fas fa-fire"></i> KJS PREMIUM ACCESS</h2>
+    <p>Database Eksklusif & High-Quality Data Redy 2026</p>
+    <i class="fas fa-crown"></i>
+</div>
+
 <div class="container">
-    <!-- Deskripsi Store untuk Pembeli -->
-    <div class="store-description">
-        <i class="fas fa-map-marked-alt"></i> Cari data kependudukan berdasarkan nama atau wilayah (desa/kecamatan/kabupaten). 
-        Ketik kata kunci, temukan data, dan klik <span style="color:var(--wa-green); font-weight:bold;">BELI</span> untuk menghubungi admin via WhatsApp.
+    <div class="premium-card">
+        <div class="search-box">
+            <input type="text" id="search-free" placeholder="Cari langsung, daerah, Lokasi..." autocomplete="off">
+            <button onclick="searchData()">SCAN</button>
+        </div>
+        <div style="margin-top: 15px; display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px;">
+            <span style="font-size: 10px; background: #8B0000; color: #fff; padding: 5px 12px; border-radius: 5px; white-space: nowrap; border: 1px solid var(--fire-red);">#REDY_ACCESS</span>
+            <span style="font-size: 10px; background: #333; color: var(--gold-light); padding: 5px 12px; border-radius: 5px; white-space: nowrap; border: 1px solid var(--gold-primary);">#BASIL_KJS</span>
+            <span style="font-size: 10px; background: #333; color: #fff; padding: 5px 12px; border-radius: 5px; white-space: nowrap;">#FRESH_DATA</span>
+        </div>
     </div>
 
-    <!-- Panel admin (tersembunyi, hanya muncul setelah login) -->
-    <div id="admin-panel" class="premium-card">
-        <div style="font-size: 10px; color: var(--accent); margin-bottom: 8px;">⬇️ UPLOAD DATABASE (TXT)</div>
-        <div class="upload-zone" onclick="document.getElementById('file-input').click()">
-            <i class="fas fa-cloud-upload-alt" style="font-size: 24px; color: var(--purple); margin-bottom: 8px;"></i>
-            <p style="margin: 0; font-size: 11px; font-weight: bold;">IMPORT TXT DATABASE</p>
-            <span id="file-name" style="font-size: 9px; opacity: 0.5;">Tap to select file</span>
-            <input type="file" id="file-input" hidden accept=".txt">
-        </div>
-
-        <div id="preview-container" style="display:none; margin-top:10px; border: 1px solid var(--accent); border-radius:5px; overflow:hidden;">
-            <div style="background:var(--accent); color:#000; font-size:9px; padding:4px; text-align:center; font-weight:bold;">PREVIEW SCAN</div>
-            <div id="preview-list" style="max-height:100px; overflow-y:auto; font-size:10px; padding:8px; background:#000;"></div>
-        </div>
-
-        <button id="btn-process" class="btn-main" style="background: #111; color: var(--primary); border: 1px solid var(--primary);">
-            <i class="fas fa-sync-alt"></i> SCAN & VALIDATE
-        </button>
-        <button id="btn-confirm-save" class="btn-main btn-save">
-            <i class="fas fa-database"></i> INJECT TO CORE
+    <div id="admin-panel" class="premium-card" style="display:none; border-left: 4px solid var(--gold-primary);">
+        <div style="color: var(--gold-light); font-weight: bold; margin-bottom: 15px; font-size: 14px; letter-spacing: 1px;">DASHBOARD FOUNDER</div>
+        <input type="file" id="file-input" hidden accept=".txt">
+        <button class="btn-main" style="background: #000; color: var(--gold-primary); border: 1px dashed var(--gold-primary);" onclick="document.getElementById('file-input').click()">
+            <i class="fas fa-upload"></i> LOAD NEW DATABASE
         </button>
         
-        <button onclick="toggleFilePanel()" class="btn-main" style="background:transparent; border:1px solid var(--accent); color:var(--accent);">
-            <i class="fas fa-folder-open"></i> STORAGE MANAGER
+        <button id="btn-process" class="btn-main btn-gold">
+            <i class="fas fa-bolt"></i> EXECUTE INJECTION
         </button>
-
-        <div id="file-panel" style="display:none; margin-top:10px;">
-            <div class="file-manager-title">LOCAL_FILES</div>
-            <div class="file-list" id="main-file-list"></div>
+        
+        <div id="preview-container" style="display:none; margin-top:10px; background:#000; border-radius:8px; padding:10px; border: 1px solid #333;">
+            <div id="preview-list" style="max-height:100px; overflow-y:auto; font-size:10px; color: #0f0; font-family: monospace;"></div>
+            <button id="btn-confirm-save" class="btn-main btn-gold" style="margin-top:10px;">SAVE TO CLOUD</button>
         </div>
 
-        <!-- Tombol reset hanya untuk admin -->
-        <button onclick="clearAllData()" class="btn-main reset-btn">
-            <i class="fas fa-trash-alt"></i> SYSTEM FACTORY RESET
+        <button onclick="clearAllData()" class="btn-main" style="background:transparent; color:#ff4747; font-size: 11px; border: 1px solid #440000; margin-top: 20px;">
+            <i class="fas fa-skull"></i> DESTROY ALL RECORDS
         </button>
-
-        <div class="db-info" id="db-count"></div>
+        <div class="db-info" id="db-count">SYSTEM READY</div>
     </div>
 
-    <!-- Panel pencarian satu kolom (untuk semua pengguna) -->
-    <div class="premium-card">
-        <div style="font-size: 10px; color: var(--gold); margin-bottom: 10px; font-weight: bold; text-align: center;">
-            <i class="fas fa-search"></i> PENCARIAN DATA
-        </div>
-        <div class="search-box">
-            <input type="text" id="search-free" placeholder="Contoh: Garut, Budi, Sukajadi, 12345..." autocomplete="off">
-            <button onclick="searchData()"><i class="fas fa-search"></i> CARI</button>
-        </div>
-        <div style="font-size: 9px; color: #aaa; text-align: center;">Ketik nama, desa, kecamatan, kabupaten, atau NIK</div>
-    </div>
-
-    <!-- Container hasil pencarian -->
-    <div id="hasil-container"></div>
-</div>
-
-<!-- Modal Login Admin -->
-<div id="adminModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.85); display:none; align-items:center; justify-content:center; z-index:2000; backdrop-filter:blur(6px);">
-    <div style="width:90%; max-width:350px; background:#050a05; border:1px solid var(--purple); border-radius:12px; padding:25px; box-shadow:0 0 25px rgba(188,111,241,0.3);">
-        <div style="text-align:center; color:var(--purple); font-weight:bold; margin-bottom:15px;">
-            <i class="fas fa-crown"></i> ADMIN ACCESS
-        </div>
-        <input type="password" id="adminPassword" placeholder="Masukkan password..."
-            style="width:100%; padding:12px; background:#000; border:1px solid var(--purple); color:var(--purple); border-radius:8px; font-family:'JetBrains Mono'; outline:none; margin-bottom:15px;">
-        <div style="display:flex; gap:10px;">
-            <button onclick="closeAdminModal()" 
-                style="flex:1; padding:10px; border:none; border-radius:8px; background:#111; color:#aaa; cursor:pointer;">
-                CANCEL
-            </button>
-            <button onclick="checkAdminLogin()" 
-                style="flex:1; padding:10px; border:none; border-radius:8px; background:linear-gradient(45deg, var(--purple), var(--primary)); color:#000; cursor:pointer;">
-                LOGIN
-            </button>
+    <div id="hasil-container">
+        <div class="empty-state">
+            <i class="fas fa-fingerprint"></i>
+            <p>Waiting for secure search input...</p>
         </div>
     </div>
 </div>
 
-<!-- Modal Konfirmasi Umum -->
-<div id="rdConfirm" style="position: fixed; inset: 0; background: rgba(0,0,0,0.8); display:none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(4px);">
-    <div class="rd-modal-box">
-        <div style="color:var(--primary); font-weight:bold; margin-bottom:10px; text-align:center;">SYSTEM_ALERT</div>
-        <div id="rdConfirmText" style="font-size:12px; text-align:center; margin-bottom:20px;"></div>
-        <div style="display:flex; gap:10px;">
-            <button class="mini-btn del-btn" style="flex:1; padding:10px;" onclick="closeRDConfirm()">CANCEL</button>
-            <button class="mini-btn copy-btn" style="flex:1; padding:10px;" id="rdConfirmOk">PROCEED</button>
-        </div>
+<div class="float-admin" onclick="adminLogin()">
+    <i class="fas fa-key"></i>
+</div>
+
+<div id="adminModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.95); display:none; align-items:center; justify-content:center; z-index:2000; backdrop-filter:blur(15px);">
+    <div style="width:85%; max-width:320px; background:var(--dark-surface); border: 2px solid var(--gold-primary); border-radius:20px; padding:40px 30px; text-align: center; box-shadow: 0 0 30px var(--gold-glow);">
+        <i class="fas fa-shield-alt" style="font-size: 50px; color: var(--gold-primary); margin-bottom: 20px;"></i>
+        <div style="font-weight: 800; color: #fff; margin-bottom: 20px; letter-spacing: 2px;">SECURE LOGIN</div>
+        <input type="password" id="adminPassword" placeholder="ACCESS PIN"
+            style="width:100%; padding:15px; background:#000; border:1px solid var(--gold-primary); border-radius:10px; outline:none; margin-bottom:15px; text-align: center; font-weight: bold; color: var(--gold-light);">
+        <button onclick="checkAdminLogin()" style="width:100%; padding:15px; border:none; border-radius:10px; background:linear-gradient(45deg, var(--gold-primary), var(--gold-light)); color:#000; font-weight: 900; cursor:pointer;">ACCESS SYSTEM</button>
+        <div onclick="closeAdminModal()" style="margin-top: 20px; font-size: 11px; color: #666; cursor: pointer; text-transform: uppercase;">Abort Mission</div>
     </div>
 </div>
 
 <script>
-    // Nomor WhatsApp admin (ganti dengan nomor Anda, format internasional tanpa +)
-    const ADMIN_WA = "6281234567890"; // Contoh: 6281234567890
+    // Konfigurasi Store
+    const ADMIN_WA = "6281234567890"; // GANTI NOMOR WA DISINI
+    const STORE_PIN = "kemet2026";    // PIN ADMIN BARU
 
-    // Data utama
-    let localDatabase = JSON.parse(localStorage.getItem('daterDB_V32')) || [];
+    let localDatabase = JSON.parse(localStorage.getItem('kemetStore_DB')) || [];
     let tempStorage = [];
-    let currentFileName = "";
 
-    // Fungsi admin login modal
     function adminLogin() {
         document.getElementById("adminModal").style.display = "flex";
-        document.getElementById("adminPassword").value = "";
-        document.getElementById("adminPassword").focus();
     }
 
     function closeAdminModal() {
@@ -412,53 +338,27 @@
 
     function checkAdminLogin() {
         const pwd = document.getElementById("adminPassword").value;
-        if (pwd === "dater2026") { // Ganti password sesuai keinginan
+        if (pwd === STORE_PIN) { 
             document.getElementById('admin-panel').style.display = 'block';
             closeAdminModal();
+            alert("ACCESS GRANTED. Welcome back, Boss.");
         } else {
-            alert("Password salah!");
+            alert("ACCESS DENIED. WRONG PIN.");
         }
     }
 
-    // Update tampilan file manager dan info jumlah record
     function updateSystemUI() {
-        const count = localDatabase.length;
-        document.getElementById('db-count').innerHTML = `CORE_DATABASE: <span style="color:#fff">${count}</span> RECORDS`;
-
-        const container = document.getElementById('main-file-list');
-        if (!container) return;
-        container.innerHTML = "";
-        const files = [...new Set(localDatabase.map(d => d.sourceFile))];
-        if (files.length === 0) {
-            container.innerHTML = "<div style='text-align:center; opacity:0.3; padding: 10px; font-size:9px;'>No files saved.</div>";
-            return;
-        }
-        files.forEach(fileName => {
-            const dataCount = localDatabase.filter(d => d.sourceFile === fileName).length;
-            const item = document.createElement('div');
-            item.className = 'file-item';
-            item.innerHTML = `
-                <span><i class="fas fa-file-code" style="color:var(--primary)"></i> ${fileName} (${dataCount})</span>
-                <div style="display:flex; gap:4px;">
-                    <button class="mini-btn copy-btn" style="background:#111; color:var(--primary); border:1px solid var(--primary)" onclick="viewFile('${fileName}')">VIEW</button>
-                    <button class="mini-btn del-btn" onclick="deleteByFile('${fileName}')"><i class="fas fa-times"></i></button>
-                </div>
-            `;
-            container.appendChild(item);
-        });
+        document.getElementById('db-count').innerHTML = `RECORDS ENCRYPTED: ${localDatabase.length}`;
     }
 
-    // Handle upload file
     document.getElementById('file-input').addEventListener('change', (e) => {
-        if(e.target.files[0]) {
-            currentFileName = e.target.files[0].name;
-            document.getElementById('file-name').innerText = currentFileName;
-        }
+        if(e.target.files[0]) alert("File Ready: " + e.target.files[0].name);
     });
 
     document.getElementById('btn-process').addEventListener('click', () => {
         const file = document.getElementById('file-input').files[0];
-        if(!file) return alert("Select .txt file!");
+        if(!file) return alert("Select .txt source first!");
+        
         const reader = new FileReader();
         reader.onload = (e) => {
             const rawText = e.target.result;
@@ -466,259 +366,104 @@
             const previewList = document.getElementById('preview-list');
             previewList.innerHTML = "";
             tempStorage = [];
+            
             blocks.forEach((block, index) => {
                 const text = block.trim();
                 if(text.length < 10) return;
                 
-                // Ekstraksi data
-                const nikMatch = text.match(/NIK\s*[:\-\s]*(\d+)/i) || text.match(/⚠️(\d+)/);
-                const kpjMatch = text.match(/KPJ\s*[:\-\s]*(\d+)/i);
                 const namaMatch = text.match(/Nama\s*[:\-\s]*([A-Za-z\s\.]+)/i) || text.match(/➬\s*:\s*([A-Za-z\s\.]+)/i);
-                
-                // Ekstraksi alamat dan wilayah
-                const alamatMatch = text.match(/Alamat\s*[:\-\s]*(.+)/i);
-                let kelurahan = "", kecamatan = "", kabkota = "";
-                if (alamatMatch) {
-                    const alamat = alamatMatch[1];
-                    const kelMatch = alamat.match(/Kelurahan\s+(\w+(?:\s+\w+)?)/i);
-                    const kecMatch = alamat.match(/Kecamatan\s+(\w+(?:\s+\w+)?)/i);
-                    const kabMatch = alamat.match(/(Kab\.?|Kota)\s+(\w+(?:\s+\w+)?)/i);
-                    kelurahan = kelMatch ? kelMatch[1].trim() : "";
-                    kecamatan = kecMatch ? kecMatch[1].trim() : "";
-                    kabkota = kabMatch ? kabMatch[2].trim() : "";
-                }
 
                 const item = {
-                    id: Date.now() + index + Math.random(),
-                    nik: nikMatch ? nikMatch[1] : "N/A",
-                    kpj: kpjMatch ? kpjMatch[1] : "N/A",
-                    nama: namaMatch ? namaMatch[1].trim().toLowerCase() : "unknown",
-                    kelurahan: kelurahan.toLowerCase(),
-                    kecamatan: kecamatan.toLowerCase(),
-                    kabkota: kabkota.toLowerCase(),
-                    raw: text,
-                    sourceFile: currentFileName
+                    id: Date.now() + index,
+                    nama: namaMatch ? namaMatch[1].trim() : "Unknown",
+                    raw: text
                 };
                 
-                // Cek duplikat sederhana berdasarkan NIK atau raw
-                const isDup = localDatabase.some(d => (item.nik !== "N/A" && d.nik === item.nik) || d.raw === item.raw);
-                if(!isDup) {
-                    tempStorage.push(item);
-                    const div = document.createElement('div');
-                    div.style = "display:flex; justify-content:space-between; padding:2px 0; border-bottom:1px solid #052205";
-                    div.innerHTML = `<span>${item.nama.toUpperCase()}</span><span style="color:var(--primary)">SCAN OK</span>`;
-                    previewList.appendChild(div);
-                }
+                tempStorage.push(item);
+                previewList.innerHTML += `<div>[OK] INJECTING: ${item.nama}</div>`;
             });
-            if(tempStorage.length > 0) {
-                document.getElementById('preview-container').style.display = 'block';
-                document.getElementById('btn-confirm-save').style.display = 'flex';
-            } else { 
-                alert("Tidak ada data baru atau semua duplikat!"); 
-            }
+            document.getElementById('preview-container').style.display = 'block';
         };
         reader.readAsText(file);
     });
 
     document.getElementById('btn-confirm-save').addEventListener('click', () => {
         localDatabase = [...localDatabase, ...tempStorage];
-        localStorage.setItem('daterDB_V32', JSON.stringify(localDatabase));
-        alert("Injected: " + tempStorage.length + " items");
+        localStorage.setItem('kemetStore_DB', JSON.stringify(localDatabase));
+        alert("Injection Success! " + tempStorage.length + " Items Added.");
         tempStorage = [];
         document.getElementById('preview-container').style.display = 'none';
-        document.getElementById('btn-confirm-save').style.display = 'none';
         updateSystemUI();
     });
 
-    // Fungsi pencarian bebas (full-text di semua field)
     function searchData() {
         const keyword = document.getElementById('search-free').value.toLowerCase().trim();
         const container = document.getElementById('hasil-container');
-        if(!keyword) return alert("Masukkan kata kunci pencarian!");
+        if(!keyword) return;
 
-        const results = localDatabase.filter(d => {
-            // Cari di semua field yang relevan (termasuk raw)
-            return d.nama.includes(keyword) || 
-                   d.kelurahan.includes(keyword) || 
-                   d.kecamatan.includes(keyword) || 
-                   d.kabkota.includes(keyword) ||
-                   d.nik.includes(keyword) ||
-                   d.kpj.includes(keyword) ||
-                   d.raw.toLowerCase().includes(keyword);
-        });
-
+        const results = localDatabase.filter(d => d.raw.toLowerCase().includes(keyword));
         container.innerHTML = "";
 
         if (results.length === 0) {
-            container.innerHTML = `
-            <div style="text-align:center; padding:40px; font-size:20px; font-weight:900; color:#ffffff;">
-                🚫 NOT FOUND ATAU STOK BELUM READY KAK 🙏
-            </div>
-        `;
+            container.innerHTML = `<div class="empty-state">
+                <i class="fas fa-ghost"></i>
+                <p>TIDAK DI TEMUKAN ATAU STOK BELUM REDY 🙏.</p>
+            </div>`;
             return;
         }
-        results.forEach((res, i) => {
+
+        results.forEach((res) => {
             const div = document.createElement('div');
             div.className = 'card-result';
-            
-            // Buat info wilayah untuk ditampilkan di header
-            let wilayahInfo = [];
-            if (res.kelurahan) wilayahInfo.push(`Kel:${res.kelurahan}`);
-            if (res.kecamatan) wilayahInfo.push(`Kec:${res.kecamatan}`);
-            if (res.kabkota) wilayahInfo.push(`Kab:${res.kabkota}`);
-            const wilayahStr = wilayahInfo.length ? ` // ${wilayahInfo.join(' ')}` : '';
-            
-            // Siapkan tombol aksi
             div.innerHTML = `
                 <div class="result-header">
-                    <span style="font-size:10px; font-weight:bold; color:var(--gold)">REC_${i+1}${wilayahStr}</span>
-                    <div class="action-group">
+                    <span class="badge-id"><i class="fas fa-check-circle"></i> VERIFIED DATA</span>
+                    <div style="display:flex; gap:8px;">
                         <button class="mini-btn copy-btn" onclick="copyText(this)">COPY</button>
-                        <button class="wa-btn" onclick="waOrder(this)"><i class="fab fa-whatsapp"></i> BELI</button>
-                        <button class="mini-btn del-btn" onclick="deleteItem(${res.id})"><i class="fas fa-trash"></i></button>
+                        <button class="mini-btn wa-btn" onclick="waOrder(this)"><i class="fab fa-whatsapp"></i> BUY</button>
                     </div>
                 </div>
-                <pre>${res.raw}</pre>`;
+                <pre>${res.raw}</pre>
+            `;
             container.appendChild(div);
         });
     }
 
-    // Fungsi untuk tombol BELI (WhatsApp)
     function waOrder(btn) {
-        // Ambil teks record dari elemen pre terdekat
         const pre = btn.closest('.card-result').querySelector('pre').innerText;
-        // Buat pesan singkat
-        const message = `Halo, saya tertarik dengan data berikut:\n\n${pre}\n\nApakah masih tersedia?`;
-        // Encode untuk URL
-        const encoded = encodeURIComponent(message);
-        // Buka WhatsApp
-        window.open(`https://wa.me/${ADMIN_WA}?text=${encoded}`, '_blank');
-    }
-
-    function toggleFilePanel() {
-        const panel = document.getElementById("file-panel");
-        panel.style.display = panel.style.display === "none" ? "block" : "none";
-    }
-
-    function viewFile(fileName) {
-        const container = document.getElementById('hasil-container');
-        container.innerHTML = `<div style="text-align:center; padding:10px; font-size:10px; color:var(--accent)">FILE_LOADED: ${fileName}</div>`;
-        const results = localDatabase.filter(d => d.sourceFile === fileName);
-        results.forEach((res, i) => {
-            const div = document.createElement('div');
-            div.className = 'card-result';
-            div.innerHTML = `
-                <div class="result-header">
-                    <span style="font-size:10px; font-weight:bold; color:var(--gold)">#${i+1}</span>
-                    <div class="action-group">
-                        <button class="mini-btn copy-btn" onclick="copyText(this)">COPY</button>
-                        <button class="wa-btn" onclick="waOrder(this)"><i class="fab fa-whatsapp"></i> BELI</button>
-                    </div>
-                </div>
-                <pre>${res.raw}</pre>`;
-            container.appendChild(div);
-        });
-    }
-
-    function deleteByFile(fileName) {
-        showRDConfirm(`Wipe all data from ${fileName}?`, () => {
-            localDatabase = localDatabase.filter(d => d.sourceFile !== fileName);
-            localStorage.setItem('daterDB_V32', JSON.stringify(localDatabase));
-            updateSystemUI();
-            document.getElementById('hasil-container').innerHTML = "";
-        });
-    }
-
-    function deleteItem(id) {
-        showRDConfirm("Delete record?", () => {
-            localDatabase = localDatabase.filter(d => d.id !== id);
-            localStorage.setItem('daterDB_V32', JSON.stringify(localDatabase));
-            updateSystemUI();
-            searchData(); // refresh hasil jika ada
-        });
-    }
-
-    function clearAllData() {
-        showRDConfirm("TOTAL WIPE FACTORY RESET?", () => {
-            localStorage.removeItem('daterDB_V32');
-            localDatabase = [];
-            updateSystemUI();
-            document.getElementById('hasil-container').innerHTML = "";
-        });
+        const message = `Halo Kemet JS Store, saya berminat dengan data ini:\n\n${pre}\n\nInfo harga dan pembayarannya Boss.`;
+        window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(message)}`, '_blank');
     }
 
     function copyText(btn) {
         const text = btn.closest('.card-result').querySelector('pre').innerText;
         navigator.clipboard.writeText(text);
-        const originalText = btn.innerText;
-        btn.innerText = "COPIED";
-        setTimeout(() => btn.innerText = originalText, 1000);
+        btn.innerHTML = "DONE!";
+        setTimeout(() => btn.innerText = "COPY", 1000);
     }
 
-    function showRDConfirm(message, callback) {
-        document.getElementById("rdConfirmText").innerText = message;
-        const modal = document.getElementById("rdConfirm");
-        modal.style.display = "flex";
-        document.getElementById("rdConfirmOk").onclick = () => { closeRDConfirm(); callback(); };
-    }
-
-    function closeRDConfirm() { document.getElementById("rdConfirm").style.display = "none"; }
-
-    // Inisialisasi
-    updateSystemUI();
-    document.getElementById('admin-panel').style.display = 'none';
-
-    // Tambahkan event enter pada input pencarian
-    document.getElementById('search-free').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') searchData();
-    });
-    
-    // Musik latar
-    let musicStarted = false;
-
-    function startMusic() {
-        if (!musicStarted) {
-            const audio = document.getElementById("bgMusic");
-            audio.volume = 0.3; 
-            audio.play().catch(() => {});
-            musicStarted = true;
+    function clearAllData() {
+        if(confirm("DANGER! This will wipe the entire store. Proceed?")) {
+            localStorage.removeItem('kemetStore_DB');
+            localDatabase = [];
+            updateSystemUI();
+            location.reload();
         }
     }
-
-    document.addEventListener("click", startMusic);
-    document.addEventListener("touchstart", startMusic);
 
     function toggleMusic() {
         const audio = document.getElementById("bgMusic");
-        const btn = document.getElementById("musicBtn");
-
-        if (!audio.paused) {
-            let fadeOut = setInterval(() => {
-                if (audio.volume > 0.05) {
-                    audio.volume -= 0.05;
-                } else {
-                    audio.pause();
-                    audio.volume = 0.3;
-                    clearInterval(fadeOut);
-                }
-            }, 100);
-
-            btn.innerHTML = '<i class="fas fa-volume-mute"></i> MUTED';
-
+        const icon = document.getElementById("musicBtn");
+        if (audio.paused) {
+            audio.play().catch(() => alert("Klik di mana saja dulu agar musik bisa jalan!"));
+            icon.classList.replace("fa-volume-mute", "fa-music");
         } else {
-            audio.volume = 0;
-            audio.play();
-            let fadeIn = setInterval(() => {
-                if (audio.volume < 0.3) {
-                    audio.volume += 0.05;
-                } else {
-                    clearInterval(fadeIn);
-                }
-            }, 100);
-
-            btn.innerHTML = '<i class="fas fa-volume-up"></i> SOUND';
+            audio.pause();
+            icon.classList.replace("fa-music", "fa-volume-mute");
         }
     }
+
+    updateSystemUI();
 </script>
 
 </body>
