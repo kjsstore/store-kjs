@@ -1,470 +1,677 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KEMET JS STORE | PREMIUM EDITION</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root { 
-            --gold-primary: #D4AF37;
-            --gold-light: #FFD700;
-            --fire-red: #FF4500;
-            --dark-bg: #050505;
-            --dark-surface: #121212;
-            --gold-glow: rgba(212, 175, 55, 0.3);
-            --fire-glow: rgba(255, 69, 0, 0.4);
-            --wa-green: #25D366;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<title>KJSSTORE | Garuda Pro Premium - Official Marketplace</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-        * { box-sizing: border-box; }
+    body {
+        font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+        background: #f5f7fb;
+        color: #1e293b;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0;
-            padding-bottom: 80px;
-            color: #fff;
-            background: var(--dark-bg);
-            overflow-x: hidden;
-        }
+    /* Simulasi marketplace modern */
+    .app-bar {
+        background: #ffffff;
+        backdrop-filter: blur(0px);
+        padding: 12px 20px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid #eef2f6;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-        /* Scanline / Grainy Effect for Cyber Look */
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-            background-size: 100% 4px;
-            z-index: 999;
-            pointer-events: none;
-            opacity: 0.3;
-        }
+    .app-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 
-        header { 
-            background: linear-gradient(180deg, #1a1a1a 0%, #000 100%); 
-            padding: 1rem; 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            border-bottom: 2px solid var(--gold-primary);
-            box-shadow: 0 4px 20px var(--fire-glow);
-        }
+    .app-logo i {
+        font-size: 28px;
+        background: linear-gradient(135deg, #f97316, #dc2626);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
 
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo-area img {
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid var(--gold-primary);
-            box-shadow: 0 0 10px var(--gold-primary);
-        }
-        .header-title {
-            font-weight: 800; 
-            color: var(--gold-light); 
-            font-size: 1.2rem; 
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
+    .app-logo span {
+        font-weight: 800;
+        font-size: 20px;
+        background: linear-gradient(135deg, #ea580c, #dc2626);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        letter-spacing: -0.3px;
+    }
 
-        /* Banner Flame Style */
-        .promo-banner {
-            background: linear-gradient(45deg, #000, #400000);
-            margin: 15px;
-            padding: 25px;
-            border-radius: 15px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--fire-red);
-            box-shadow: inset 0 0 20px var(--fire-glow);
-        }
-        .promo-banner h2 { 
-            margin: 0; 
-            font-size: 1.3rem; 
-            color: var(--gold-light);
-            position: relative;
-            z-index: 2;
-        }
-        .promo-banner p { margin: 5px 0 0; font-size: 0.85rem; opacity: 0.9; position: relative; z-index: 2;}
-        .promo-banner i {
-            position: absolute;
-            right: -10px;
-            bottom: -10px;
-            font-size: 100px;
-            color: var(--fire-red);
-            opacity: 0.3;
-            transform: rotate(-15deg);
-        }
+    .app-badge {
+        background: #fef2e8;
+        padding: 6px 12px;
+        border-radius: 40px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #ea580c;
+    }
 
-        .container { max-width: 600px; margin: 0 auto; padding: 0 12px; }
+    .container-market {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 16px 16px 24px;
+        position: relative;
+    }
 
-        .premium-card { 
-            background: var(--dark-surface); 
-            border: 1px solid rgba(212, 175, 55, 0.2); 
-            border-radius: 15px; 
-            padding: 1.5rem; 
-            margin-bottom: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
+    /* Kartu ala marketplace */
+    .market-card {
+        background: #ffffff;
+        border-radius: 24px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.05);
+        transition: all 0.2s ease;
+        border: 1px solid #edf2f7;
+        overflow: hidden;
+    }
 
-        /* Search Box Gold Style */
-        .search-box {
-            display: flex;
-            background: #1a1a1a;
-            padding: 5px;
-            border-radius: 10px;
-            border: 1px solid var(--gold-primary);
-            box-shadow: 0 0 15px var(--gold-glow);
-        }
-        .search-box input {
-            flex: 1;
+    .market-card-header {
+        padding: 16px 18px 8px 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .market-card-header i {
+        font-size: 22px;
+        color: #f97316;
+    }
+
+    .market-card-header h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    .market-card-body {
+        padding: 16px 18px 20px;
+    }
+
+    .flash-sale {
+        background: linear-gradient(105deg, #fff9f0 0%, #ffffff 100%);
+        border-left: 4px solid #f97316;
+    }
+
+    .promo-chip {
+        display: inline-flex;
+        background: #fee2e2;
+        border-radius: 40px;
+        padding: 4px 12px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #b91c1c;
+        margin-bottom: 12px;
+    }
+
+    .feature-grid-market {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 16px 0 8px;
+    }
+
+    .feature-badge {
+        background: #f8fafc;
+        padding: 10px 12px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1e293b;
+        border: 1px solid #eef2ff;
+        transition: all 0.2s;
+    }
+
+    .feature-badge i {
+        color: #f97316;
+        font-size: 16px;
+        width: 24px;
+    }
+
+    .coming-soon-market {
+        background: #f1f5f9;
+        border-radius: 18px;
+        padding: 12px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 500;
+        color: #334155;
+        margin-top: 12px;
+    }
+
+    .price-market {
+        background: #fff7ed;
+        border-radius: 20px;
+        padding: 12px;
+        text-align: center;
+        margin-top: 12px;
+    }
+
+    .price-market .big-price {
+        font-size: 32px;
+        font-weight: 800;
+        color: #ea580c;
+        letter-spacing: -0.5px;
+    }
+
+    .price-market small {
+        font-size: 12px;
+        color: #64748b;
+    }
+
+    /* Form styling modern */
+    .form-group-market {
+        margin-bottom: 18px;
+    }
+
+    .form-group-market label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #334155;
+        letter-spacing: 0.3px;
+    }
+
+    .input-market {
+        width: 100%;
+        padding: 14px 16px;
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 20px;
+        font-size: 14px;
+        color: #0f172a;
+        transition: all 0.2s;
+    }
+
+    .input-market:focus {
+        outline: none;
+        border-color: #f97316;
+        box-shadow: 0 0 0 3px rgba(249,115,22,0.15);
+    }
+
+    .btn-market {
+        background: linear-gradient(95deg, #f97316, #ea580c);
+        border: none;
+        border-radius: 44px;
+        padding: 16px;
+        width: 100%;
+        font-weight: 800;
+        font-size: 16px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 8px 18px rgba(249,115,22,0.25);
+    }
+
+    .btn-market:active {
+        transform: scale(0.97);
+        box-shadow: 0 4px 12px rgba(249,115,22,0.3);
+    }
+
+    /* timer marketplace */
+    .timer-market {
+        background: #1e293b;
+        border-radius: 60px;
+        padding: 8px 16px;
+        display: inline-flex;
+        gap: 12px;
+        margin-bottom: 8px;
+    }
+
+    .timer-block {
+        text-align: center;
+        background: #0f172a;
+        border-radius: 40px;
+        padding: 4px 10px;
+        min-width: 55px;
+    }
+
+    .timer-number {
+        font-size: 22px;
+        font-weight: 800;
+        color: #facc15;
+        line-height: 1.2;
+    }
+
+    .timer-label {
+        font-size: 9px;
+        color: #94a3b8;
+        letter-spacing: 0.5px;
+    }
+
+    /* warning note ala market */
+    .warning-note {
+        background: #fef2e8;
+        border-radius: 20px;
+        padding: 14px 18px;
+        border-left: 4px solid #f97316;
+    }
+
+    .warning-note p {
+        font-size: 12px;
+        margin: 6px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #7c2d12;
+    }
+
+    .footer-market {
+        text-align: center;
+        padding: 20px 16px;
+        font-size: 11px;
+        color: #64748b;
+        border-top: 1px solid #eef2ff;
+        margin-top: 16px;
+    }
+
+    .rating-star {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        color: #fbbf24;
+    }
+
+    /* note harga no nego */
+    .no-nego-note {
+        background: #fef9e6;
+        border-radius: 16px;
+        padding: 10px 12px;
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #b45309;
+        border: 1px solid #ffedd5;
+    }
+
+    .no-nego-note i {
+        font-size: 14px;
+        color: #dc2626;
+    }
+
+    /* Logo aplikasi custom - tempat untuk logo.png */
+    .app-icon-custom {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 12px;
+        border-radius: 24px;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 12px 24px -8px rgba(0,0,0,0.15);
+        overflow: hidden;
+        transition: transform 0.2s ease;
+    }
+    
+    .app-icon-custom img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    
+    /* fallback jika gambar belum ada */
+    .app-icon-custom .fallback-icon {
+        font-size: 48px;
+        background: linear-gradient(145deg, #f97316, #ea580c);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+    
+    .app-icon-custom:hover {
+        transform: scale(1.02);
+    }
+
+    @media (max-width: 480px) {
+        .container-market {
             padding: 12px;
-            border: none;
-            outline: none;
-            font-size: 14px;
-            background: transparent;
-            color: #fff;
         }
-        .search-box button {
-            background: linear-gradient(45deg, var(--gold-primary), var(--gold-light));
-            border: none;
-            color: #000;
-            padding: 0 25px;
-            border-radius: 8px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
+        .feature-grid-market {
+            grid-template-columns: 1fr;
         }
-        .search-box button:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--gold-light); }
-
-        /* Button Style */
-        .btn-main { 
-            width: 100%; 
+        .market-card-body {
             padding: 14px;
-            border: none; 
-            border-radius: 10px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            font-family: 'Plus Jakarta Sans'; 
-            margin-top: 10px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 8px; 
-            text-transform: uppercase;
-            transition: 0.3s;
         }
-        .btn-gold { 
-            background: linear-gradient(45deg, #8B6B1E, var(--gold-primary)); 
-            color: black; 
+        .app-icon-custom {
+            width: 70px;
+            height: 70px;
         }
-
-        /* Result Cards Style */
-        .card-result { 
-            background: #1a1a1a; 
-            border-radius: 12px; 
-            margin-bottom: 15px; 
-            overflow: hidden; 
-            border: 1px solid #333;
-            transition: 0.3s;
-        }
-        .card-result:hover { border-color: var(--fire-red); box-shadow: 0 0 15px var(--fire-glow); }
-
-        .result-header { 
-            background: #222; 
-            padding: 10px 15px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 1px solid #333; 
-        }
-        .badge-id {
-            background: rgba(255, 69, 0, 0.1);
-            color: var(--fire-red);
-            padding: 4px 10px;
-            border-radius: 5px;
-            font-size: 10px;
-            font-weight: 800;
-            border: 1px solid var(--fire-red);
-        }
-
-        pre { 
-            background: #0a0a0a; 
-            padding: 15px; 
-            color: #00ff00; /* Neon green code like Matrix */
-            font-size: 12px; 
-            white-space: pre-wrap; 
-            font-family: 'JetBrains Mono', monospace;
-            margin: 0;
-        }
-
-        .mini-btn { padding: 8px 15px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; font-size: 11px; }
-        .copy-btn { background: #333; color: #fff; }
-        .wa-btn { background: var(--wa-green); color: white; display: flex; align-items: center; gap: 5px; text-decoration: none; }
-        
-        .float-admin {
-            position: fixed;
-            bottom: 25px;
-            left: 20px;
-            background: #000;
-            color: var(--gold-primary);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 998;
-            cursor: pointer;
-            border: 2px solid var(--gold-primary);
-            box-shadow: 0 0 15px var(--gold-glow);
-        }
-
-        .db-info { font-size: 11px; color: var(--gold-light); text-align: center; margin-top: 15px; font-weight: bold; }
-        
-        .empty-state {
-            text-align: center;
-            padding: 50px 20px;
-            color: #555;
-        }
-        .empty-state i { font-size: 50px; color: #222; margin-bottom: 15px; }
-
-    </style>
+    }
+</style>
 </head>
 <body>
 
-<audio id="bgMusic" loop>
-    <source src="musik.mp3" type="audio/mpeg">
-</audio>
-
-<header>
-    <div class="logo-area">
-        <img src="logo.png" alt="KJS" onerror="this.src='https://i.ibb.co/vzB7pYn/temp-logo.jpg'">
-        <span class="header-title">RUANG DATER SE-INDONESIA 🇮🇩</span>
+<!-- Marketplace-like App Bar -->
+<div class="app-bar">
+    <div class="app-logo">
+        <i class="fas fa-store"></i>
+        <span>KJSSTORE</span>
     </div>
-    <div style="display: flex; gap: 15px; align-items: center;">
-        <i class="fas fa-volume-mute" id="musicBtn" onclick="toggleMusic()" style="color: var(--gold-primary); cursor: pointer; font-size: 1.2rem;"></i>
-        <i class="fas fa-crown" style="color: var(--gold-light);"></i>
-    </div>
-</header>
-
-<div class="promo-banner">
-    <h2><i class="fas fa-fire"></i> KJS PREMIUM ACCESS</h2>
-    <p>Database Eksklusif & High-Quality Data Redy 2026</p>
-    <i class="fas fa-crown"></i>
-</div>
-
-<div class="container">
-    <div class="premium-card">
-        <div class="search-box">
-            <input type="text" id="search-free" placeholder="Cari langsung, daerah, Lokasi..." autocomplete="off">
-            <button onclick="searchData()">SCAN</button>
-        </div>
-        <div style="margin-top: 15px; display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px;">
-            <span style="font-size: 10px; background: #8B0000; color: #fff; padding: 5px 12px; border-radius: 5px; white-space: nowrap; border: 1px solid var(--fire-red);">#REDY_ACCESS</span>
-            <span style="font-size: 10px; background: #333; color: var(--gold-light); padding: 5px 12px; border-radius: 5px; white-space: nowrap; border: 1px solid var(--gold-primary);">#BASIL_KJS</span>
-            <span style="font-size: 10px; background: #333; color: #fff; padding: 5px 12px; border-radius: 5px; white-space: nowrap;">#FRESH_DATA</span>
-        </div>
-    </div>
-
-    <div id="admin-panel" class="premium-card" style="display:none; border-left: 4px solid var(--gold-primary);">
-        <div style="color: var(--gold-light); font-weight: bold; margin-bottom: 15px; font-size: 14px; letter-spacing: 1px;">DASHBOARD FOUNDER</div>
-        <input type="file" id="file-input" hidden accept=".txt">
-        <button class="btn-main" style="background: #000; color: var(--gold-primary); border: 1px dashed var(--gold-primary);" onclick="document.getElementById('file-input').click()">
-            <i class="fas fa-upload"></i> LOAD NEW DATABASE
-        </button>
-        
-        <button id="btn-process" class="btn-main btn-gold">
-            <i class="fas fa-bolt"></i> EXECUTE INJECTION
-        </button>
-        
-        <div id="preview-container" style="display:none; margin-top:10px; background:#000; border-radius:8px; padding:10px; border: 1px solid #333;">
-            <div id="preview-list" style="max-height:100px; overflow-y:auto; font-size:10px; color: #0f0; font-family: monospace;"></div>
-            <button id="btn-confirm-save" class="btn-main btn-gold" style="margin-top:10px;">SAVE TO CLOUD</button>
-        </div>
-
-        <button onclick="clearAllData()" class="btn-main" style="background:transparent; color:#ff4747; font-size: 11px; border: 1px solid #440000; margin-top: 20px;">
-            <i class="fas fa-skull"></i> DESTROY ALL RECORDS
-        </button>
-        <div class="db-info" id="db-count">SYSTEM READY</div>
-    </div>
-
-    <div id="hasil-container">
-        <div class="empty-state">
-            <i class="fas fa-fingerprint"></i>
-            <p>Waiting for secure search input...</p>
-        </div>
+    <div class="app-badge">
+        <i class="fas fa-bolt"></i> ONLINE
     </div>
 </div>
 
-<div class="float-admin" onclick="adminLogin()">
-    <i class="fas fa-key"></i>
-</div>
+<div class="container-market">
+    
+    <!-- Header produk premium dengan logo aplikasi (logo.png) -->
+    <div class="market-card" style="background: linear-gradient(115deg, #ffffff 0%, #fffaf5 100%);">
+        <div class="market-card-body" style="text-align: center; padding-bottom: 16px;">
+            <!-- Tempat Logo Aplikasi: Ganti file logo.png di folder yang sama -->
+            <div class="app-icon-custom" id="appLogoContainer">
+                <!-- secara default menggunakan fallback icon, nanti akan terganti jika logo.png tersedia -->
+                <div class="fallback-icon" id="fallbackIcon">
+                    <i class="fas fa-eagle"></i>
+                </div>
+                <img id="customAppLogo" src="logo.png" alt="App Logo" style="display: none;" onerror="handleLogoError()">
+            </div>
+            
+            <h2 style="font-size: 26px; font-weight: 800; background: linear-gradient(135deg, #f97316, #dc2626); -webkit-background-clip: text; background-clip: text; color: transparent; margin-top: 8px;">🦅GARUDA PRO🦅</h2>
+            <div class="rating-star" style="justify-content: center; margin: 6px 0 4px;">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                <span style="color:#475569; margin-left: 6px;">4.9 (1.2k+ terjual)</span>
+            </div>
+            <div class="promo-chip" style="display: inline-flex; background: #fef3c7; color:#b45309;">
+                <i class="fas fa-fire"></i> KING ROBOT 🔥
+            </div>
+        </div>
+    </div>
 
-<div id="adminModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.95); display:none; align-items:center; justify-content:center; z-index:2000; backdrop-filter:blur(15px);">
-    <div style="width:85%; max-width:320px; background:var(--dark-surface); border: 2px solid var(--gold-primary); border-radius:20px; padding:40px 30px; text-align: center; box-shadow: 0 0 30px var(--gold-glow);">
-        <i class="fas fa-shield-alt" style="font-size: 50px; color: var(--gold-primary); margin-bottom: 20px;"></i>
-        <div style="font-weight: 800; color: #fff; margin-bottom: 20px; letter-spacing: 2px;">SECURE LOGIN</div>
-        <input type="password" id="adminPassword" placeholder="ACCESS PIN"
-            style="width:100%; padding:15px; background:#000; border:1px solid var(--gold-primary); border-radius:10px; outline:none; margin-bottom:15px; text-align: center; font-weight: bold; color: var(--gold-light);">
-        <button onclick="checkAdminLogin()" style="width:100%; padding:15px; border:none; border-radius:10px; background:linear-gradient(45deg, var(--gold-primary), var(--gold-light)); color:#000; font-weight: 900; cursor:pointer;">ACCESS SYSTEM</button>
-        <div onclick="closeAdminModal()" style="margin-top: 20px; font-size: 11px; color: #666; cursor: pointer; text-transform: uppercase;">Abort Mission</div>
+    <!-- Countdown + Flash Sale -->
+    <div class="market-card flash-sale">
+        <div class="market-card-body" style="text-align: center;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span style="font-weight: 800; background: #dc2626; padding: 4px 12px; border-radius: 30px; color: white; font-size: 12px;"><i class="fas fa-stopwatch"></i> FLASH SALE</span>
+                <span style="font-size: 12px; color:#ea580c;"><i class="fas fa-tag"></i> Limited slot</span>
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <div class="timer-market" id="countdownTimerMarket">
+                    <div class="timer-block">
+                        <div class="timer-number" id="hoursMarket">00</div>
+                        <div class="timer-label">Jam</div>
+                    </div>
+                    <div class="timer-block">
+                        <div class="timer-number" id="minutesMarket">00</div>
+                        <div class="timer-label">Menit</div>
+                    </div>
+                    <div class="timer-block">
+                        <div class="timer-number" id="secondsMarket">00</div>
+                        <div class="timer-label">Detik</div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 12px; margin-top: 12px; color:#9a3412;"><i class="fas fa-gem"></i> Harga promo berakhir dalam hitungan menit!</p>
+        </div>
+    </div>
+
+    <!-- Fitur Premium Card -->
+    <div class="market-card">
+        <div class="market-card-header">
+            <i class="fas fa-crown"></i>
+            <h3> FITUR BARU</h3>
+        </div>
+        <div class="market-card-body">
+            <div class="feature-grid-market">
+                <div class="feature-badge"><i class="fas fa-eye"></i> Cek Sensoran Akun</div>
+                <div class="feature-badge"><i class="fas fa-envelope"></i> Cek Email JMO</div>
+                <div class="feature-badge"><i class="fas fa-chart-line"></i> Cek Lasik Manual</div>
+                <div class="feature-badge"><i class="fas fa-user-check"></i> Cek Registrasi Akun</div>
+            </div>
+            <div class="coming-soon-market">
+                <i class="fas fa-rocket" style="color:#f97316;"></i> COMING SOON : <strong>[ Auto Regis JMO ]</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Keunggulan & Harga -->
+    <div class="market-card">
+        <div class="market-card-header">
+            <i class="fas fa-gem" style="color:#fbbf24;"></i>
+            <h3> KEUNGGULAN GARUDA PRO</h3>
+        </div>
+        <div class="market-card-body">
+            <div class="feature-grid-market">
+                <div class="feature-badge"><i class="fas fa-robot"></i> Full Otomatis & Akurat</div>
+                <div class="feature-badge"><i class="fas fa-wallet"></i> Sekali Bayar </div>
+                <div class="feature-badge"><i class="fas fa-infinity"></i> Tanpa Top Up / Limit</div>
+                <div class="feature-badge"><i class="fas fa-charging-station"></i> Unlimited Akses 24/7</div>
+            </div>
+            <div class="price-market">
+                <div class="big-price">Rp3.500.000</div>
+                <small><strike style="color:#aaa;">Rp4.000.000</strike> · Hemat 12%</small>
+                <div style="margin-top: 8px;"><span style="background:#eef2ff; padding: 4px 10px; border-radius: 30px; font-size: 11px;"><i class="fas fa-check-circle" style="color:#16a34a;"></i> Lifetime Akses</span></div>
+                <!-- NOTE HARGA NO NEGO (SIMPLE) -->
+                <div class="no-nego-note">
+                    <i class="fas fa-gavel"></i> HARGA SUDAH FIX / NO NEGO
+                    <i class="fas fa-ban" style="margin-left: 4px;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORM PEMBELIAN (Marketplace Style) -->
+    <div class="market-card">
+        <div class="market-card-header">
+            <i class="fas fa-clipboard-list"></i>
+            <h3>Form Registrasi Akun</h3>
+        </div>
+        <div class="market-card-body">
+            <div class="form-group-market">
+                <label><i class="fas fa-user"></i> Nama Lengkap</label>
+                <input type="text" id="namaPemilikMarket" class="input-market" placeholder="cth: Ahmad Wijaya" autocomplete="off">
+            </div>
+            <div class="form-group-market">
+                <label><i class="fas fa-map-pin"></i> Domisili (Kota/Kab)</label>
+                <input type="text" id="domisiliMarket" class="input-market" placeholder="Jakarta Selatan / Surabaya" autocomplete="off">
+            </div>
+            <div class="form-group-market">
+                <label><i class="fas fa-user-circle"></i> Username (Login App)</label>
+                <input type="text" id="usernameMarket" class="input-market" placeholder="Buat username unik" autocomplete="off">
+            </div>
+            <div class="form-group-market">
+                <label><i class="fas fa-key"></i> Password / Fasword</label>
+                <input type="text" id="passwordMarket" class="input-market" placeholder="Minimal 6 karakter" autocomplete="off">
+            </div>
+            <button class="btn-market" id="orderNowBtn">
+                <i class="fab fa-whatsapp"></i> BELI SEKARANG
+            </button>
+            <p style="font-size: 11px; text-align: center; margin-top: 14px; color:#475569;"><i class="fas fa-shield-alt"></i> Data aman terenkripsi · Proses cepat via WhatsApp</p>
+        </div>
+    </div>
+
+    <!-- Note Penting Marketplace -->
+    <div class="market-card warning-note">
+        <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <i class="fas fa-exclamation-triangle" style="font-size: 20px; color:#f97316;"></i>
+            <div style="flex:1">
+                <h4 style="font-size: 14px; margin-bottom: 8px;">⚠️ Ketentuan Layanan Premium</h4>
+                <p><i class="fas fa-ban"></i> Pembelian bersifat FINAL (tidak ada refund/transfer)</p>
+                <p><i class="fas fa-hand-peace"></i> Dengan melakukan pembayaran, Anda setuju dengan syarat & ketentuan</p>
+                <p><i class="fas fa-sync-alt"></i> Garansi teknis aplikasi (error fix guarantee)</p>
+                <p><i class="fas fa-clock"></i> Aktivasi maksimal 1x24 jam setelah konfirmasi</p>
+                <p><i class="fas fa-headset"></i> Dukungan via WhatsApp Official</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer market -->
+    <div class="footer-market">
+        <i class="fas fa-store"></i> KJSSTORE Official MarketPlace · Garuda Pro Premium<br>
+        <span style="font-size: 10px;">© 2025 All rights reserved · Sistem Keamanan Terverifikasi</span>
     </div>
 </div>
 
 <script>
-    // Konfigurasi Store
-    const ADMIN_WA = "6281234567890"; // GANTI NOMOR WA DISINI
-    const STORE_PIN = "kemet2026";    // PIN ADMIN BARU
-
-    let localDatabase = JSON.parse(localStorage.getItem('kemetStore_DB')) || [];
-    let tempStorage = [];
-
-    function adminLogin() {
-        document.getElementById("adminModal").style.display = "flex";
-    }
-
-    function closeAdminModal() {
-        document.getElementById("adminModal").style.display = "none";
-    }
-
-    function checkAdminLogin() {
-        const pwd = document.getElementById("adminPassword").value;
-        if (pwd === STORE_PIN) { 
-            document.getElementById('admin-panel').style.display = 'block';
-            closeAdminModal();
-            alert("ACCESS GRANTED. Welcome back, Boss.");
-        } else {
-            alert("ACCESS DENIED. WRONG PIN.");
-        }
-    }
-
-    function updateSystemUI() {
-        document.getElementById('db-count').innerHTML = `RECORDS ENCRYPTED: ${localDatabase.length}`;
-    }
-
-    document.getElementById('file-input').addEventListener('change', (e) => {
-        if(e.target.files[0]) alert("File Ready: " + e.target.files[0].name);
-    });
-
-    document.getElementById('btn-process').addEventListener('click', () => {
-        const file = document.getElementById('file-input').files[0];
-        if(!file) return alert("Select .txt source first!");
+    (function() {
+        // ========== LOGO.PNG HANDLER ==========
+        // Menampilkan logo custom jika file logo.png tersedia, jika tidak akan menampilkan fallback icon
+        const logoImg = document.getElementById('customAppLogo');
+        const fallbackDiv = document.getElementById('fallbackIcon');
         
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const rawText = e.target.result;
-            const blocks = rawText.split(/🛑══BERHASIL══🛑/g);
-            const previewList = document.getElementById('preview-list');
-            previewList.innerHTML = "";
-            tempStorage = [];
-            
-            blocks.forEach((block, index) => {
-                const text = block.trim();
-                if(text.length < 10) return;
-                
-                const namaMatch = text.match(/Nama\s*[:\-\s]*([A-Za-z\s\.]+)/i) || text.match(/➬\s*:\s*([A-Za-z\s\.]+)/i);
-
-                const item = {
-                    id: Date.now() + index,
-                    nama: namaMatch ? namaMatch[1].trim() : "Unknown",
-                    raw: text
-                };
-                
-                tempStorage.push(item);
-                previewList.innerHTML += `<div>[OK] INJECTING: ${item.nama}</div>`;
-            });
-            document.getElementById('preview-container').style.display = 'block';
+        window.handleLogoError = function() {
+            // jika logo gagal load, sembunyikan img dan tampilkan fallback
+            if (logoImg) logoImg.style.display = 'none';
+            if (fallbackDiv) fallbackDiv.style.display = 'flex';
         };
-        reader.readAsText(file);
-    });
-
-    document.getElementById('btn-confirm-save').addEventListener('click', () => {
-        localDatabase = [...localDatabase, ...tempStorage];
-        localStorage.setItem('kemetStore_DB', JSON.stringify(localDatabase));
-        alert("Injection Success! " + tempStorage.length + " Items Added.");
-        tempStorage = [];
-        document.getElementById('preview-container').style.display = 'none';
-        updateSystemUI();
-    });
-
-    function searchData() {
-        const keyword = document.getElementById('search-free').value.toLowerCase().trim();
-        const container = document.getElementById('hasil-container');
-        if(!keyword) return;
-
-        const results = localDatabase.filter(d => d.raw.toLowerCase().includes(keyword));
-        container.innerHTML = "";
-
-        if (results.length === 0) {
-            container.innerHTML = `<div class="empty-state">
-                <i class="fas fa-ghost"></i>
-                <p>TIDAK DI TEMUKAN ATAU STOK BELUM REDY 🙏.</p>
-            </div>`;
-            return;
+        
+        if (logoImg) {
+            // cek apakah gambar berhasil dimuat
+            logoImg.onload = function() {
+                // gambar berhasil dimuat: sembunyikan fallback, tampilkan img
+                if (fallbackDiv) fallbackDiv.style.display = 'none';
+                logoImg.style.display = 'block';
+            };
+            logoImg.onerror = function() {
+                handleLogoError();
+            };
+            // Jika src kosong atau tidak ada, paksa error handler
+            if (!logoImg.complete) {
+                // masih loading
+            } else if (logoImg.naturalWidth === 0) {
+                handleLogoError();
+            } else {
+                // sudah terload dengan baik
+                if (fallbackDiv) fallbackDiv.style.display = 'none';
+                logoImg.style.display = 'block';
+            }
         }
-
-        results.forEach((res) => {
-            const div = document.createElement('div');
-            div.className = 'card-result';
-            div.innerHTML = `
-                <div class="result-header">
-                    <span class="badge-id"><i class="fas fa-check-circle"></i> VERIFIED DATA</span>
-                    <div style="display:flex; gap:8px;">
-                        <button class="mini-btn copy-btn" onclick="copyText(this)">COPY</button>
-                        <button class="mini-btn wa-btn" onclick="waOrder(this)"><i class="fab fa-whatsapp"></i> BUY</button>
-                    </div>
-                </div>
-                <pre>${res.raw}</pre>
-            `;
-            container.appendChild(div);
-        });
-    }
-
-    function waOrder(btn) {
-        const pre = btn.closest('.card-result').querySelector('pre').innerText;
-        const message = `Halo Kemet JS Store, saya berminat dengan data ini:\n\n${pre}\n\nInfo harga dan pembayarannya Boss.`;
-        window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(message)}`, '_blank');
-    }
-
-    function copyText(btn) {
-        const text = btn.closest('.card-result').querySelector('pre').innerText;
-        navigator.clipboard.writeText(text);
-        btn.innerHTML = "DONE!";
-        setTimeout(() => btn.innerText = "COPY", 1000);
-    }
-
-    function clearAllData() {
-        if(confirm("DANGER! This will wipe the entire store. Proceed?")) {
-            localStorage.removeItem('kemetStore_DB');
-            localDatabase = [];
-            updateSystemUI();
-            location.reload();
-        }
-    }
-
-    function toggleMusic() {
-        const audio = document.getElementById("bgMusic");
-        const icon = document.getElementById("musicBtn");
-        if (audio.paused) {
-            audio.play().catch(() => alert("Klik di mana saja dulu agar musik bisa jalan!"));
-            icon.classList.replace("fa-volume-mute", "fa-music");
+        
+        // ------------------------------
+        // COUNTDOWN 24 JAM (Marketplace style)
+        // ------------------------------
+        let endTime = localStorage.getItem('garudaCountdownMarket');
+        if (!endTime) {
+            endTime = Date.now() + (24 * 60 * 60 * 1000);
+            localStorage.setItem('garudaCountdownMarket', endTime);
         } else {
-            audio.pause();
-            icon.classList.replace("fa-music", "fa-volume-mute");
+            endTime = parseInt(endTime);
         }
-    }
 
-    updateSystemUI();
+        function updateTimerUI() {
+            const now = Date.now();
+            let distance = endTime - now;
+            if (distance <= 0) {
+                // reset countdown (24 jam lagi)
+                const newEnd = Date.now() + (24 * 60 * 60 * 1000);
+                localStorage.setItem('garudaCountdownMarket', newEnd);
+                endTime = newEnd;
+                distance = 24 * 60 * 60 * 1000;
+            }
+            const hours = Math.floor(distance / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            const hoursEl = document.getElementById('hoursMarket');
+            const minutesEl = document.getElementById('minutesMarket');
+            const secondsEl = document.getElementById('secondsMarket');
+            if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+            if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+        }
+        updateTimerUI();
+        setInterval(updateTimerUI, 1000);
+
+        // ------------------------------
+        // FUNGSI ORDER WHATSAPP (Marketplace)
+        // ------------------------------
+        window.orderMarketplace = function() {
+            const nama = document.getElementById('namaPemilikMarket')?.value.trim();
+            const domisili = document.getElementById('domisiliMarket')?.value.trim();
+            const username = document.getElementById('usernameMarket')?.value.trim();
+            const password = document.getElementById('passwordMarket')?.value.trim();
+            
+            if (!nama || !domisili || !username || !password) {
+                alert('⚠️ Lengkapi semua data registrasi terlebih dahulu!');
+                return false;
+            }
+            if (password.length < 4) {
+                alert('🔐 Password minimal 4 karakter untuk keamanan akun Anda.');
+                return false;
+            }
+            
+            const nomorWA = "6285943111681";
+            const pesan = `Halo Admin KJSSTORE 🛒
+
+Saya ingin ORDER GARUDA PRO PREMIUM (LIFETIME) ✅
+
+📋 DATA REGISTRASI:
+👤 Nama Pemilik : ${nama}
+🏠 Domisili : ${domisili}
+👤 Username : ${username}
+🔑 Password : ${password}
+
+Saya siap melakukan pembayaran. Mohon dikirimkan instruksi pembayaran & aktivasi.
+
+Terima kasih 🙏
+#GarudaPro #KJSSTORE`;
+            
+            const url = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+            window.open(url, '_blank');
+            return true;
+        };
+        
+        // pasang event listener ke tombol
+        const btnOrder = document.getElementById('orderNowBtn');
+        if (btnOrder) {
+            btnOrder.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.orderMarketplace();
+            });
+        }
+        
+        // efek input interaktif (seperti marketplace)
+        const allInputs = document.querySelectorAll('.input-market');
+        allInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#f97316';
+                this.style.boxShadow = '0 0 0 3px rgba(249,115,22,0.1)';
+            });
+            input.addEventListener('blur', function() {
+                this.style.borderColor = '#e2e8f0';
+                this.style.boxShadow = 'none';
+            });
+        });
+    })();
 </script>
-
 </body>
 </html>
