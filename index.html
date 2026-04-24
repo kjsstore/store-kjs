@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Auto Formatter VVIP | KJSSTORE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Formatter VVIP</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -16,329 +16,154 @@
 }
 
 body {
-  background: radial-gradient(circle at 10% 20%, #0a0f1c, #000000);
-  color: #ffffff;
-  min-height: 100vh;
-  padding-bottom: 30px;
+  background: radial-gradient(circle at top, #0a0f1c, #000);
+  color: #fff;
 }
 
-/* HEADER dengan LOGO GAMBAR + TEKS */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(2px);
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(255, 123, 0, 0.1);
-  padding: 6px 18px 6px 12px;
-  border-radius: 60px;
-  border-left: 3px solid #ff7b00;
-}
-
-.logo-img {
-  height: 42px;
-  width: auto;
-  border-radius: 12px;
-  background: #fff3e8;
-  padding: 4px;
-  object-fit: contain;
-  transition: transform 0.2s ease;
-  box-shadow: 0 0 8px rgba(255, 123, 0, 0.5);
-}
-
-.logo-img:hover {
-  transform: scale(1.02);
-}
-
-.logo-text {
-  font-weight: 800;
-  color: #ff7b00;
-  font-size: 24px;
-  letter-spacing: 1px;
-  text-shadow: 0 0 6px rgba(255, 123, 0, 0.3);
-}
-
-.status {
-  background: rgba(255, 123, 0, 0.2);
-  padding: 6px 16px;
-  border-radius: 40px;
-  color: #ffb347;
-  font-size: 13px;
-  font-weight: 600;
-  backdrop-filter: blur(2px);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  border: 1px solid rgba(255, 123, 0, 0.3);
-}
-
-/* CARD UTAMA */
+/* CARD */
 .card {
-  margin: 24px 20px;
-  padding: 28px 20px;
-  border-radius: 36px;
-  background: linear-gradient(145deg, #0f172a, #030617);
-  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 123, 0, 0.15);
+  margin: 25px 15px;
+  padding: 30px 20px;
+  border-radius: 30px;
+  background: linear-gradient(145deg, #0f172a, #020617);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
   text-align: center;
-  transition: all 0.2s;
 }
 
-/* TOMBOL GAMBAR (logo produk autoformatter.jpg) */
+/* GAMBAR UTAMA */
 .img-btn {
   display: inline-block;
-  border-radius: 28px;
+  border-radius: 25px;
   overflow: hidden;
-  box-shadow: 0 12px 35px rgba(255, 123, 0, 0.5);
-  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  background: #00000033;
-  line-height: 0;
+  box-shadow: 0 0 40px rgba(255,123,0,0.7);
+  transition: 0.3s;
 }
 
 .img-btn img {
-  width: 210px;
-  max-width: 85%;
-  height: auto;
+  width: 260px; /* DIPERBESAR */
+  max-width: 95%;
   display: block;
-  transition: transform 0.4s ease;
 }
 
 .img-btn:hover {
-  transform: scale(1.04);
-  box-shadow: 0 18px 40px rgba(255, 123, 0, 0.7);
+  transform: scale(1.05);
 }
 
-.img-btn:hover img {
-  transform: scale(1.01);
-}
-
+/* TEXT */
 .title {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 800;
   color: #ff7b00;
   margin-top: 20px;
-  letter-spacing: -0.5px;
-  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .subtitle {
-  color: #cbd5e6;
-  margin-top: 8px;
-  font-size: 16px;
-  font-weight: 500;
+  color: #aaa;
+  margin-top: 6px;
 }
 
 .rating {
-  margin-top: 14px;
-  color: #fbbf24;
-  font-size: 15px;
-  font-weight: 600;
-  background: rgba(0,0,0,0.4);
-  display: inline-block;
-  padding: 5px 16px;
-  border-radius: 40px;
-  backdrop-filter: blur(2px);
+  margin-top: 12px;
+  color: gold;
+  font-size: 14px;
 }
 
 .badge {
+  margin-top: 14px;
   display: inline-block;
-  margin-top: 16px;
-  padding: 6px 18px;
-  border-radius: 40px;
-  background: linear-gradient(135deg, rgba(255, 123, 0, 0.25), rgba(255, 180, 70, 0.15));
-  color: #ffb347;
-  font-size: 13px;
-  font-weight: 700;
-  border: 1px solid rgba(255, 123, 0, 0.4);
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(255,123,0,0.15);
+  color: #ff7b00;
+  font-size: 12px;
 }
 
-/* FEATURES PREMIUM */
+/* FEATURES */
 .features {
-  margin: 20px 20px 20px 20px;
-  padding: 24px 20px;
-  border-radius: 32px;
-  background: linear-gradient(135deg, #0f172a, #010514);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-  border: 1px solid rgba(255, 123, 0, 0.2);
-}
-
-.features h3 {
-  margin-bottom: 18px;
-  font-size: 22px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: #ff9f4a;
+  margin: 20px 15px;
+  padding: 20px;
+  border-radius: 25px;
+  background: #0f172a;
 }
 
 .feature-item {
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.04);
-  font-weight: 500;
-  font-size: 15px;
-  backdrop-filter: blur(2px);
-  transition: all 0.2s;
-  border-left: 4px solid #ff7b00;
-  text-align: left;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.03);
 }
 
-.feature-item:last-child {
-  margin-bottom: 0;
-}
-
-/* HARGA */
+/* PRICE */
 .price {
   text-align: center;
-  font-size: 34px;
-  margin: 20px 20px 10px 20px;
-  color: #2effd2;
-  font-weight: 800;
-  background: linear-gradient(135deg, #00e0b0, #00ffc3);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 12px rgba(0, 255, 195, 0.3);
-  letter-spacing: 1px;
+  font-size: 28px;
+  margin-top: 15px;
+  color: #00ffc3;
+  font-weight: bold;
 }
 
-/* BUTTON ORDER */
+/* BUTTON */
 .btn {
   display: block;
-  margin: 16px 20px 20px 20px;
+  margin: 20px;
+  padding: 15px;
   text-align: center;
-  padding: 16px 18px;
-  border-radius: 60px;
-  background: linear-gradient(95deg, #ff7b00, #ffac4a);
-  color: #0c0f1c;
-  font-weight: 800;
-  font-size: 18px;
+  border-radius: 40px;
+  background: linear-gradient(45deg, #ff7b00, #ffb347);
+  color: black;
+  font-weight: bold;
   text-decoration: none;
-  box-shadow: 0 10px 25px rgba(255, 123, 0, 0.5);
-  transition: 0.25s;
-  letter-spacing: 1px;
-  backdrop-filter: blur(2px);
-  border: none;
-}
-
-.btn:hover {
-  transform: scale(1.02);
-  background: linear-gradient(95deg, #ff8c1a, #ffbb55);
-  box-shadow: 0 15px 30px rgba(255, 123, 0, 0.7);
+  box-shadow: 0 0 25px rgba(255,123,0,0.6);
 }
 
 .footer {
   text-align: center;
   font-size: 13px;
-  color: #9ca3af;
-  margin: 20px 20px 0;
-  padding-top: 10px;
-  border-top: 1px dashed rgba(255, 123, 0, 0.3);
-}
-
-/* RESPONSIVE : untuk layar kecil, logo tetap rapi */
-@media (max-width: 480px) {
-  .header {
-    padding: 12px 16px;
-  }
-  .logo-area {
-    padding: 4px 14px 4px 8px;
-  }
-  .logo-img {
-    height: 34px;
-  }
-  .logo-text {
-    font-size: 20px;
-  }
-  .title {
-    font-size: 26px;
-  }
-  .img-btn img {
-    width: 160px;
-  }
-  .price {
-    font-size: 28px;
-  }
-  .feature-item {
-    font-size: 13px;
-    padding: 10px 14px;
-  }
-}
-
-/* efek smooth */
-.card, .features, .btn, .img-btn {
-  transition: all 0.2s ease;
+  color: #777;
+  margin-top: 10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER dengan LOGO GAMBAR (logo.jpg) diletakkan sederetan di samping teks KJSSTORE -->
-<div class="header">
-  <div class="logo-area">
-    <!-- LOGO GAMBAR: pastikan file "logo.jpg" ada di direktori yang sama dengan HTML (Github sederetan) -->
-    <img src="logo.png" alt="Logo KJSSTORE" class="logo-img" onerror="this.onerror=null; this.src='https://placehold.co/80x80?text=KJS'; console.log('logo.jpg tidak ditemukan, silakan upload logo.jpg')">
-    <span class="logo-text">KJSSTORE</span>
-  </div>
-  <div class="status">
-    <span>⚡</span> ONLINE 24/7
-  </div>
-</div>
-
-<!-- MAIN CARD dengan gambar produk autoformatter.jpg sebagai tombol WA -->
+<!-- CARD UTAMA -->
 <div class="card">
-  <!-- Tombol gambar ke WhatsApp, menggunakan file autoformatter.jpg -->
-  <a href="https://wa.me/6285943111681" class="img-btn" target="_blank" rel="noopener noreferrer">
-    <img src="autoformatter.jpg" alt="Auto Formatter Premium" onerror="this.onerror=null; this.src='https://placehold.co/400x300?text=Auto+Formatter'; this.style.opacity='0.8'">
+
+  <!-- 1 GAMBAR SAJA -->
+  <a href="https://wa.me/6285943111681" class="img-btn">
+    <img src="autoformatter.jpg">
   </a>
 
   <div class="title">AUTO FORMATTER</div>
-  <div class="subtitle">✨ Format Data Otomatis • 1 Klik Saja ✨</div>
+  <div class="subtitle">Format Data Otomatis 1 Klik</div>
 
-  <div class="rating">⭐⭐⭐⭐⭐ 4.9 (1K+ user puas)</div>
+  <div class="rating">⭐⭐⭐⭐⭐ 4.9 (1K+ user)</div>
 
-  <div class="badge">⚙️ SYSTEM AUTO • VVIP • SPEED BOOST</div>
+  <div class="badge">⚙️ SYSTEM AUTO • VVIP</div>
 </div>
 
-<!-- FEATURES PREMIUM -->
+<!-- FITUR -->
 <div class="features">
-  <h3>👑 FITUR PREMIUM</h3>
-
-  <div class="feature-item">✔ Format otomatis sekali klik — langsung jadi</div>
-  <div class="feature-item">✔ Support banyak data (CSV, Excel, Text, dll)</div>
-  <div class="feature-item">✔ Hemat waktu kerja hingga 90%</div>
-  <div class="feature-item">✔ Tinggal input mentahan → keluar rapi & terstruktur</div>
-  <div class="feature-item">✔ Support WhatsApp & Google Spreadsheet</div>
+  <div class="feature-item">✔ Format otomatis sekali klik</div>
+  <div class="feature-item">✔ Support banyak data</div>
+  <div class="feature-item">✔ Hemat waktu kerja</div>
+  <div class="feature-item">✔ Tinggal input → jadi</div>
 </div>
 
-<!-- HARGA JELAS -->
+<!-- HARGA -->
 <div class="price">
-  💰 Rp 350.000
+💰 Rp 350.000
 </div>
 
-<!-- TOMBOL ORDER LANGSUNG -->
-<a href="https://wa.me/6285943111681" class="btn" target="_blank" rel="noopener noreferrer">
-  🔥 ORDER SEKARANG 🔥
+<!-- BUTTON -->
+<a href="https://wa.me/6285943111681" class="btn">
+🔥 ORDER SEKARANG
 </a>
 
 <div class="footer">
-  ⚡ Fast Response 24 Jam | Garansi 100% Work ⚡ <br>
-  📁 File: logo.jpg + autoformatter.jpg (sederetan dengan file html)
+⚡ Fast Response 24 Jam
 </div>
 
-<!-- Pesan rapi untuk memastikan logo dan gambar ditampilkan optimal -->
 </body>
 </html>
