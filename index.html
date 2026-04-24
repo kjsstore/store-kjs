@@ -16,153 +16,142 @@
 }
 
 body {
-  background: radial-gradient(circle at top, #0a0f1c, #000);
+  height: 100vh;
+  background: #020617;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* CARD */
-.card {
-  margin: 25px 15px;
-  padding: 30px 20px;
-  border-radius: 30px;
-  background: linear-gradient(145deg, #0f172a, #020617);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  text-align: center;
+/* CONTAINER FULL HP */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  padding: 15px;
 }
 
-/* GAMBAR UTAMA */
+/* GAMBAR BUTTON */
 .img-btn {
-  display: inline-block;
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: 0 0 40px rgba(255,123,0,0.7);
-  transition: 0.3s;
+  display: flex;
+  justify-content: center;
 }
 
 .img-btn img {
-  width: 260px; /* DIPERBESAR */
-  max-width: 95%;
-  display: block;
-}
-
-.img-btn:hover {
-  transform: scale(1.05);
+  width: 70%;
+  max-width: 260px;
+  border-radius: 20px;
 }
 
 /* TEXT */
 .title {
-  font-size: 30px;
+  text-align: center;
+  font-size: 24px;
   font-weight: 800;
   color: #ff7b00;
-  margin-top: 20px;
 }
 
 .subtitle {
+  text-align: center;
+  font-size: 13px;
   color: #aaa;
-  margin-top: 6px;
 }
 
 .rating {
-  margin-top: 12px;
+  text-align: center;
+  font-size: 13px;
   color: gold;
-  font-size: 14px;
 }
 
 .badge {
-  margin-top: 14px;
-  display: inline-block;
-  padding: 6px 16px;
-  border-radius: 20px;
-  background: rgba(255,123,0,0.15);
+  text-align: center;
+  font-size: 11px;
   color: #ff7b00;
+}
+
+/* FITUR GRID */
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
   font-size: 12px;
 }
 
-/* FEATURES */
-.features {
-  margin: 20px 15px;
-  padding: 20px;
-  border-radius: 25px;
-  background: #0f172a;
-}
-
 .feature-item {
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 15px;
-  background: rgba(255,255,255,0.03);
+  background: #0f172a;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
 }
 
-/* PRICE */
+/* HARGA */
 .price {
   text-align: center;
-  font-size: 28px;
-  margin-top: 15px;
+  font-size: 22px;
   color: #00ffc3;
   font-weight: bold;
 }
 
 /* BUTTON */
 .btn {
-  display: block;
-  margin: 20px;
-  padding: 15px;
   text-align: center;
-  border-radius: 40px;
-  background: linear-gradient(45deg, #ff7b00, #ffb347);
+  padding: 14px;
+  border-radius: 30px;
+  background: #ff7b00;
   color: black;
   font-weight: bold;
   text-decoration: none;
-  box-shadow: 0 0 25px rgba(255,123,0,0.6);
 }
 
+/* FOOTER */
 .footer {
   text-align: center;
-  font-size: 13px;
-  color: #777;
-  margin-top: 10px;
+  font-size: 11px;
+  color: #666;
 }
 </style>
 </head>
 
 <body>
 
-<!-- CARD UTAMA -->
-<div class="card">
+<div class="container">
 
-  <!-- 1 GAMBAR SAJA -->
+  <!-- GAMBAR -->
   <a href="https://wa.me/6285943111681" class="img-btn">
     <img src="autoformatter.jpg">
   </a>
 
-  <div class="title">AUTO FORMATTER</div>
-  <div class="subtitle">Format Data Otomatis 1 Klik</div>
+  <!-- TEXT -->
+  <div>
+    <div class="title">AUTO FORMATTER</div>
+    <div class="subtitle">Format Data Otomatis 1 Klik</div>
+    <div class="rating">⭐⭐⭐⭐⭐ 4.9 (1K+ user)</div>
+    <div class="badge">⚙️ SYSTEM AUTO • VVIP</div>
+  </div>
 
-  <div class="rating">⭐⭐⭐⭐⭐ 4.9 (1K+ user)</div>
+  <!-- FITUR -->
+  <div class="features">
+    <div class="feature-item">✔ Auto Format</div>
+    <div class="feature-item">✔ Banyak Data</div>
+    <div class="feature-item">✔ Hemat Waktu</div>
+    <div class="feature-item">✔ 1 Klik Jadi</div>
+  </div>
 
-  <div class="badge">⚙️ SYSTEM AUTO • VVIP</div>
-</div>
+  <!-- HARGA -->
+  <div class="price">Rp 350.000</div>
 
-<!-- FITUR -->
-<div class="features">
-  <div class="feature-item">✔ Format otomatis sekali klik</div>
-  <div class="feature-item">✔ Support banyak data</div>
-  <div class="feature-item">✔ Hemat waktu kerja</div>
-  <div class="feature-item">✔ Tinggal input → jadi</div>
-</div>
+  <!-- BUTTON -->
+  <a href="https://wa.me/6285943111681" class="btn">
+    ORDER SEKARANG
+  </a>
 
-<!-- HARGA -->
-<div class="price">
-💰 Rp 350.000
-</div>
+  <!-- FOOTER -->
+  <div class="footer">
+    Fast Response 24 Jam
+  </div>
 
-<!-- BUTTON -->
-<a href="https://wa.me/6285943111681" class="btn">
-🔥 ORDER SEKARANG
-</a>
-
-<div class="footer">
-⚡ Fast Response 24 Jam
 </div>
 
 </body>
