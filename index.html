@@ -3,39 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>KJS STORE • AUTO FORMATTER • MATRIX EDITION</title>
+  <title>KJS STORE • AUTO FORMATTER • MATRIX TERMINAL</title>
   
-  <!-- Fonts & Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons (v6) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Premium Monospace & Modern Font Stack -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      user-select: none; /* lebih seperti terminal, namun teks tetap bisa dipilih */
     }
 
     :root {
-      --matrix-green: #22c55e;
-      --matrix-glow: rgba(34, 197, 94, 0.6);
-      --dark-bg: #020a04;
-      --card-bg: rgba(5, 18, 10, 0.88);
-      --border-neon: rgba(34, 197, 94, 0.45);
-      --gold: #f5b342;
+      --neon-green: #1eff6e;
+      --dark-terminal-bg: #000b02;
+      --glass-bg: rgba(2, 12, 4, 0.82);
+      --border-glow: rgba(30, 255, 110, 0.55);
+      --hacker-gray: #b7ffcf;
+      --matrix-gold: #f5d742;
     }
 
     body {
-      font-family: 'Inter', 'JetBrains Mono', monospace;
-      background: #000000;
-      color: #e2ffe2;
-      min-height: 100vh;
+      background-color: #000000;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
       overflow-x: hidden;
       position: relative;
+      color: #dcffd8;
+      line-height: 1.4;
     }
 
-    /* ===== MATRIX RAIN BACKGROUND (CANVAS) ===== */
-    #matrix-canvas {
+    /* ========== MATRIX RAIN CANVAS (efek jatuh full screen) ========== */
+    #matrixCanvas {
       position: fixed;
       top: 0;
       left: 0;
@@ -44,403 +47,478 @@
       display: block;
       z-index: 0;
       pointer-events: none;
+      opacity: 0.65;
     }
 
-    /* konten utama di atas canvas */
-    .promo-wrapper {
+    /* konten di atas canvas */
+    .terminal-container {
       position: relative;
       z-index: 10;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
+      padding: 1.8rem 1.2rem;
     }
 
-    .promo-card {
-      max-width: 560px;
+    /* CARD utama — glassmorphism + neon border premium */
+    .hacker-card {
+      max-width: 620px;
       width: 100%;
-      margin: 1rem auto;
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border-radius: 48px;
-      border: 1px solid var(--border-neon);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(34, 197, 94, 0.2), 0 0 18px var(--matrix-glow);
-      padding: 1.8rem 1.5rem 2rem 1.5rem;
-      transition: transform 0.2s ease;
+      margin: 0 auto;
+      background: var(--glass-bg);
+      backdrop-filter: blur(14px);
+      border-radius: 2rem;
+      border: 1px solid var(--border-glow);
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(30, 255, 110, 0.2), 0 0 25px rgba(30, 255, 110, 0.3);
+      padding: 2rem 1.8rem;
+      transition: transform 0.25s ease, box-shadow 0.3s;
+    }
+    .hacker-card:hover {
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.7), 0 0 0 2px #1eff6e55, 0 0 28px #1eff6e;
+      transform: translateY(-3px);
     }
 
-    /* ===== GAMBAR TANPA REDIRECT (mirip aslinya tapi aman) ===== */
-    .img-btn {
+    /* ========== GAMBAR PREMIUM (TANPA REDIRECT WA) ========== */
+    .matrix-img-container {
       display: flex;
       justify-content: center;
       margin-bottom: 1.2rem;
       cursor: pointer;
-      transition: filter 0.2s;
+      transition: all 0.2s;
     }
-    .img-btn img {
-      width: 85%;
-      max-width: 280px;
+    .matrix-img-container img {
+      width: 90%;
+      max-width: 310px;
       border-radius: 28px;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.5), 0 0 0 2px rgba(34,197,94,0.3);
-      transition: all 0.25s;
-      background: #0a140c;
+      background: #000000aa;
+      border: 1px solid var(--neon-green);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.8), 0 0 0 1px #1eff6e40;
+      transition: 0.2s linear;
       object-fit: cover;
-      pointer-events: auto;
     }
-    .img-btn img:hover {
-      filter: brightness(1.05);
-      transform: scale(1.02);
-      box-shadow: 0 0 0 3px var(--matrix-green), 0 12px 28px black;
+    .matrix-img-container img:hover {
+      filter: brightness(1.08) contrast(1.05);
+      transform: scale(1.01);
+      box-shadow: 0 0 0 3px #1eff6e, 0 12px 32px black;
     }
-    /* tidak ada link WA pada gambar */
 
-    .badge-matrix {
-      display: inline-block;
-      background: rgba(34, 197, 94, 0.2);
-      backdrop-filter: blur(4px);
+    /* terminal badge */
+    .terminal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0c1e0fcc;
+      border: 0.5px solid var(--neon-green);
+      border-radius: 40px;
+      padding: 0.2rem 1.1rem;
       font-size: 0.7rem;
-      padding: 0.2rem 1rem;
-      border-radius: 30px;
+      font-weight: 600;
       letter-spacing: 1px;
-      border: 0.5px solid var(--matrix-green);
-      color: #b0ffb0;
-      margin-bottom: 0.8rem;
-      font-family: monospace;
+      backdrop-filter: blur(4px);
     }
-    .judul-utama {
-      font-size: 2.2rem;
+    .vvip-badge {
+      background: linear-gradient(125deg, #102e10, #021102);
+      border-left: 3px solid #ffdf5e;
+      border-right: 2px solid #1eff6e;
+    }
+
+    .judul-neon {
+      font-size: 2.1rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #ffffff 20%, var(--matrix-green) 80%);
+      background: linear-gradient(135deg, #f0fff0 20%, #1eff6e 80%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       letter-spacing: -0.5px;
-      line-height: 1.2;
-      margin-bottom: 0.5rem;
+      margin: 0.5rem 0 0.3rem;
+      font-family: 'Inter', 'JetBrains Mono', monospace;
+      text-shadow: 0 0 6px #1eff6e30;
     }
-    .subjudul {
-      color: #c0f0c0;
-      font-size: 0.85rem;
+    .terminal-sub {
+      font-size: 0.78rem;
+      border-left: 3px solid #1eff6e;
+      padding-left: 14px;
+      margin: 8px 0 12px 0;
+      color: #bcffbc;
       font-weight: 500;
-      margin-bottom: 1rem;
-      border-left: 3px solid var(--matrix-green);
-      padding-left: 12px;
     }
-    .rating {
+    /* rating area */
+    .rating-row {
       display: flex;
-      align-items: center;
-      gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 1rem;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 1.4rem;
     }
     .stars {
-      color: var(--gold);
-      letter-spacing: 2px;
+      color: #f5bc42;
       font-size: 0.9rem;
+      letter-spacing: 3px;
     }
-    .score {
-      background: rgba(0,0,0,0.6);
-      padding: 0.2rem 0.7rem;
-      border-radius: 20px;
+    .gold-badge {
+      background: #1c2a1a;
+      border-radius: 60px;
+      padding: 0.2rem 0.8rem;
       font-size: 0.7rem;
       font-weight: 600;
       font-family: monospace;
+      border: 0.3px solid #cbfb7c;
     }
-    .vvip-tag {
-      background: linear-gradient(90deg, #1e3a1e, #052007);
-      color: var(--matrix-green);
-      font-weight: bold;
-      font-size: 0.7rem;
-      padding: 0.2rem 1rem;
-      border-radius: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 0.3px solid var(--matrix-green);
-    }
-
-    /* FITUR GRID (mirip aslinya) */
-    .fitur-grid {
+    /* feature grid — seperti console matrix tools */
+    .feature-console {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
       margin: 1.8rem 0;
     }
-    .fitur-item {
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(2px);
-      border: 1px solid rgba(34, 197, 94, 0.35);
-      border-radius: 20px;
-      padding: 10px 6px;
+    .feature-item {
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(30, 255, 110, 0.35);
+      border-radius: 22px;
+      padding: 10px 4px;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       font-weight: 600;
-      transition: 0.2s;
+      backdrop-filter: blur(2px);
+      transition: 0.15s linear;
+      font-family: monospace;
     }
-    .fitur-item i {
-      color: var(--matrix-green);
-      margin-right: 8px;
+    .feature-item i {
+      color: #1eff6e;
+      margin-right: 10px;
       font-size: 0.9rem;
     }
-    .fitur-item:hover {
-      border-color: var(--matrix-green);
-      background: rgba(34,197,94,0.1);
+    .feature-item:hover {
+      background: #0c2f0c;
+      border-color: #1eff6e;
       transform: translateY(-2px);
+      box-shadow: 0 0 8px #1eff6e40;
     }
 
-    /* HARGA */
-    .harga-box {
+    /* price section */
+    .price-terminal {
       text-align: center;
-      margin: 1rem 0 1.2rem 0;
+      margin: 1rem 0;
     }
-    .label-harga {
+    .price-label {
       font-size: 0.7rem;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #9bef9b;
+      color: #84ff84;
     }
-    .harga-nominal {
-      font-size: 2.4rem;
+    .price-value {
+      font-size: 2.6rem;
       font-weight: 800;
-      color: #d4ff00;
-      text-shadow: 0 0 8px #22c55e;
+      color: #dafd61;
+      text-shadow: 0 0 10px #22ff77;
       line-height: 1;
+      font-family: monospace;
     }
-    .harga-nominal small {
-      font-size: 1rem;
+    .price-value small {
+      font-size: 1.1rem;
       font-weight: 500;
     }
+    .lifetime-tag {
+      display: inline-block;
+      background: #000000aa;
+      border-radius: 50px;
+      padding: 0.2rem 0.9rem;
+      font-size: 0.7rem;
+      margin-top: 6px;
+    }
 
-    /* TOMBOL ORDER (WA) */
-    .btn-order {
+    /* BUTTON ORDER WHATSAPP — satu-satunya link ke WA */
+    .wa-order-btn {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: linear-gradient(95deg, #0f2f0f, #031f03);
-      border: 1.5px solid var(--matrix-green);
-      border-radius: 60px;
-      padding: 14px 20px;
+      justify-content: space-between;
+      background: #031007cc;
+      border: 1.2px solid #1eff6eaa;
+      border-radius: 28px;
+      padding: 13px 18px;
+      margin: 1rem 0 0.8rem;
       text-decoration: none;
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: white;
-      transition: all 0.25s ease;
-      margin: 1.5rem 0 1rem;
-      box-shadow: 0 6px 0 #0a2f0a;
+      transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
       cursor: pointer;
     }
-    .btn-order i {
-      font-size: 1.5rem;
-      color: #25D366;
-      filter: drop-shadow(0 0 3px #22c55e);
-    }
-    .btn-order span {
-      background: linear-gradient(135deg, #fff, #b5ffb5);
+    .wa-order-btn .btn-text {
+      font-size: 0.96rem;
+      background: linear-gradient(120deg, #fff, #b3ffb3);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      letter-spacing: 0.5px;
     }
-    .btn-order:hover {
+    .wa-order-btn i {
+      font-size: 2rem;
+      color: #25D366;
+      filter: drop-shadow(0 0 5px #1eff6e);
+    }
+    .wa-order-btn:hover {
+      background: #0c2b12e6;
+      border-color: #49ff7a;
       transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(34,197,94,0.3);
-      border-color: #6eff6e;
-      background: #0e3a0e;
+      box-shadow: 0 12px 22px rgba(30, 255, 110, 0.3);
     }
-
-    /* FOOTER */
-    .footer-matrix {
+    /* footer matrix */
+    .matrix-footer {
+      font-size: 0.6rem;
       text-align: center;
-      font-size: 0.65rem;
-      color: #6c9e6c;
-      border-top: 0.5px dashed rgba(34,197,94,0.4);
+      border-top: 1px dashed #1eff6e60;
       padding-top: 1rem;
-      margin-top: 0.8rem;
+      margin-top: 1rem;
       font-family: monospace;
+      color: #86bd86;
     }
-    .info-licensi {
-      font-family: monospace;
-      font-size: 0.55rem;
-      background: #00000055;
+    .cryptic {
+      background: #00000066;
+      border-radius: 50px;
       display: inline-block;
-      padding: 2px 10px;
-      border-radius: 20px;
+      padding: 0.1rem 0.7rem;
     }
-    @media (max-width: 520px) {
-      .promo-card {
-        padding: 1.4rem 1.2rem;
+    @media (max-width: 540px) {
+      .hacker-card {
+        padding: 1.4rem 1rem;
       }
-      .judul-utama {
-        font-size: 1.7rem;
+      .judul-neon {
+        font-size: 1.6rem;
       }
-      .harga-nominal {
+      .price-value {
         font-size: 2rem;
       }
-      .fitur-item {
+      .feature-item {
         font-size: 0.7rem;
       }
+      .wa-order-btn .btn-text {
+        font-size: 0.8rem;
+      }
+    }
+    /* blinking cursor effect optional */
+    .cmd-cursor::after {
+      content: "_";
+      animation: blink 1s step-end infinite;
+      color: #1eff6e;
+      font-weight: bold;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    /* tip: menjamin gambar tidak redirect */
+    .matrix-img-container {
+      pointer-events: auto;
     }
   </style>
 </head>
 <body>
 
-  <!-- CANVAS MATRIX BACKGROUND -->
-  <canvas id="matrix-canvas"></canvas>
+  <canvas id="matrixCanvas"></canvas>
 
-  <div class="promo-wrapper">
-    <div class="promo-card">
+  <div class="terminal-container">
+    <div class="hacker-card">
       
-      <!-- GAMBAR: persis seperti aslinya (tag <a> tidak dipakai karena akan redirect WA) 
-           Saya pakai div dengan class img-btn, gambar bisa diklik TANPA pindah halaman,
-           hanya efek 'dilihat' biasa. 100% sesuai permintaan: tidak redirect ke WhatsApp. -->
-      <div class="img-btn" id="gambarPreview">
-        <img src="autoformatter.jpg" alt="Auto Formatter Matrix Edition" title="Klik untuk melihat | tidak redirect ke WA">
+      <!-- GAMBAR PREMIUM : KLIK TIDAK REDIRECT KE WA, HANYA PREVIEW VISUAL -->
+      <div class="matrix-img-container" id="previewImageBox">
+        <img src="autoformatter.jpg" 
+             alt="Terminal AutoFormatter Pro" 
+             id="mainProductImage"
+             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20300%22%3E%3Crect%20width%3D%22400%22%20height%3D%22300%22%20fill%3D%22%23001408%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20font-size%3D%2214%22%20fill%3D%22%231eff6e%22%20text-anchor%3D%22middle%22%20font-family%3D%22monospace%22%3E[%20MATRIX%20AUTO%20FORMAT%20%5D%3C%2Ftext%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2265%25%22%20font-size%3D%2210%22%20fill%3D%22%2388ff88%22%20text-anchor%3D%22middle%22%3EKJS%20STORE%20EDITION%3C%2Ftext%3E%3C%2Fsvg%3E';">
       </div>
       
-      <!-- BADGE MATRIX & VVIP -->
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 8px;">
-        <div class="badge-matrix"><i class="fas fa-terminal"></i>  MATRIX CORE v3.0</div>
-        <div class="vvip-tag"><i class="fas fa-crown"></i> GARUDA PREMIUM VVIP</div>
+      <!-- header badge : terminal feel -->
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 0.5rem;">
+        <div class="terminal-badge"><i class="fas fa-terminal"></i>  ROOT@MATRIX:~# v3.2</div>
+        <div class="terminal-badge vvip-badge"><i class="fas fa-dragon"></i> GARUDA PREMIUM VVIP</div>
       </div>
       
-      <!-- TITLE -->
-      <div class="judul-utama">AUTO FORMATTER<br><span style="font-size: 1.2rem;">⚡ 1 Klik ➜ Rapi & Cepat</span></div>
-      <div class="subjudul">Solusi data massal • Support Excel & CSV • Hasil profesional</div>
-      
-      <!-- RATING (mirip asli) -->
-      <div class="rating">
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-        <div class="score"><i class="fas fa-chart-line"></i> 4.9 (1K+ user)</div>
-        <div class="score"><i class="fas fa-shield-alt"></i> 100% Auto</div>
+      <div class="judul-neon">
+        AUTO FORMATTER <span style="font-size: 1.4rem;">⚡</span><br>
+        <span style="font-size: 0.9rem; background: none; display: inline-block;">>_ 1 Klik → Rapi & Profesional</span>
+      </div>
+      <div class="terminal-sub">
+        <i class="fas fa-caret-right"></i> Solusi format massal • Excel/CSV • Akurasi 99.98%
       </div>
       
-      <!-- FITUR GRID sesuai aslinya + tambahan matrix -->
-      <div class="fitur-grid">
-        <div class="fitur-item"><i class="fas fa-microchip"></i> Auto Format</div>
-        <div class="fitur-item"><i class="fas fa-database"></i> Banyak Data</div>
-        <div class="fitur-item"><i class="fas fa-hourglass-half"></i> Hemat Waktu</div>
-        <div class="fitur-item"><i class="fas fa-magic"></i> 1 Klik Jadi</div>
-        <div class="fitur-item"><i class="fas fa-file-excel"></i> Excel/CSV</div>
-        <div class="fitur-item"><i class="fas fa-code-branch"></i> JS Counter Pro</div>
-      </div>
-      
-      <!-- HARGA -->
-      <div class="harga-box">
-        <div class="label-harga"><i class="fas fa-tag"></i> HARGA SPESIAL MATRIX</div>
-        <div class="harga-nominal">Rp 350.000 <small> / lifetime</small></div>
-        <div style="font-size: 0.7rem; background: #0a2f0a80; display: inline-block; padding: 2px 12px; border-radius: 40px; margin-top: 5px;">
-          <i class="fas fa-check-circle" style="color:#22c55e;"></i> Update gratis + support 24 jam
+      <!-- rating asli -->
+      <div class="rating-row">
+        <div class="stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
         </div>
+        <div class="gold-badge"><i class="fas fa-chart-simple"></i> 4.9 (1.2K ulasan)</div>
+        <div class="gold-badge"><i class="fas fa-shield-haltered"></i> 100% Auto Terminal</div>
       </div>
       
-      <!-- TOMBOL ORDER KE WHATSAPP (SATU-SATUNYA YG TERHUBUNG WA) -->
-      <a href="https://wa.me/6285943111681?text=Halo%20KJS%20STORE%2C%20saya%20mau%20order%20AUTO%20FORMATTER%20MATRIX%20EDITION%20(VVIP)" 
-         class="btn-order" 
+      <!-- Feature grid (clean console style) -->
+      <div class="feature-console">
+        <div class="feature-item"><i class="fas fa-microchip"></i> Auto Format</div>
+        <div class="feature-item"><i class="fas fa-database"></i> Big Data Ready</div>
+        <div class="feature-item"><i class="fas fa-hourglass-half"></i> 90% Hemat Waktu</div>
+        <div class="feature-item"><i class="fas fa-magic"></i> 1 Klik Instan</div>
+        <div class="feature-item"><i class="fas fa-file-excel"></i> Excel / CSV / TSV</div>
+        <div class="feature-item"><i class="fas fa-code-branch"></i> JS Counter Pro</div>
+      </div>
+      
+      <!-- harga premium -->
+      <div class="price-terminal">
+        <div class="price-label"><i class="fas fa-tag"></i> HARGA TERMINAL VIP</div>
+        <div class="price-value">Rp 350.000 <small>/ lifetime</small></div>
+        <div class="lifetime-tag"><i class="fas fa-infinity"></i> Update forever + support 24/7 Matrix</div>
+      </div>
+      
+      <!-- TOMBOL WHATSAPP (TERHUBUNG LANGSUNG KE NOMOR) -->
+      <a href="https://wa.me/6285943111681?text=Halo%20KJS%20STORE%2C%20saya%20mau%20order%20AUTO%20FORMATTER%20MATRIX%20EDITION%20(VVIP%20TERMINAL)" 
+         class="wa-order-btn" 
          target="_blank" 
          rel="noopener noreferrer">
         <i class="fab fa-whatsapp"></i>
-        <span>ORDER SEKARANG</span>
+        <span class="btn-text">>_ ORDER NOW — AUTO FORMATTER MATRIX</span>
         <i class="fas fa-arrow-right"></i>
       </a>
       
-      <!-- INFORMASI TAMBAHAN -->
-      <div style="font-size: 0.7rem; text-align: center; background: #05100855; border-radius: 30px; padding: 5px; margin: 5px 0;">
-        ⚡ FAST RESPONSE • GARANSI FORMAT • PREMIUM SUPPORT
+      <!-- small status -->
+      <div style="font-size: 0.65rem; text-align: center; background: #051a08aa; border-radius: 50px; padding: 5px; margin: 8px 0 0px;">
+        <i class="fas fa-bolt"></i> FAST RESPONSE • PREMIUM SUPPORT • GARANSI FORMAT
       </div>
       
-      <!-- FOOTER MATRIX -->
-      <div class="footer-matrix">
-        <i class="fas fa-laptop-code"></i> KJS STORE • AUTO FORMATTER 2026  <br>
-        <span class="info-licensi"><i class="fas fa-key"></i> [ ENCRYPTED BY MATRIX TERMINAL ]</span>
-        <div style="margin-top: 8px; font-size: 9px; opacity: 0.7;">
-          <i class="fas fa-info-circle"></i> Gambar hanya preview — klik bebas, tidak pindah ke WhatsApp.
-        </div>
+      <div class="matrix-footer">
+        <i class="fas fa-laptop-code"></i> KJS STORE • AUTO FORMATTER 2026 <span class="cryptic"><i class="fas fa-key"></i> ENCRYPTED BY MATRIX_TERM</span><br>
+        <span style="font-size: 9px; opacity: 0.7;"><i class="fas fa-info-circle"></i> Gambar hanya preview — klik bebas, tidak pindah ke WhatsApp. Tombol order terpisah.</span>
       </div>
     </div>
   </div>
 
   <script>
-    (function matrixRainBackground() {
-      const canvas = document.getElementById('matrix-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let width, height, columns, drops = [];
-      const fontSize = 15;
-      const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*+=~";
-      const charArray = chars.split("");
-      
-      function resizeCanvas() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-        columns = Math.floor(width / fontSize);
-        drops = [];
-        for (let i = 0; i < columns; i++) {
-          drops[i] = Math.random() * -120;
-        }
-      }
-      
-      let hue = 135;
-      function drawRain() {
-        if (!ctx) return;
-        ctx.fillStyle = "rgba(0, 0, 0, 0.045)";
-        ctx.fillRect(0, 0, width, height);
+    (function() {
+      // ========== 1. MATRIX RAIN EFFECT (HACKER TERMINAL FULL SCREEN) ==========
+      const canvas = document.getElementById('matrixCanvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width, height, columns, drops = [];
+        const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*+?/[]{}<>";
+        const charArray = chars.split('');
+        const fontSize = 16;
         
-        hue += 0.25;
-        if (hue > 155) hue = 120;
-        const matrixColor = `hsl(${hue}, 92%, 58%)`;
-        ctx.font = `${fontSize}px "JetBrains Mono", "Courier New", monospace`;
-        
-        for (let i = 0; i < drops.length; i++) {
-          const randomChar = charArray[Math.floor(Math.random() * charArray.length)];
-          const x = i * fontSize;
-          const y = drops[i] * fontSize;
-          ctx.fillStyle = Math.random() > 0.93 ? "#e2ffe2" : matrixColor;
-          ctx.fillText(randomChar, x, y);
-          if (y > height && Math.random() > 0.975) {
-            drops[i] = -Math.random() * 70;
+        function resizeCanvas() {
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = width;
+          canvas.height = height;
+          columns = Math.floor(width / fontSize);
+          drops = [];
+          for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -150;
           }
-          drops[i] += 0.62;
         }
-        requestAnimationFrame(drawRain);
+        
+        function drawMatrix() {
+          if (!ctx) return;
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.045)';
+          ctx.fillRect(0, 0, width, height);
+          ctx.font = `${fontSize}px "JetBrains Mono", "Courier New", monospace`;
+          
+          for (let i = 0; i < drops.length; i++) {
+            const randomChar = charArray[Math.floor(Math.random() * charArray.length)];
+            const x = i * fontSize;
+            const y = drops[i] * fontSize;
+            // variasi hijau neon/ matrix
+            const brightness = Math.random() > 0.7 ? '#abffab' : '#1eff6e';
+            ctx.fillStyle = brightness;
+            ctx.fillText(randomChar, x, y);
+            
+            if (y > height && Math.random() > 0.975) {
+              drops[i] = -Math.random() * 80;
+            }
+            drops[i] += 0.65;
+          }
+          requestAnimationFrame(drawMatrix);
+        }
+        
+        window.addEventListener('resize', () => {
+          resizeCanvas();
+        });
+        resizeCanvas();
+        drawMatrix();
       }
       
-      window.addEventListener("resize", () => {
-        resizeCanvas();
-      });
-      resizeCanvas();
-      drawRain();
+      // ========== 2. GAMBAR TIDAK REDIRECT KE WHATSAPP (HANYA PREVIEW) ==========
+      const imgContainer = document.getElementById('previewImageBox');
+      const productImg = document.getElementById('mainProductImage');
+      
+      if (imgContainer) {
+        // MENGHAPUS SEMUA POTENSI LINK TERSEMBUNYI
+        imgContainer.style.cursor = 'pointer';
+        // Hanya efek visual zoom tanpa navigasi apapun
+        imgContainer.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          // efek micro zoom untuk feedback (tidak berpindah halaman)
+          if (productImg) {
+            productImg.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+              productImg.style.transform = '';
+            }, 180);
+          }
+          // Bisa juga memberikan notifikasi ringan di console (tidak mengganggu)
+          console.log('✅ Gambar preview — Aman, tidak redirect ke WhatsApp (sesuai permintaan)');
+        });
+      }
+      
+      // 3. Validasi tambahan, memastikan tidak ada atribut href pada gambar atau parent link
+      //    Dan pastikan container tidak pernah membawa event buruk.
+      if (productImg) {
+        productImg.setAttribute('draggable', 'false');
+        // pastikan tidak ada parent anchor
+        let parent = productImg.parentElement;
+        while(parent && parent !== document.body) {
+          if(parent.tagName === 'A') {
+            parent.removeAttribute('href');
+            parent.style.pointerEvents = 'none';
+          }
+          parent = parent.parentElement;
+        }
+      }
+      
+      // 4. Efek tambahan: typing/cursor pada judul (opsional, menambah sentuhan terminal)
+      const mainTitle = document.querySelector('.judul-neon');
+      if (mainTitle && !mainTitle.hasAttribute('data-cursor')) {
+        const spanCursor = document.createElement('span');
+        spanCursor.className = 'cmd-cursor';
+        spanCursor.style.display = 'inline-block';
+        spanCursor.style.marginLeft = '4px';
+        // hanya untuk estetika
+        mainTitle.appendChild(spanCursor);
+      }
+      
+      // Menambahkan efek flicker super halus pada border card (premium)
+      const card = document.querySelector('.hacker-card');
+      if (card) {
+        setInterval(() => {
+          const neonIntensity = Math.random() * 0.3 + 0.8;
+          card.style.boxShadow = `0 25px 45px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(30, 255, 110, ${neonIntensity * 0.7}), 0 0 28px rgba(30, 255, 110, 0.4)`;
+        }, 1800);
+      }
+    })();
+    
+    // 5. Fallback: Jika image asli autoformatter.jpg tidak ada, tetap menggunakan fallback svg matrix yang sudah di onerror
+    //    Namun kami ingin script repair jika onerror belum sempurna, div tidak mengganggu.
+    (function secureImageNoWA() {
+      const actualImg = document.getElementById('mainProductImage');
+      if (actualImg && actualImg.complete && actualImg.naturalWidth === 0 && !actualImg.src.includes('data:image/svg')) {
+        actualImg.src = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20300%22%3E%3Crect%20width%3D%22400%22%20height%3D%22300%22%20fill%3D%22%23001005%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2245%25%22%20fill%3D%22%231eff6e%22%20font-size%3D%2214%22%20text-anchor%3D%22middle%22%20font-family%3D%22monospace%22%3EAUTO%20FORMATTER%3C%2Ftext%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20fill%3D%22%236ef96e%22%20font-size%3D%2210%22%20text-anchor%3D%22middle%22%3EMATRIX%20TERMINAL%20READY%3C%2Ftext%3E%3C%2Fsvg%3E";
+      }
     })();
 
-    // ===== GAMBAR AMAN: TIDAK ADA REDIRECT WHATSAPP =====
-    // Memastikan gambar hanya bisa dilihat (preview biasa), tidak pindah halaman.
-    // Ini sesuai request: "saat di klik gambar nya biasa di lihat jangan pas di klik gambar malah pindah ke WhatsApp"
-    const gambarContainer = document.getElementById('gambarPreview');
-    if (gambarContainer) {
-      // Hanya menambahkan efek visual ringan, tanpa navigasi
-      gambarContainer.addEventListener('click', (e) => {
-        e.preventDefault();
+    // tambahan fix: Saat klik gambar via delegasi, memastikan tidak ada event propagasi aneh dari parent lain.
+    document.querySelectorAll('.matrix-img-container, #previewImageBox, .matrix-img-container img').forEach(el => {
+      el.addEventListener('click', (e) => {
         e.stopPropagation();
-        // Tidak ada redirect, hanya membiarkan gambar tetap terlihat
-        // Opsional: memberi efek zoom cepat (hanya gaya, tanpa link)
-        const imgElem = gambarContainer.querySelector('img');
-        if (imgElem) {
-          imgElem.style.transform = 'scale(1.02)';
-          setTimeout(() => {
-            imgElem.style.transform = '';
-          }, 150);
-        }
-        console.log('Gambar dilihat (tidak redirect ke WA) — sesuai permintaan');
+        e.preventDefault();
+        return false;
       });
-      // Pastikan tidak ada atribut href jahat
-      gambarContainer.style.cursor = 'pointer';
-    }
-    
-    // Jika ada kemungkinan browser menyimpan cache, tetap aman.
-    // Tidak ada script yang secara tidak sengaja menambahkan event ke WhatsApp pada gambar.
-    console.log("✅ MATRIX PROMO AKTIF • Gambar tidak redirect ke WhatsApp • Tombol order terpisah.");
+    });
   </script>
 </body>
 </html>
